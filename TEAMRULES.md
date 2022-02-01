@@ -1,0 +1,10 @@
+# Project-1-Fast-Food-Fantasy
+Team Rules
+Each team member should be available throughout the week to meet and discuss the project. Either after class ends or a pre-agreed time. 
+Accept feedback
+If in need of help ask 
+Make sure work is evenly distrubuted 
+Team member should push their work as often as possible to keep the proejct up to date
+Do not disrespect other team members
+Write clean and easy to read code
+Everyone should know whats going on in the project and not just their part.
