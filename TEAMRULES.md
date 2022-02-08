@@ -8,3 +8,4 @@ Team member should push their work as often as possible to keep the proejct up t
 Do not disrespect other team members
 Write clean and easy to read code
 Everyone should know whats going on in the project and not just their part.
+Follow the Google C++ style guide
