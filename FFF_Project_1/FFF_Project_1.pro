@@ -11,10 +11,16 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    menu.cpp \
+    menuitem.cpp \
+    restaurant.cpp \
     signin.cpp
 
 HEADERS += \
+    Restaurant.h \
     mainwindow.h \
+    menu.h \
+    menuitem.h \
     signin.h
 
 FORMS += \
