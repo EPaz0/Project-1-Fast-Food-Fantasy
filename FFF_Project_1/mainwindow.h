@@ -2,7 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QList>
 #include "signin.h"
+#include "restaurant.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,5 +28,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Signin *signin;
+    QList<restaurant> restaurantList;
 };
 #endif // MAINWINDOW_H
