@@ -26,6 +26,8 @@ private slots:
 
     void on_actionLog_out_triggered();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     Signin *signin;

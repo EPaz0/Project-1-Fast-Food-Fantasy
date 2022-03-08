@@ -18,7 +18,7 @@ double Restaurant::GetDistancesFromSaddleback()
 
 Menu Restaurant::GetMenu()
 {
-    return menu;
+    return restaurantMenu;
 }
 
 void Restaurant::setRestaurantName(QString name)
@@ -26,6 +26,11 @@ void Restaurant::setRestaurantName(QString name)
     restaurantName = name;
 }
 
+
+void Restaurant::setMenu(Menu menu)
+{
+     restaurantMenu = menu;
+}
 
 void Restaurant::setDistancesToSaddleback(double distance)
 {
@@ -41,12 +46,12 @@ void Restaurant::addOtherRestaurantDistance(DistanceByRestaurant pair)
 
 void DisplayMenu()
 {
-    // display menu (display name of item and price of item) - will add after we have data
+    // display menu (display name of item and price of item) - needs to connect with mainwindow object
 
 }
 
 void DisplayDisToSaddleback()
 {
-    // display distance from Saddleback - will add after we have data
+    // display distance from Saddleback - needs to connect with mainwindow object
 }
 

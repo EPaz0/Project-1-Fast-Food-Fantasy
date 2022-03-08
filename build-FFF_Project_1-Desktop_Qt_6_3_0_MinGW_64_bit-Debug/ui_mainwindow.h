@@ -20,6 +20,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
@@ -41,11 +42,11 @@ public:
     QWidget *centralwidget;
     QListWidget *listWidget;
     QLabel *label;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
     QLabel *label_2;
     QLineEdit *lineEdit;
-    QWidget *widget1;
+    QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout_2;
     QLabel *label_3;
@@ -54,10 +55,11 @@ public:
     QVBoxLayout *verticalLayout;
     QLabel *label_4;
     QListView *listView_2;
-    QWidget *widget2;
+    QWidget *layoutWidget2;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_5;
     QLineEdit *lineEdit_2;
+    QPushButton *pushButton;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuAdmin;
@@ -93,36 +95,36 @@ public:
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(30, 20, 91, 16));
-        widget = new QWidget(centralwidget);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(250, 50, 187, 24));
-        horizontalLayout = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(centralwidget);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(250, 50, 200, 28));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        label_2 = new QLabel(widget);
+        label_2 = new QLabel(layoutWidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
         horizontalLayout->addWidget(label_2);
 
-        lineEdit = new QLineEdit(widget);
+        lineEdit = new QLineEdit(layoutWidget);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
 
         horizontalLayout->addWidget(lineEdit);
 
-        widget1 = new QWidget(centralwidget);
-        widget1->setObjectName(QString::fromUtf8("widget1"));
-        widget1->setGeometry(QRect(250, 100, 471, 191));
-        horizontalLayout_2 = new QHBoxLayout(widget1);
+        layoutWidget1 = new QWidget(centralwidget);
+        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(250, 100, 471, 191));
+        horizontalLayout_2 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        label_3 = new QLabel(widget1);
+        label_3 = new QLabel(layoutWidget1);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
         verticalLayout_2->addWidget(label_3);
 
-        listView = new QListView(widget1);
+        listView = new QListView(layoutWidget1);
         listView->setObjectName(QString::fromUtf8("listView"));
 
         verticalLayout_2->addWidget(listView);
@@ -136,12 +138,12 @@ public:
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        label_4 = new QLabel(widget1);
+        label_4 = new QLabel(layoutWidget1);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
         verticalLayout->addWidget(label_4);
 
-        listView_2 = new QListView(widget1);
+        listView_2 = new QListView(layoutWidget1);
         listView_2->setObjectName(QString::fromUtf8("listView_2"));
 
         verticalLayout->addWidget(listView_2);
@@ -149,26 +151,29 @@ public:
 
         horizontalLayout_2->addLayout(verticalLayout);
 
-        widget2 = new QWidget(centralwidget);
-        widget2->setObjectName(QString::fromUtf8("widget2"));
-        widget2->setGeometry(QRect(500, 310, 237, 24));
-        horizontalLayout_3 = new QHBoxLayout(widget2);
+        layoutWidget2 = new QWidget(centralwidget);
+        layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
+        layoutWidget2->setGeometry(QRect(500, 310, 275, 28));
+        horizontalLayout_3 = new QHBoxLayout(layoutWidget2);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
-        label_5 = new QLabel(widget2);
+        label_5 = new QLabel(layoutWidget2);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
         horizontalLayout_3->addWidget(label_5);
 
-        lineEdit_2 = new QLineEdit(widget2);
+        lineEdit_2 = new QLineEdit(layoutWidget2);
         lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
 
         horizontalLayout_3->addWidget(lineEdit_2);
 
+        pushButton = new QPushButton(centralwidget);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setGeometry(QRect(60, 490, 93, 29));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 21));
+        menubar->setGeometry(QRect(0, 0, 800, 26));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuAdmin = new QMenu(menubar);
@@ -244,6 +249,7 @@ public:
         label_4->setText(QCoreApplication::translate("MainWindow", "Distance (miles)\n"
 "to other Fast Food restaurants", nullptr));
         label_5->setText(QCoreApplication::translate("MainWindow", "Miles to Saddleback College:", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "Choose", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuAdmin->setTitle(QCoreApplication::translate("MainWindow", "Admin", nullptr));
         menuTrips->setTitle(QCoreApplication::translate("MainWindow", "Trips", nullptr));
