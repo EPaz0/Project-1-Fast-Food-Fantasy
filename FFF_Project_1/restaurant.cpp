@@ -1,57 +1,51 @@
-#include "mainwindow.h"
+#include "restaurant.h"
 
-Restaurant::Restaurant()
-{
-    distanceFromSaddleback = 0;
-}
+restaurant::restaurant(){}
 
-QString Restaurant::GetRestaurantName()
+QString restaurant::getRestaurantName() const
 {
     return restaurantName;
 }
 
-
-double Restaurant::GetDistancesFromSaddleback()
+int restaurant::getRestaurantNumber() const
 {
-    return distanceFromSaddleback;
+    return restaurantNumber;
 }
 
-Menu Restaurant::GetMenu()
+void restaurant::getDistanceList(QVector<distanceInfo>& aList) const
 {
-    return restaurantMenu;
+    aList = distanceList;
 }
 
-void Restaurant::setRestaurantName(QString name)
+float restaurant::getDistanceToSaddleback() const
 {
-    restaurantName = name;
+    return distanceToSaddleback;
 }
 
-
-void Restaurant::setMenu(Menu menu)
+void restaurant::getMenu(QList<menuItem>& aMenu) const
 {
-     restaurantMenu = menu;
+    aMenu = menu;
 }
 
-void Restaurant::setDistancesToSaddleback(double distance)
+void restaurant::setRestaurantName(QString aRestaurantName)
 {
-    distanceFromSaddleback = distance;
+    restaurantName = aRestaurantName;
+}
+void restaurant::setRestaurantNumber(int aRestaurantNumber)
+{
+    restaurantNumber = aRestaurantNumber;
+}
+void restaurant::setDistanceList(QVector<distanceInfo>& aList)
+{
+    distanceList = aList;
+}
+void restaurant::setDistanceToSaddleback(float aDistanceToSaddleback)
+{
+    distanceToSaddleback = aDistanceToSaddleback;
+}
+void restaurant::setMenu(QList<menuItem>& aMenu)
+{
+    menu = aMenu;
 }
 
-
-void Restaurant::addOtherRestaurantDistance(DistanceByRestaurant pair)
-{
-    distancesToOthersList.push_back(pair);
-}
-
-
-void DisplayMenu()
-{
-    // display menu (display name of item and price of item) - needs to connect with mainwindow object
-
-}
-
-void DisplayDisToSaddleback()
-{
-    // display distance from Saddleback - needs to connect with mainwindow object
-}
-
+restaurant::~restaurant(){}
