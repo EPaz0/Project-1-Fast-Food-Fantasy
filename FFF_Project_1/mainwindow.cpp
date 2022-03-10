@@ -37,10 +37,10 @@ MainWindow::MainWindow(QWidget *parent)
           if(!query.exec("INSERT INTO people(name) VALUES('Eddie Guerrero')"))
             qWarning() << "ERROR: " << query.lastError().text();
 
-          query.prepare("SELECT name FROM people WHERE id = ?");
+//          query.prepare("SELECT name FROM people WHERE id = ?");
           //query.addBindValue(mInputText->text().toInt());
-          if(!query.exec())
-            qWarning() << "ERROR: " << query.lastError().text();
+          /*if(!query.exec())
+            qWarning() << "ERROR: " << query.lastError().text();*/
 //          if(query.first())
 //            mOutputText->setText(query.value(0).toString());
 //          else
