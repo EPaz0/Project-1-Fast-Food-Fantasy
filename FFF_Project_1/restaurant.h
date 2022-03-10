@@ -5,7 +5,7 @@
 #include <QString>
 #include <QVector>
 #include <QList>
-#include <QFloat16>
+
 
 struct distanceInfo
 {

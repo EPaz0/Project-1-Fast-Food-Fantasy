@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     MainWindow::setToolTipDuration(500);
 
+
     QFile file(":/txt/CS1D_Spring_2022_Fast_Food_Project.txt");
     if (file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
