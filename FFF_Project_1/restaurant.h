@@ -1,9 +1,11 @@
 #ifndef RESTAURANT_H
 #define RESTAURANT_H
 
+#include <QObject>
 #include <QString>
 #include <QVector>
 #include <QList>
+#include <QFloat16>
 
 struct distanceInfo
 {
@@ -22,9 +24,9 @@ public:
     restaurant();
     QString getRestaurantName() const;
     int getRestaurantNumber() const;
-    void getDistanceList(QVector<distanceInfo>& aList) const;
+    QVector<distanceInfo> getDistanceList() const;
     float getDistanceToSaddleback() const;
-    void getMenu(QList<menuItem>& aMenu) const;
+    QList<menuItem> getMenu() const;
     void setRestaurantName(QString aRestaurantName);
     void setRestaurantNumber(int aRestaurantNumber);
     void setDistanceList(QVector<distanceInfo>& aList);
@@ -32,12 +34,14 @@ public:
     void setMenu(QList<menuItem>& aMenu);
     ~restaurant();
 
+    QVector<distanceInfo> distanceList;
+
 private:
     QString restaurantName;
     int restaurantNumber;
-    QVector<distanceInfo> distanceList;
     float distanceToSaddleback;
     QList<menuItem> menu;
+
 };
 
 #endif // RESTAURANT_H

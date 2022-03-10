@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QList>
 #include "signin.h"
-
+#include "closesttrip.h"
 #include "restaurant.h"
 
 
@@ -15,7 +15,6 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    QList<Restaurant> restaurantList;  // list of all restaurant
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -30,9 +29,12 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_action10_Closet_triggered();
+
 private:
     Ui::MainWindow *ui;
     Signin *signin;
+    ClosestTrip *tripFromSaddleback;
     QList<restaurant> restaurantList;
 };
 #endif // MAINWINDOW_H
