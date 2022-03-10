@@ -8,7 +8,48 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->actionUpdate_List->setDisabled(true);
     ui->actionLog_out->setDisabled(true);
-    MainWindow::setToolTipDuration(500);
+
+    const QString DRIVER("QSQLITE");
+    if(QSqlDatabase::isDriverAvailable(DRIVER))
+    {
+       // QString dbPath = QDir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)).filePath("database.db");
+       // QFile::copy(":/database.db", dbPath);
+         QSqlDatabase db = QSqlDatabase::addDatabase(DRIVER);
+         QDir::setCurrent(QCoreApplication::applicationDirPath());
+         QDir tempDir = QDir::currentPath();
+         qDebug() << tempDir;
+         tempDir.cdUp();
+         tempDir.cdUp();
+
+      QString s = tempDir.path() + "/FFF_Project_1";
+
+
+     QDir::setCurrent(s);
+       // QString path = QCoreApplication::applicationDirPath() + "/database/efeis.sqlite";
+        // QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+         db.setDatabaseName("database.db");
+          if(!db.open())
+            qWarning() << "ERROR: " << db.lastError();
+          QSqlQuery query("CREATE TABLE people (id INTEGER PRIMARY KEY, name TEXT)");
+          if(!query.isActive())
+              qWarning() << "ERROR: " << query.lastError().text();
+          //QSqlQuery query1;
+          if(!query.exec("INSERT INTO people(name) VALUES('Eddie Guerrero')"))
+            qWarning() << "ERROR: " << query.lastError().text();
+
+          query.prepare("SELECT name FROM people WHERE id = ?");
+          //query.addBindValue(mInputText->text().toInt());
+          if(!query.exec())
+            qWarning() << "ERROR: " << query.lastError().text();
+//          if(query.first())
+//            mOutputText->setText(query.value(0).toString());
+//          else
+//            mOutputText->setText("person not found");
+    }
+    else
+        qWarning() << "ERROR: no driver";
+
+
 }
 
 MainWindow::~MainWindow()

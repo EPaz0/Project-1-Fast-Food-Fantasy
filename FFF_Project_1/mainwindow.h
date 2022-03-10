@@ -2,6 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSqlDatabase>
+#include <QSqlDriver>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QStandardPaths>
+#include <QDir>
 #include "signin.h"
 
 QT_BEGIN_NAMESPACE
