@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QString>
 #include <QTextStream>
+#include <iomanip>
 
 #include "restaurant.h"
 
@@ -13,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->actionUpdate_List->setDisabled(true);
     ui->actionLog_out->setDisabled(true);
+
     MainWindow::setToolTipDuration(500);
 
     QFile file(":/txt/CS1D_Spring_2022_Fast_Food_Project.txt");
@@ -110,6 +112,59 @@ MainWindow::MainWindow(QWidget *parent)
         }
         file.close();
     }
+
+
+    // add each restaurant in the restaurant list to the main listWidget
+    for (int i = 0; i < restaurantList.size(); i++)
+    {
+        restaurant res = restaurantList.at(i);
+        QListWidgetItem* item = new QListWidgetItem(res.getRestaurantName());  // add name of restaurant
+        item->setData(Qt::UserRole, QString::number(res.getDistanceToSaddleback())); // store distance to Saddleback to the current widget item
+
+        QVariant listMenuName;
+        QList<QString> menuItemName;
+        for (int i = 0; i < res.getMenu().size(); i++)
+        {
+            menuItemName.append(res.getMenu().at(i).itemName);
+        }
+        listMenuName = menuItemName;
+        item->setData(Qt::Key_1, listMenuName);  // store menu name to the current widget item
+
+
+        QList<QVariant> listMenuPrice;
+        for (int i = 0; i < res.getMenu().size(); i++)
+        {
+            listMenuPrice.append(QString::number(res.getMenu().at(i).itemPrice));
+        }
+        item->setData(Qt::Key_2, listMenuPrice);  // store menu price to the current widget item
+
+
+        QList<QVariant> distanceToOthers;
+        QList<QString> distanceToOthersRestaurant;
+        int restaurantId;
+        for (int i = 0; i < res.getDistanceList().size(); i++)
+        {
+            if (res.getDistanceList().at(i).distance != 0.0)    // not display itself (ex: in McDonald not display McDonald 0.0)
+            {
+                distanceToOthers.append(QString::number(res.getDistanceList().at(i).distance));
+
+                restaurantId = res.getDistanceList().at(i).toWhich;
+
+                for (int j = 0; j < restaurantList.size(); j++)
+                {
+                  if (restaurantList.at(j).getRestaurantNumber() == restaurantId)
+                     distanceToOthersRestaurant.append(restaurantList.at(j).getRestaurantName());
+                }
+            }
+        }
+        item->setData(Qt::Key_3, distanceToOthers);  // store distance to the current widget item
+        item->setData(Qt::Key_4, distanceToOthersRestaurant); // store other restaurants' names to the current widget item
+
+
+        ui->listWidget->insertItem(1, item);  // insert item with all info stored to widget
+
+    }
+
 }
 
 MainWindow::~MainWindow()
@@ -138,4 +193,61 @@ void MainWindow::on_actionLog_out_triggered()
     ui->actionLog_out->setDisabled(true);
     ui->actionUpdate_List->setDisabled(true);
 }
+
+void MainWindow::on_action10_Closet_triggered()
+{
+    hide();
+    tripFromSaddleback = new ClosestTrip(this);
+
+    tripFromSaddleback->show();
+
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    ui->listWidget_price->clear();
+    ui->listWidget_item->clear();
+    ui->listWidget_distance->clear();
+    ui->listWidget_name->clear();
+
+    // once a restaurant is chosen from the listWidget, its information will be displayed
+    ui->lineEdit->setText(ui->listWidget->currentItem()->text());  // display restaurant  name
+
+    ui->lineEdit_2->setText(ui->listWidget->currentItem()->data(Qt::UserRole).toString()); // display distance to Saddleback College
+
+    // display menu list
+    QVariant listMenuName = (ui->listWidget->currentItem()->data(Qt::Key_1));
+    QList<QString> q = listMenuName.toStringList();
+    for (int i = 0; i < q.size(); i++)
+    {
+        ui->listWidget_item->addItem(q.at(i));
+    }
+
+    // display item menu price
+    QVariant listMenuPrice = (ui->listWidget->currentItem()->data(Qt::Key_2));
+    QList<QString> p = listMenuPrice.toStringList();
+    for (int i = 0; i < p.size(); i++)
+    {
+        ui->listWidget_price->addItem("$" + p.at(i));
+    }
+
+    // display distance
+    QVariant listDistance = (ui->listWidget->currentItem()->data(Qt::Key_3));
+    QList<QString> j = listDistance.toStringList();
+    for (int i = 0; i < j.size(); i++)
+    {
+        ui->listWidget_distance->addItem(j.at(i) + " miles");
+    }
+
+
+    // display distance
+    QVariant listRestaurantName = (ui->listWidget->currentItem()->data(Qt::Key_4));
+    QList<QString> k = listRestaurantName.toStringList();
+    for (int i = 0; i < k.size(); i++)
+    {
+        ui->listWidget_name->addItem(k.at(i));
+    }
+}
+
+
 

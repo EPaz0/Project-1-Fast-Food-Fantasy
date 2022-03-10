@@ -12,9 +12,9 @@ int restaurant::getRestaurantNumber() const
     return restaurantNumber;
 }
 
-void restaurant::getDistanceList(QVector<distanceInfo>& aList) const
+QVector<distanceInfo> restaurant::getDistanceList() const
 {
-    aList = distanceList;
+    return distanceList;
 }
 
 float restaurant::getDistanceToSaddleback() const
@@ -22,9 +22,9 @@ float restaurant::getDistanceToSaddleback() const
     return distanceToSaddleback;
 }
 
-void restaurant::getMenu(QList<menuItem>& aMenu) const
+QList<menuItem> restaurant::getMenu() const
 {
-    aMenu = menu;
+    return menu;
 }
 
 void restaurant::setRestaurantName(QString aRestaurantName)

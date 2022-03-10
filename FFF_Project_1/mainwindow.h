@@ -4,7 +4,9 @@
 #include <QMainWindow>
 #include <QList>
 #include "signin.h"
+#include "closesttrip.h"
 #include "restaurant.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,9 +27,14 @@ private slots:
 
     void on_actionLog_out_triggered();
 
+    void on_pushButton_clicked();
+
+    void on_action10_Closet_triggered();
+
 private:
     Ui::MainWindow *ui;
     Signin *signin;
+    ClosestTrip *tripFromSaddleback;
     QList<restaurant> restaurantList;
 };
 #endif // MAINWINDOW_H
