@@ -15,13 +15,11 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListView>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -35,7 +33,7 @@ public:
     QAction *actionUpdate_List;
     QAction *actionLog_in;
     QAction *actionLog_out;
-    QAction *action10_Closest;
+    QAction *action10_Closet;
     QAction *actionShortest_Trip;
     QAction *actionVisit_All_12;
     QAction *actionCustom_Trip;
@@ -47,19 +45,22 @@ public:
     QLabel *label_2;
     QLineEdit *lineEdit;
     QWidget *layoutWidget1;
-    QHBoxLayout *horizontalLayout_2;
-    QVBoxLayout *verticalLayout_2;
-    QLabel *label_3;
-    QListView *listView;
-    QSpacerItem *horizontalSpacer;
-    QVBoxLayout *verticalLayout;
-    QLabel *label_4;
-    QListView *listView_2;
-    QWidget *layoutWidget2;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_5;
     QLineEdit *lineEdit_2;
     QPushButton *pushButton;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout;
+    QLabel *label_3;
+    QHBoxLayout *horizontalLayout_4;
+    QListWidget *listWidget_item;
+    QListWidget *listWidget_price;
+    QWidget *widget1;
+    QVBoxLayout *verticalLayout_2;
+    QLabel *label_4;
+    QHBoxLayout *horizontalLayout_5;
+    QListWidget *listWidget_name;
+    QListWidget *listWidget_distance;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuAdmin;
@@ -70,7 +71,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(800, 600);
+        MainWindow->resize(862, 548);
         actionOpen_File = new QAction(MainWindow);
         actionOpen_File->setObjectName(QString::fromUtf8("actionOpen_File"));
         actionUpdate_List = new QAction(MainWindow);
@@ -79,8 +80,8 @@ public:
         actionLog_in->setObjectName(QString::fromUtf8("actionLog_in"));
         actionLog_out = new QAction(MainWindow);
         actionLog_out->setObjectName(QString::fromUtf8("actionLog_out"));
-        action10_Closest = new QAction(MainWindow);
-        action10_Closest->setObjectName(QString::fromUtf8("action10_Closest"));
+        action10_Closet = new QAction(MainWindow);
+        action10_Closet->setObjectName(QString::fromUtf8("action10_Closet"));
         actionShortest_Trip = new QAction(MainWindow);
         actionShortest_Trip->setObjectName(QString::fromUtf8("actionShortest_Trip"));
         actionVisit_All_12 = new QAction(MainWindow);
@@ -91,7 +92,7 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         listWidget = new QListWidget(centralwidget);
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
-        listWidget->setGeometry(QRect(20, 40, 191, 441));
+        listWidget->setGeometry(QRect(20, 40, 171, 421));
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(30, 20, 91, 16));
@@ -113,67 +114,79 @@ public:
 
         layoutWidget1 = new QWidget(centralwidget);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(250, 100, 471, 191));
-        horizontalLayout_2 = new QHBoxLayout(layoutWidget1);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        label_3 = new QLabel(layoutWidget1);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-
-        verticalLayout_2->addWidget(label_3);
-
-        listView = new QListView(layoutWidget1);
-        listView->setObjectName(QString::fromUtf8("listView"));
-
-        verticalLayout_2->addWidget(listView);
-
-
-        horizontalLayout_2->addLayout(verticalLayout_2);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer);
-
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        label_4 = new QLabel(layoutWidget1);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-
-        verticalLayout->addWidget(label_4);
-
-        listView_2 = new QListView(layoutWidget1);
-        listView_2->setObjectName(QString::fromUtf8("listView_2"));
-
-        verticalLayout->addWidget(listView_2);
-
-
-        horizontalLayout_2->addLayout(verticalLayout);
-
-        layoutWidget2 = new QWidget(centralwidget);
-        layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(500, 310, 275, 28));
-        horizontalLayout_3 = new QHBoxLayout(layoutWidget2);
+        layoutWidget1->setGeometry(QRect(480, 440, 275, 28));
+        horizontalLayout_3 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
-        label_5 = new QLabel(layoutWidget2);
+        label_5 = new QLabel(layoutWidget1);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
         horizontalLayout_3->addWidget(label_5);
 
-        lineEdit_2 = new QLineEdit(layoutWidget2);
+        lineEdit_2 = new QLineEdit(layoutWidget1);
         lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
 
         horizontalLayout_3->addWidget(lineEdit_2);
 
         pushButton = new QPushButton(centralwidget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(60, 490, 93, 29));
+        pushButton->setGeometry(QRect(50, 470, 93, 29));
+        widget = new QWidget(centralwidget);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(210, 90, 301, 341));
+        verticalLayout = new QVBoxLayout(widget);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        label_3 = new QLabel(widget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        verticalLayout->addWidget(label_3);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        listWidget_item = new QListWidget(widget);
+        listWidget_item->setObjectName(QString::fromUtf8("listWidget_item"));
+
+        horizontalLayout_4->addWidget(listWidget_item);
+
+        listWidget_price = new QListWidget(widget);
+        listWidget_price->setObjectName(QString::fromUtf8("listWidget_price"));
+
+        horizontalLayout_4->addWidget(listWidget_price);
+
+
+        verticalLayout->addLayout(horizontalLayout_4);
+
+        widget1 = new QWidget(centralwidget);
+        widget1->setObjectName(QString::fromUtf8("widget1"));
+        widget1->setGeometry(QRect(530, 90, 321, 341));
+        verticalLayout_2 = new QVBoxLayout(widget1);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        label_4 = new QLabel(widget1);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+
+        verticalLayout_2->addWidget(label_4);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        listWidget_name = new QListWidget(widget1);
+        listWidget_name->setObjectName(QString::fromUtf8("listWidget_name"));
+
+        horizontalLayout_5->addWidget(listWidget_name);
+
+        listWidget_distance = new QListWidget(widget1);
+        listWidget_distance->setObjectName(QString::fromUtf8("listWidget_distance"));
+
+        horizontalLayout_5->addWidget(listWidget_distance);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_5);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 26));
+        menubar->setGeometry(QRect(0, 0, 862, 26));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuAdmin = new QMenu(menubar);
@@ -192,7 +205,7 @@ public:
         menuFile->addAction(actionUpdate_List);
         menuAdmin->addAction(actionLog_in);
         menuAdmin->addAction(actionLog_out);
-        menuTrips->addAction(action10_Closest);
+        menuTrips->addAction(action10_Closet);
         menuTrips->addAction(actionShortest_Trip);
         menuTrips->addAction(actionVisit_All_12);
         menuTrips->addAction(actionCustom_Trip);
@@ -221,15 +234,15 @@ public:
 #if QT_CONFIG(tooltip)
         actionLog_out->setToolTip(QCoreApplication::translate("MainWindow", "Log-out of Maintinance", nullptr));
 #endif // QT_CONFIG(tooltip)
-        action10_Closest->setText(QCoreApplication::translate("MainWindow", "10 Closest", nullptr));
+        action10_Closet->setText(QCoreApplication::translate("MainWindow", "10 Closest", nullptr));
 #if QT_CONFIG(tooltip)
-        action10_Closest->setToolTip(QCoreApplication::translate("MainWindow", "Plan a Trip to the Closest 10 Restaurants", nullptr));
+        action10_Closet->setToolTip(QCoreApplication::translate("MainWindow", "Plan a Trip to the Closest 10 Restaurants", nullptr));
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(statustip)
-        action10_Closest->setStatusTip(QString());
+        action10_Closet->setStatusTip(QString());
 #endif // QT_CONFIG(statustip)
 #if QT_CONFIG(whatsthis)
-        action10_Closest->setWhatsThis(QString());
+        action10_Closet->setWhatsThis(QString());
 #endif // QT_CONFIG(whatsthis)
         actionShortest_Trip->setText(QCoreApplication::translate("MainWindow", "Shortest Trip", nullptr));
 #if QT_CONFIG(tooltip)
@@ -245,11 +258,10 @@ public:
 #endif // QT_CONFIG(tooltip)
         label->setText(QCoreApplication::translate("MainWindow", "Restaurants:", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Restaurant Name:", nullptr));
-        label_3->setText(QCoreApplication::translate("MainWindow", "Menu Items: ", nullptr));
-        label_4->setText(QCoreApplication::translate("MainWindow", "Distance (miles)\n"
-"to other Fast Food restaurants", nullptr));
         label_5->setText(QCoreApplication::translate("MainWindow", "Miles to Saddleback College:", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "Choose", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "Menu", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "Distances (miles) to other Fast Food restaurants", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuAdmin->setTitle(QCoreApplication::translate("MainWindow", "Admin", nullptr));
         menuTrips->setTitle(QCoreApplication::translate("MainWindow", "Trips", nullptr));

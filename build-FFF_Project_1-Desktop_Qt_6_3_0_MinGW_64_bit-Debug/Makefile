@@ -332,7 +332,8 @@ Makefile: ../FFF_Project_1/FFF_Project_1.pro C:/Users/thyva/qt/6.3.0/mingw_64/mk
 		C:/Users/thyva/qt/6.3.0/mingw_64/lib/Qt6Gui.prl \
 		C:/Users/thyva/qt/6.3.0/mingw_64/lib/Qt6Core.prl \
 		C:/Users/thyva/qt/6.3.0/mingw_64/lib/Qt6EntryPoint.prl \
-		C:/Users/thyva/qt/6.3.0/mingw_64/mkspecs/features/build_pass.prf
+		C:/Users/thyva/qt/6.3.0/mingw_64/mkspecs/features/build_pass.prf \
+		../FFF_Project_1/resource.qrc
 	$(QMAKE) -o Makefile ..\FFF_Project_1\FFF_Project_1.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 C:/Users/thyva/qt/6.3.0/mingw_64/mkspecs/features/spec_pre.prf:
 C:/Users/thyva/qt/6.3.0/mingw_64/mkspecs/features/device_config.prf:
@@ -597,6 +598,7 @@ C:/Users/thyva/qt/6.3.0/mingw_64/lib/Qt6Gui.prl:
 C:/Users/thyva/qt/6.3.0/mingw_64/lib/Qt6Core.prl:
 C:/Users/thyva/qt/6.3.0/mingw_64/lib/Qt6EntryPoint.prl:
 C:/Users/thyva/qt/6.3.0/mingw_64/mkspecs/features/build_pass.prf:
+../FFF_Project_1/resource.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\FFF_Project_1\FFF_Project_1.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 
