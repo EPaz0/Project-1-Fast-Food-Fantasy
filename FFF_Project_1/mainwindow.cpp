@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     MainWindow::setToolTipDuration(500);
 
+
     QFile file(":/txt/CS1D_Spring_2022_Fast_Food_Project.txt");
     if (file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -212,6 +213,7 @@ void MainWindow::on_pushButton_clicked()
 
     // once a restaurant is chosen from the listWidget, its information will be displayed
     ui->lineEdit->setText(ui->listWidget->currentItem()->text());  // display restaurant  name
+
 
     ui->lineEdit_2->setText(ui->listWidget->currentItem()->data(Qt::UserRole).toString()); // display distance to Saddleback College
 

@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QWidget>
+#include <QtSql>
 #include "restaurant.h"
 
 
