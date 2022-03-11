@@ -5,7 +5,7 @@
 #include <QString>
 #include <QVector>
 #include <QList>
-#include <QFloat16>
+
 
 struct distanceInfo
 {
@@ -41,7 +41,6 @@ private:
     int restaurantNumber;
     float distanceToSaddleback;
     QList<menuItem> menu;
-
 };
 
 #endif // RESTAURANT_H

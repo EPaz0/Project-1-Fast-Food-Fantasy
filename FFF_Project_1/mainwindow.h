@@ -9,6 +9,7 @@
 #include <QStandardPaths>
 #include <QDir>
 #include <QList>
+#include <QtSql>
 #include "signin.h"
 #include "closesttrip.h"
 #include "restaurant.h"
