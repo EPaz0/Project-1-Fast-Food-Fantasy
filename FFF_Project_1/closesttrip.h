@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QWidget>
+#include <QtSql>
 #include "restaurant.h"
 
 
@@ -26,8 +27,17 @@ signals:
 private slots:
     void on_pushButton_3_clicked();
 
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
 private:
     Ui::ClosestTrip *ui;
+    // import the table already created
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    QSqlQuery qry;
 };
 
 #endif // CLOSESTTRIP_H
