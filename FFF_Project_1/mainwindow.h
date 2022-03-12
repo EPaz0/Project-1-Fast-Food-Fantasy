@@ -6,6 +6,7 @@
 #include <QtSql>
 #include "signin.h"
 #include "closesttrip.h"
+#include "endwindow.h"
 #include "restaurant.h"
 
 

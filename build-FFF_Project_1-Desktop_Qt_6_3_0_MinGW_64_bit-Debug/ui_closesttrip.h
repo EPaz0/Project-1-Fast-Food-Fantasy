@@ -12,11 +12,13 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListView>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -28,29 +30,32 @@ public:
     QLabel *label_3;
     QLabel *label_4;
     QLabel *label_5;
-    QLabel *label_6;
     QListWidget *listWidget;
     QLineEdit *name;
     QListWidget *listWidget_price;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
-    QLineEdit *lineEdit_2;
-    QLineEdit *lineEdit_3;
+    QLineEdit *lineEdit_totalOnRest;
     QListView *listView_2;
     QPushButton *pushButton_3;
     QPushButton *pushButton_4;
-    QLineEdit *lineEdit;
-    QLabel *label_7;
     QListWidget *listWidget_menu;
     QListWidget *listWidget_cartItem;
     QPushButton *pushButton_5;
     QListWidget *listWidget_cartPrice;
+    QPushButton *pushButton_6;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout;
+    QLabel *label_7;
+    QLineEdit *lineEdit_totalDistance;
+    QLabel *label_6;
+    QLineEdit *lineEdit_totalSpentTrip;
 
     void setupUi(QDialog *ClosestTrip)
     {
         if (ClosestTrip->objectName().isEmpty())
             ClosestTrip->setObjectName(QString::fromUtf8("ClosestTrip"));
-        ClosestTrip->resize(830, 502);
+        ClosestTrip->resize(857, 502);
         label = new QLabel(ClosestTrip);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(260, 40, 121, 16));
@@ -66,9 +71,6 @@ public:
         label_5 = new QLabel(ClosestTrip);
         label_5->setObjectName(QString::fromUtf8("label_5"));
         label_5->setGeometry(QRect(590, 370, 63, 20));
-        label_6 = new QLabel(ClosestTrip);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
-        label_6->setGeometry(QRect(310, 410, 191, 41));
         listWidget = new QListWidget(ClosestTrip);
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
         listWidget->setGeometry(QRect(30, 40, 191, 331));
@@ -84,27 +86,18 @@ public:
         pushButton_2 = new QPushButton(ClosestTrip);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
         pushButton_2->setGeometry(QRect(510, 330, 93, 29));
-        lineEdit_2 = new QLineEdit(ClosestTrip);
-        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
-        lineEdit_2->setGeometry(QRect(630, 370, 113, 26));
-        lineEdit_3 = new QLineEdit(ClosestTrip);
-        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
-        lineEdit_3->setGeometry(QRect(470, 420, 113, 26));
+        lineEdit_totalOnRest = new QLineEdit(ClosestTrip);
+        lineEdit_totalOnRest->setObjectName(QString::fromUtf8("lineEdit_totalOnRest"));
+        lineEdit_totalOnRest->setGeometry(QRect(630, 370, 113, 26));
         listView_2 = new QListView(ClosestTrip);
         listView_2->setObjectName(QString::fromUtf8("listView_2"));
         listView_2->setGeometry(QRect(620, 130, 41, 191));
         pushButton_3 = new QPushButton(ClosestTrip);
         pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
-        pushButton_3->setGeometry(QRect(690, 450, 93, 29));
+        pushButton_3->setGeometry(QRect(640, 460, 93, 29));
         pushButton_4 = new QPushButton(ClosestTrip);
         pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
         pushButton_4->setGeometry(QRect(80, 380, 93, 29));
-        lineEdit = new QLineEdit(ClosestTrip);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setGeometry(QRect(150, 420, 113, 26));
-        label_7 = new QLabel(ClosestTrip);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
-        label_7->setGeometry(QRect(50, 420, 111, 21));
         listWidget_menu = new QListWidget(ClosestTrip);
         listWidget_menu->setObjectName(QString::fromUtf8("listWidget_menu"));
         listWidget_menu->setGeometry(QRect(240, 130, 161, 191));
@@ -117,6 +110,35 @@ public:
         listWidget_cartPrice = new QListWidget(ClosestTrip);
         listWidget_cartPrice->setObjectName(QString::fromUtf8("listWidget_cartPrice"));
         listWidget_cartPrice->setGeometry(QRect(660, 130, 121, 192));
+        pushButton_6 = new QPushButton(ClosestTrip);
+        pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
+        pushButton_6->setGeometry(QRect(740, 460, 93, 29));
+        widget = new QWidget(ClosestTrip);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(40, 450, 575, 28));
+        horizontalLayout = new QHBoxLayout(widget);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        label_7 = new QLabel(widget);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+
+        horizontalLayout->addWidget(label_7);
+
+        lineEdit_totalDistance = new QLineEdit(widget);
+        lineEdit_totalDistance->setObjectName(QString::fromUtf8("lineEdit_totalDistance"));
+
+        horizontalLayout->addWidget(lineEdit_totalDistance);
+
+        label_6 = new QLabel(widget);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        horizontalLayout->addWidget(label_6);
+
+        lineEdit_totalSpentTrip = new QLineEdit(widget);
+        lineEdit_totalSpentTrip->setObjectName(QString::fromUtf8("lineEdit_totalSpentTrip"));
+
+        horizontalLayout->addWidget(lineEdit_totalSpentTrip);
+
 
         retranslateUi(ClosestTrip);
 
@@ -131,13 +153,14 @@ public:
         label_3->setText(QCoreApplication::translate("ClosestTrip", "Menu", nullptr));
         label_4->setText(QCoreApplication::translate("ClosestTrip", "Cart", nullptr));
         label_5->setText(QCoreApplication::translate("ClosestTrip", "Total", nullptr));
-        label_6->setText(QCoreApplication::translate("ClosestTrip", "Total Spending on Trip", nullptr));
         pushButton->setText(QCoreApplication::translate("ClosestTrip", "Add", nullptr));
         pushButton_2->setText(QCoreApplication::translate("ClosestTrip", "Remove", nullptr));
         pushButton_3->setText(QCoreApplication::translate("ClosestTrip", "Back", nullptr));
         pushButton_4->setText(QCoreApplication::translate("ClosestTrip", "Choose", nullptr));
-        label_7->setText(QCoreApplication::translate("ClosestTrip", "Total Distance", nullptr));
         pushButton_5->setText(QCoreApplication::translate("ClosestTrip", "Done", nullptr));
+        pushButton_6->setText(QCoreApplication::translate("ClosestTrip", "Finish", nullptr));
+        label_7->setText(QCoreApplication::translate("ClosestTrip", "Total Distance", nullptr));
+        label_6->setText(QCoreApplication::translate("ClosestTrip", "Total Spending on Trip", nullptr));
     } // retranslateUi
 
 };

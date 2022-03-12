@@ -11,6 +11,7 @@ CONFIG += c++11
 
 SOURCES += \
     closesttrip.cpp \
+    endwindow.cpp \
     main.cpp \
     mainwindow.cpp \
     restaurant.cpp \
@@ -18,12 +19,14 @@ SOURCES += \
 
 HEADERS += \
     closesttrip.h \
+    endwindow.h \
     mainwindow.h \
     restaurant.h \
     signin.h
 
 FORMS += \
     closesttrip.ui \
+    endwindow.ui \
     mainwindow.ui \
     signin.ui
 

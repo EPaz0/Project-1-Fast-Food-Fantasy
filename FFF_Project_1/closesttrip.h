@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QtSql>
 #include "restaurant.h"
+#include "endwindow.h"
 
 
 namespace Ui {
@@ -19,6 +20,9 @@ class ClosestTrip : public QDialog
 
 public:
     explicit ClosestTrip(QWidget *parent = nullptr);
+    QString AddApostropheToString(QString name);
+    int GetRestaurantIDUsingQSL(QString name);
+    QString GetRestaurantNameUsingQSL(int id);
     ~ClosestTrip();
 
 signals:
@@ -33,11 +37,18 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_pushButton_5_clicked();
+
+    void on_pushButton_6_clicked();
+
 private:
     Ui::ClosestTrip *ui;
+    endwindow *endWindow;
     // import the table already created
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     QSqlQuery qry;
+    float totalSpendingOnTrip = 0.0;
+
 };
 
 #endif // CLOSESTTRIP_H
