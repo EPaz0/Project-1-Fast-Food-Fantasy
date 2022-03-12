@@ -1225,7 +1225,29 @@ debug/closesttrip.o: ../FFF_Project_1/closesttrip.cpp ../FFF_Project_1/closesttr
 		../FFF_Project_1/restaurant.h \
 		../../../qt/6.3.0/mingw_64/include/QtCore/QString \
 		../../../qt/6.3.0/mingw_64/include/QtCore/QVector \
-		ui_closesttrip.h
+		ui_closesttrip.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/QVariant \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QApplication \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qapplication.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qguiapplication.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qinputmethod.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qguiapplication_platform.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QLabel \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qlabel.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qpicture.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qtextdocument.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QLineEdit \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qlineedit.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qtextcursor.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qtextformat.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qpen.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qtextoption.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QListView \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QListWidget \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qlistwidget.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QPushButton \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qpushbutton.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qabstractbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\closesttrip.o ..\FFF_Project_1\closesttrip.cpp
 
 debug/main.o: ../FFF_Project_1/main.cpp ../FFF_Project_1/mainwindow.h \
@@ -1852,6 +1874,40 @@ debug/mainwindow.o: ../FFF_Project_1/mainwindow.cpp ../FFF_Project_1/mainwindow.
 		../../../qt/6.3.0/mingw_64/include/QtCore/QString \
 		../../../qt/6.3.0/mingw_64/include/QtCore/QVector \
 		ui_mainwindow.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/QVariant \
+		../../../qt/6.3.0/mingw_64/include/QtGui/QAction \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QApplication \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qapplication.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qguiapplication.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qinputmethod.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qguiapplication_platform.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QHBoxLayout \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qboxlayout.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qlayout.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qlayoutitem.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qgridlayout.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QLabel \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qlabel.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qpicture.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qtextdocument.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QLineEdit \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qlineedit.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qtextcursor.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qtextformat.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qpen.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qtextoption.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QListWidget \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qlistwidget.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QMenu \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qmenu.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QMenuBar \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qmenubar.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QPushButton \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qpushbutton.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qabstractbutton.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QStatusBar \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qstatusbar.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QVBoxLayout \
 		../../../qt/6.3.0/mingw_64/include/QtCore/QFile \
 		../../../qt/6.3.0/mingw_64/include/QtCore/QTextStream
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\FFF_Project_1\mainwindow.cpp
@@ -2066,6 +2122,49 @@ debug/signin.o: ../FFF_Project_1/signin.cpp ../FFF_Project_1/signin.h \
 		../../../qt/6.3.0/mingw_64/include/QtGui/QTransform \
 		../../../qt/6.3.0/mingw_64/include/QtCore/qnativeinterface.h \
 		ui_signin.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/QVariant \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QApplication \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qapplication.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/qcoreapplication.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/qeventloop.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/qcoreapplication_platform.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/qfuture.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/qfutureinterface.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/qmutex.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/qresultstore.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/qfuture_impl.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/qthreadpool.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/qthread.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/qdeadlinetimer.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/qelapsedtimer.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/qrunnable.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/qexception.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/qpromise.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qguiapplication.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qinputmethod.h \
+		../../../qt/6.3.0/mingw_64/include/QtCore/qlocale.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qguiapplication_platform.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QHBoxLayout \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qboxlayout.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qlayout.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qlayoutitem.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qgridlayout.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QLabel \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qlabel.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qframe.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qpicture.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qtextdocument.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QLineEdit \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qlineedit.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qtextcursor.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qtextformat.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qpen.h \
+		../../../qt/6.3.0/mingw_64/include/QtGui/qtextoption.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QPushButton \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qpushbutton.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/qabstractbutton.h \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QVBoxLayout \
+		../../../qt/6.3.0/mingw_64/include/QtWidgets/QWidget \
 		../../../qt/6.3.0/mingw_64/include/QtWidgets/QMessageBox \
 		../../../qt/6.3.0/mingw_64/include/QtWidgets/qmessagebox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\signin.o ..\FFF_Project_1\signin.cpp
