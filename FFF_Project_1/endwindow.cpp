@@ -7,6 +7,8 @@ endwindow::endwindow(QWidget *parent) :
     ui(new Ui::endwindow)
 {
     ui->setupUi(this);
+    connect(this,SIGNAL(backMain()), parent->parent(), SLOT(show()));
+    connect(this,SIGNAL(Admin()), parent->parent(), SLOT(Admin()));
 }
 
 endwindow::~endwindow()
@@ -15,3 +17,17 @@ endwindow::~endwindow()
 }
 
 
+
+void endwindow::on_pushButton_clicked()
+{
+    hide();
+    if(admin == true)
+        emit Admin();
+    else
+        emit backMain();
+}
+
+void endwindow::AdminCheck()
+{
+    admin = true;
+}

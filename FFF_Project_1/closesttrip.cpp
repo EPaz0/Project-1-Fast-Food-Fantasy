@@ -9,6 +9,8 @@ ClosestTrip::ClosestTrip(QWidget *parent) :
     ui->setupUi(this);
     connect(this,SIGNAL(Admin()), parent, SLOT(Admin()));
     connect(this,SIGNAL(Admin()), parent, SLOT(show()));
+    connect(this,SIGNAL(backMain()), parent, SLOT(show()));
+
 
     QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
     db.setDatabaseName(dbPath);
@@ -258,7 +260,10 @@ QString ClosestTrip::GetRestaurantNameUsingQSL(int id)
 void ClosestTrip::on_pushButton_3_clicked()
 {
     hide();
-    emit Admin();
+    if(admin == true)
+        emit Admin();
+    else
+        emit backMain();
 }
 
 
@@ -266,7 +271,14 @@ void ClosestTrip::on_pushButton_3_clicked()
 void ClosestTrip::on_pushButton_6_clicked()
 {
     hide();
+    if(admin == true)
+        emit AdminCheck();
     endWindow = new endwindow(this);
     endWindow->show();
+}
+
+void ClosestTrip::isAdmin()
+{
+  admin = true;
 }
 

@@ -27,6 +27,8 @@ public:
 
 signals:
     void Admin();
+    void backMain();
+    void AdminCheck();
 
 private slots:
     void on_pushButton_3_clicked();
@@ -41,6 +43,8 @@ private slots:
 
     void on_pushButton_6_clicked();
 
+    void isAdmin();
+
 private:
     Ui::ClosestTrip *ui;
     endwindow *endWindow;
@@ -48,6 +52,7 @@ private:
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     QSqlQuery qry;
     float totalSpendingOnTrip = 0.0;
+    bool admin = false;
 
 };
 

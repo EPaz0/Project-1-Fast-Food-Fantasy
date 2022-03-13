@@ -33,10 +33,14 @@ private slots:
 
     void on_action10_Closet_triggered();
 
+signals:
+    void isAdmin();
+
 private:
     Ui::MainWindow *ui;
     Signin *signin;
     ClosestTrip *tripFromSaddleback;
     QList<restaurant> restaurantList;
+    bool admin = false;
 };
 #endif // MAINWINDOW_H
