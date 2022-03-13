@@ -106,17 +106,17 @@ ClosestTrip::ClosestTrip(QWidget *parent) :
     QString item;
 
     // test sql - display info on closest trip list
-    QSqlQuery qry;
-    qry.prepare("select restaurantName from restaurantList");
+//    QSqlQuery qry;
+//    qry.prepare("select restaurantName from restaurantList");
 
-    if (qry.exec())
-    {
-        while (qry.next())
-        {
-            item = qry.value(0).toString();
-             ui->listWidget->addItem(item);
-        }
-    }
+//    if (qry.exec())
+//    {
+//        while (qry.next())
+//        {
+//            item = qry.value(0).toString();
+//             ui->listWidget->addItem(item);
+//        }
+//    }
 
 }
 
