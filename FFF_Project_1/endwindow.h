@@ -15,9 +15,6 @@ public:
     explicit endwindow(QWidget *parent = nullptr);
     ~endwindow();
 
-private slots:
-    void on_pushButton_clicked();
-
 private:
     Ui::endwindow *ui;
 };
