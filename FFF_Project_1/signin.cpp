@@ -31,7 +31,6 @@ void Signin::on_OkButton_clicked()
     if(name.isEmpty() == true || pass.isEmpty() == true)
       { QMessageBox::warning(this, "Warning", "Incorrect Input, please enter something valid");
        return;
-       //show();
       }
     QString info = name + " " + pass;
 
@@ -45,7 +44,6 @@ void Signin::on_OkButton_clicked()
     if(match != true) {
          QMessageBox::warning(this, "Warning", "Incorrect Username or Password");
         return;
-        //show();
     }
 
 }

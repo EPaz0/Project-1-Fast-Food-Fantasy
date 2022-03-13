@@ -41,7 +41,6 @@ private:
     int restaurantNumber;
     float distanceToSaddleback;
     QList<menuItem> menu;
-
 };
 
 #endif // RESTAURANT_H

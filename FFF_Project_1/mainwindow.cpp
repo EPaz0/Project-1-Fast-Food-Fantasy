@@ -12,12 +12,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     ui->actionUpdate_List->setDisabled(true);
     ui->actionLog_out->setDisabled(true);
 
-    MainWindow::setToolTipDuration(500);
 
-
+//read text file and put info into restaurant vector
     QFile file(":/txt/CS1D_Spring_2022_Fast_Food_Project.txt");
     if (file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -183,6 +183,7 @@ void MainWindow::on_actionLog_in_triggered()
 
 void MainWindow::Admin()
 {
+    admin = true;
     ui->actionLog_in->setDisabled(true);
     ui->actionLog_out->setDisabled(false);
     ui->actionUpdate_List->setDisabled(false);
@@ -199,7 +200,9 @@ void MainWindow::on_action10_Closet_triggered()
 {
     hide();
     tripFromSaddleback = new ClosestTrip(this);
-
+    connect(this,SIGNAL(isAdmin()), tripFromSaddleback, SLOT(isAdmin()));
+    if(admin == true)
+        emit isAdmin();
     tripFromSaddleback->show();
 
 }

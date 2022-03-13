@@ -1,0 +1,11 @@
+release/closesttrip.o
+release/endwindow.o
+release/main.o
+release/mainwindow.o
+release/restaurant.o
+release/signin.o
+release/qrc_resource.o
+release/moc_closesttrip.o
+release/moc_endwindow.o
+release/moc_mainwindow.o
+release/moc_signin.o
