@@ -122,10 +122,10 @@ ClosestTrip::ClosestTrip(QWidget *parent) :
 
 ClosestTrip::~ClosestTrip()
 {
-    db.close();
-    const QString connectionName = db.connectionName();
-    db = QSqlDatabase();
-    QSqlDatabase::removeDatabase(connectionName);
+//    db.close();
+//    const QString connectionName = db.connectionName();
+//    db = QSqlDatabase();
+//    QSqlDatabase::removeDatabase(connectionName);
     delete ui;
 }
 
@@ -277,6 +277,10 @@ QString ClosestTrip::GetRestaurantNameUsingQSL(int id)
 
 void ClosestTrip::on_pushButton_3_clicked()
 {
+    db.close();
+    const QString connectionName = db.connectionName();
+    db = QSqlDatabase();
+    QSqlDatabase::removeDatabase(connectionName);
     hide();
     if(admin == true)
         emit Admin();
@@ -288,6 +292,10 @@ void ClosestTrip::on_pushButton_3_clicked()
 
 void ClosestTrip::on_pushButton_6_clicked()
 {
+    db.close();
+    const QString connectionName = db.connectionName();
+    db = QSqlDatabase();
+    QSqlDatabase::removeDatabase(connectionName);
     hide();
     endWindow = new endwindow(this);
     if(admin == true)
