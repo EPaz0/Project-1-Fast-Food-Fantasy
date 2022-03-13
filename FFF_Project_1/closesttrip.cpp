@@ -130,6 +130,8 @@ ClosestTrip::~ClosestTrip()
 }
 
 
+// this is the action when "choose" button is clicked
+// purpose: display menu with prices
 void ClosestTrip::on_pushButton_4_clicked()
 {
     ui->listWidget_menu->clear();
@@ -163,7 +165,6 @@ void ClosestTrip::on_pushButton_4_clicked()
             ui->listWidget_price->addItem("$" + price);  // add price to the listWidget_price
         }
     }
-
 }
 
 
@@ -172,30 +173,33 @@ void ClosestTrip::on_pushButton_4_clicked()
 // purpose: add menuitem to cart
 void ClosestTrip::on_pushButton_clicked()
 {
-    QString currentItem = ui->listWidget_menu->currentItem()->text();
-    QListWidgetItem* item = new QListWidgetItem(currentItem);
-    ui->listWidget_cartItem->addItem(item);   // add menu item name to cart widget
-
-    QString restaurantname = ui->listWidget->currentItem()->text();
-    // change to sql query format when string contains apostrophe
-    restaurantname = AddApostropheToString(restaurantname);
-
-    int restaurantId = GetRestaurantIDUsingQSL(restaurantname);
-
-    float price = 0;  // get the price, having menuitem and restaurant id
-    QString stringQry;
-    stringQry = "SELECT price FROM menu WHERE restaurantID = '" + QString::number(restaurantId) + "'" + " AND item = '" + currentItem + "'";
-    qry.prepare(stringQry);
-    if (qry.exec())
+    if (ui->listWidget_menu->selectedItems().size() != 0)   // check if menu item is clicked or not, if not, do not do anything
     {
-        while (qry.next())
+        QString currentItem = ui->listWidget_menu->currentItem()->text();
+        QListWidgetItem* item = new QListWidgetItem(currentItem);
+        ui->listWidget_cartItem->addItem(item);   // add menu item name to cart widget
+
+        QString restaurantname = ui->listWidget->currentItem()->text();
+        // change to sql query format when string contains apostrophe
+        restaurantname = AddApostropheToString(restaurantname);
+        int restaurantId = GetRestaurantIDUsingQSL(restaurantname);
+
+
+        float price = 0;  // get the price, having menuitem and restaurant id
+        QString stringQry;
+        stringQry = "SELECT price FROM menu WHERE restaurantID = '" + QString::number(restaurantId) + "'" + " AND item = '" + currentItem + "'";
+        qry.prepare(stringQry);
+        if (qry.exec())
         {
-            price = qry.value(0).toFloat();
+            while (qry.next())
+            {
+                price = qry.value(0).toFloat();
+            }
         }
+
+
+        ui->listWidget_cartPrice->addItem(QString::number(price));   // add price to cart widget
     }
-
-
-    ui->listWidget_cartPrice->addItem(QString::number(price));   // add price to cart widget
 }
 
 
@@ -216,6 +220,8 @@ void ClosestTrip::on_pushButton_2_clicked()
 }
 
 
+// this is the action set when "done" button is clicked
+// purpose: finish purchasing, show / update total spending on trip
 void ClosestTrip::on_pushButton_5_clicked()
 {
     float totalSpentOnRestaurant = 0.0;
@@ -229,6 +235,10 @@ void ClosestTrip::on_pushButton_5_clicked()
 
     totalSpendingOnTrip += totalSpentOnRestaurant;  // add total spent on this restaurant to total spent on trip
     ui->lineEdit_totalSpentTrip->setText("$" + QString::number(totalSpendingOnTrip));  // update/display total spent on trip
+
+    // clear the cart
+    ui->listWidget_cartItem->clear();
+    ui->listWidget_cartPrice->clear();
 }
 
 QString ClosestTrip::AddApostropheToString(QString restaurantname)
