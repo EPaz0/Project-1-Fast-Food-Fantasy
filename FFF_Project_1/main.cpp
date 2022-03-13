@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
 
+
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     const QString DRIVER("QSQLITE");
     if (QSqlDatabase::isDriverAvailable(DRIVER))
@@ -89,7 +90,6 @@ int main(int argc, char *argv[])
     const QString connectionName = db.connectionName();
     db = QSqlDatabase();
     QSqlDatabase::removeDatabase(connectionName);
-
 
     w.show();
     return a.exec();
