@@ -17,20 +17,87 @@ ClosestTrip::ClosestTrip(QWidget *parent) :
         qDebug() << "problem opening database";
     }
 
-
+    QString stringQry;
     QString restaurant;
 
-    // display info on closest trip list, order from closest to furthest
-    qry.prepare("SELECT restaurantName FROM restaurantList ORDER BY distancetoSaddleback");
 
-    if (qry.exec())
+    // get the closest restaurant
+    int res1ID = 0;
+    QString res1NAME;
+    int res2ID = 0;
+    QString res2NAME;
+    QString extractedValues = "";  // restaurants already added
+    for (int i = 0; i < 9; i++)
     {
-        while (qry.next())
+        // get the closest restaurant from Saddleback (first in list)
+        if (res1ID == 0)
         {
-            restaurant = qry.value(0).toString();
-             ui->listWidget->addItem(restaurant);  // add each restaurant to the widget
+            qry.prepare("SELECT id, MIN(distancetoSaddleback) FROM restaurantList");
+            if (qry.exec())
+            {
+                while (qry.next())
+                {
+                    res1ID = qry.value(0).toInt();
+                }
+            }
+            res1NAME = GetRestaurantNameUsingQSL(res1ID);
+            ui->listWidget->addItem(res1NAME);
+        }
+        // choose the closest restaurant from each restaurant
+        else
+        {
+            stringQry = "SELECT toRestaurant, MIN(distance) FROM distances WHERE fromRestaurant = " + QString::number(res1ID) + " AND toRestaurant NOT IN (" + extractedValues + ")";
+
+            qry.prepare(stringQry);
+            if (qry.exec())
+            {
+                while (qry.next())
+                {
+                    res2ID = qry.value(0).toInt();
+                }
+            }
+            else
+                qDebug() << "failed";
+            res2NAME = GetRestaurantNameUsingQSL(res2ID);
+            if (extractedValues.length()==0)
+                extractedValues += QString::number(res1ID);
+            else
+                extractedValues = extractedValues + "," + QString::number(res1ID);
+            res1ID = res2ID;
+            ui->listWidget->addItem(res2NAME);
         }
     }
+
+
+    // display total distance
+     QString name;
+     int restaurantID1;
+     int restaurantID2;
+     float totalDistance = 0;
+
+    for (int i = 0; i < ui->listWidget->count() - 1; i++)
+    {
+        QListWidgetItem* item1 = ui->listWidget->item(i);
+        name = item1->text();
+        name = AddApostropheToString(name);
+        restaurantID1 = GetRestaurantIDUsingQSL(name);
+
+        QListWidgetItem* item2 = ui->listWidget->item(i + 1);
+        name = item2->text();
+        name = AddApostropheToString(name);
+        restaurantID2 = GetRestaurantIDUsingQSL(name);
+
+        stringQry = "SELECT distance FROM distances WHERE fromRestaurant = " + QString::number(restaurantID1) + " AND toRestaurant = " + QString::number(restaurantID2);
+        qry.prepare(stringQry);
+        if (qry.exec())
+        {
+            while (qry.next())
+            {
+                totalDistance += qry.value(0).toFloat();
+            }
+        }
+    }
+    ui->lineEdit_totalDistance->setText(QString::number(totalDistance) + " miles");
 }
 
 ClosestTrip::~ClosestTrip()
@@ -43,51 +110,27 @@ ClosestTrip::~ClosestTrip()
 }
 
 
-void ClosestTrip::on_pushButton_3_clicked()
-{
-    hide();
-    emit Admin();
-}
-
-
 void ClosestTrip::on_pushButton_4_clicked()
 {
     ui->listWidget_menu->clear();
     ui->listWidget_price->clear();
     ui->listWidget_cartItem->clear();
     ui->listWidget_cartPrice->clear();
+    ui->lineEdit_totalOnRest->clear();
 
 
     QString restaurantname = ui->listWidget->currentItem()->text();
     ui->name->setText(restaurantname); // display restaurant  name
-
-    // change to sql query format when string contains apostrophe (need to add one more ' to the query)
-    if (restaurantname == "MacDonald's")
-        restaurantname = "MacDonald''s";
-    if (restaurantname == "Domino's Pizza")
-        restaurantname = "Domino''s Pizza";
-    if (restaurantname == "Wendy's")
-        restaurantname = "Wendy''s";
-    if (restaurantname == "Papa John's Pizza")
-        restaurantname = "Papa John''s Pizza";
+    restaurantname = AddApostropheToString(restaurantname);
 
 
-    int restaurantId;
-    // get restaurant's id number for the restaurant name, use restaurantList table
-    QString stringQry = "SELECT id FROM restaurantList WHERE restaurantName = '" + restaurantname + "'";
-    qry.prepare(stringQry);
-    if (qry.exec())
-    {
-        while (qry.next())
-        {
-            restaurantId = qry.value(0).toInt();
-        }
-    }
+    int restaurantId = GetRestaurantIDUsingQSL(restaurantname);
 
 
     // display menu and price
     QString menuItem;
     QString price;
+    QString stringQry;
     stringQry = "SELECT * FROM menu WHERE restaurantID = " + QString::number(restaurantId);
     qry.prepare(stringQry);  // pass the stringQry to the SQL query
     if (qry.exec())
@@ -114,28 +157,12 @@ void ClosestTrip::on_pushButton_clicked()
 
     QString restaurantname = ui->listWidget->currentItem()->text();
     // change to sql query format when string contains apostrophe
-    if (restaurantname == "MacDonald's")
-        restaurantname = "MacDonald''s";
-    if (restaurantname == "Domino's Pizza")
-        restaurantname = "Domino''s Pizza";
-    if (restaurantname == "Wendy's")
-        restaurantname = "Wendy''s";
-    if (restaurantname == "Papa John's Pizza")
-        restaurantname = "Papa John''s Pizza";
+    restaurantname = AddApostropheToString(restaurantname);
 
-    int restaurantId;
-    // get restaurant's id number from restaurant name
-    QString stringQry = "SELECT id FROM restaurantList WHERE restaurantName = '" + restaurantname + "'";
-    qry.prepare(stringQry);
-    if (qry.exec())
-    {
-        while (qry.next())
-        {
-            restaurantId = qry.value(0).toInt();
-        }
-    }
+    int restaurantId = GetRestaurantIDUsingQSL(restaurantname);
 
     float price;  // get the price, having menuitem and restaurant id
+    QString stringQry;
     stringQry = "SELECT price FROM menu WHERE restaurantID = '" + QString::number(restaurantId) + "'" + " AND item = '" + currentItem + "'";
     qry.prepare(stringQry);
     if (qry.exec())
@@ -165,5 +192,81 @@ void ClosestTrip::on_pushButton_2_clicked()
         delete item;
         delete itemPrice;
     }
+}
+
+
+void ClosestTrip::on_pushButton_5_clicked()
+{
+    float totalSpentOnRestaurant = 0.0;
+    for (int i = 0; i < ui->listWidget_cartPrice->count(); i++)
+    {
+        QListWidgetItem* item = ui->listWidget_cartPrice->item(i);
+        totalSpentOnRestaurant += item->text().toFloat();
+    }
+
+    ui->lineEdit_totalOnRest->setText("$" + QString::number(totalSpentOnRestaurant));
+
+    totalSpendingOnTrip += totalSpentOnRestaurant;  // add total spent on this restaurant to total spent on trip
+    ui->lineEdit_totalSpentTrip->setText("$" + QString::number(totalSpendingOnTrip));  // update/display total spent on trip
+}
+
+QString ClosestTrip::AddApostropheToString(QString restaurantname)
+{
+    // change to sql query format when string contains apostrophe (need to add one more ' to the query)
+    if (restaurantname == "MacDonald's")
+        restaurantname = "MacDonald''s";
+    if (restaurantname == "Domino's Pizza")
+        restaurantname = "Domino''s Pizza";
+    if (restaurantname == "Wendy's")
+        restaurantname = "Wendy''s";
+    if (restaurantname == "Papa John's Pizza")
+        restaurantname = "Papa John''s Pizza";
+    return restaurantname;
+}
+
+int ClosestTrip::GetRestaurantIDUsingQSL(QString name)
+{
+    int id;
+    QString stringQry = "SELECT id FROM restaurantList WHERE restaurantName = '" + name + "'";
+    qry.prepare(stringQry);
+    if (qry.exec())
+    {
+        while (qry.next())
+        {
+            id = qry.value(0).toInt();
+        }
+    }
+    return id;
+}
+
+
+QString ClosestTrip::GetRestaurantNameUsingQSL(int id)
+{
+    QString name;
+    QString stringQry = "SELECT restaurantName FROM restaurantList WHERE id = " + QString::number(id);
+    qry.prepare(stringQry);
+    if (qry.exec())
+    {
+        while (qry.next())
+        {
+            name = qry.value(0).toString();
+        }
+    }
+    return name;
+}
+
+void ClosestTrip::on_pushButton_3_clicked()
+{
+    hide();
+    emit Admin();
+}
+
+
+
+void ClosestTrip::on_pushButton_6_clicked()
+{
+    hide();
+    endWindow = new endwindow(this);
+    endWindow->show();
 }
 
