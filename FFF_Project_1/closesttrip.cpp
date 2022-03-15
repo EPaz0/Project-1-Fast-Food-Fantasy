@@ -23,6 +23,7 @@ ClosestTrip::ClosestTrip(QWidget *parent) :
     ui->listWidget->clear();
     QString stringQry;
     QString restaurant;
+    float totalDistance = 0;
 
 
     int res1ID = 0;
@@ -30,7 +31,7 @@ ClosestTrip::ClosestTrip(QWidget *parent) :
        int res2ID = 0;
        QString res2NAME;
        QString extractedValues = "";  // restaurants already added
-       for (int i = 0; i < 9; i++)
+       for (int i = 0; i < 10; i++)
        {
            // get the closest restaurant from Saddleback (first in list)
            if (res1ID == 0)
@@ -41,6 +42,8 @@ ClosestTrip::ClosestTrip(QWidget *parent) :
                    while (qry.next())
                    {
                        res1ID = qry.value(0).toInt();
+                       totalDistance += qry.value(1).toFloat();   // add the distance from saddleback to the first restaurant to total distance
+
                    }
                }
                res1NAME = GetRestaurantNameUsingQSL(res1ID);
@@ -77,7 +80,6 @@ ClosestTrip::ClosestTrip(QWidget *parent) :
      QString name;
      int restaurantID1;
      int restaurantID2;
-     float totalDistance = 0;
 
     for (int i = 0; i < ui->listWidget->count() - 1; i++)
     {
@@ -101,6 +103,7 @@ ClosestTrip::ClosestTrip(QWidget *parent) :
             }
         }
     }
+
     ui->lineEdit_totalDistance->setText(QString::number(totalDistance) + " miles");
 
     QString item;
@@ -130,8 +133,8 @@ ClosestTrip::~ClosestTrip()
 }
 
 
-// this is the action when "choose" button is clicked
-// purpose: display menu with prices
+// this is the action set when "choose" button is clicked
+// purpose: display menu (item and prices)
 void ClosestTrip::on_pushButton_4_clicked()
 {
     ui->listWidget_menu->clear();
@@ -140,29 +143,31 @@ void ClosestTrip::on_pushButton_4_clicked()
     ui->listWidget_cartPrice->clear();
     ui->lineEdit_totalOnRest->clear();
 
-
-    QString restaurantname = ui->listWidget->currentItem()->text();
-    ui->name->setText(restaurantname); // display restaurant  name
-    restaurantname = AddApostropheToString(restaurantname);
-
-
-    int restaurantId = GetRestaurantIDUsingQSL(restaurantname);
-
-
-    // display menu and price
-    QString menuItem;
-    QString price;
-    QString stringQry;
-    stringQry = "SELECT * FROM menu WHERE restaurantID = " + QString::number(restaurantId);
-    qry.prepare(stringQry);  // pass the stringQry to the SQL query
-    if (qry.exec())
+    if (ui->listWidget->selectedItems().size() != 0)  // check if restaurant is selected or not
     {
-        while (qry.next())
+        QString restaurantname = ui->listWidget->currentItem()->text();
+        ui->name->setText(restaurantname); // display restaurant  name
+        restaurantname = AddApostropheToString(restaurantname);
+
+
+        int restaurantId = GetRestaurantIDUsingQSL(restaurantname);
+
+
+        // display menu and price
+        QString menuItem;
+        QString price;
+        QString stringQry;
+        stringQry = "SELECT * FROM menu WHERE restaurantID = " + QString::number(restaurantId);
+        qry.prepare(stringQry);  // pass the stringQry to the SQL query
+        if (qry.exec())
         {
-            menuItem = qry.value(1).toString();   // in here, 1 specifies column 2 of menu table (item)
-            ui->listWidget_menu->addItem(menuItem); // add menu item to the listWidget_menu
-            price = qry.value(2).toString();    // in here, 2 specifies column 3 of menu table (price)
-            ui->listWidget_price->addItem("$" + price);  // add price to the listWidget_price
+            while (qry.next())
+            {
+                menuItem = qry.value(1).toString();   // in here, 1 specifies column 2 of menu table (item)
+                ui->listWidget_menu->addItem(menuItem); // add menu item to the listWidget_menu
+                price = qry.value(2).toString();    // in here, 2 specifies column 3 of menu table (price)
+                ui->listWidget_price->addItem("$" + price);  // add price to the listWidget_price
+            }
         }
     }
 }
@@ -173,8 +178,11 @@ void ClosestTrip::on_pushButton_4_clicked()
 // purpose: add menuitem to cart
 void ClosestTrip::on_pushButton_clicked()
 {
-    if (ui->listWidget_menu->selectedItems().size() != 0)   // check if menu item is clicked or not, if not, do not do anything
-    {
+    ui->lineEdit_totalOnRest->clear();
+
+   if (ui->listWidget_menu->selectedItems().size() != 0)
+   {
+
         QString currentItem = ui->listWidget_menu->currentItem()->text();
         QListWidgetItem* item = new QListWidgetItem(currentItem);
         ui->listWidget_cartItem->addItem(item);   // add menu item name to cart widget
@@ -182,8 +190,8 @@ void ClosestTrip::on_pushButton_clicked()
         QString restaurantname = ui->listWidget->currentItem()->text();
         // change to sql query format when string contains apostrophe
         restaurantname = AddApostropheToString(restaurantname);
-        int restaurantId = GetRestaurantIDUsingQSL(restaurantname);
 
+        int restaurantId = GetRestaurantIDUsingQSL(restaurantname);
 
         float price = 0;  // get the price, having menuitem and restaurant id
         QString stringQry;
@@ -220,8 +228,7 @@ void ClosestTrip::on_pushButton_2_clicked()
 }
 
 
-// this is the action set when "done" button is clicked
-// purpose: finish purchasing, show / update total spending on trip
+// when done button is clicked
 void ClosestTrip::on_pushButton_5_clicked()
 {
     float totalSpentOnRestaurant = 0.0;
@@ -236,7 +243,6 @@ void ClosestTrip::on_pushButton_5_clicked()
     totalSpendingOnTrip += totalSpentOnRestaurant;  // add total spent on this restaurant to total spent on trip
     ui->lineEdit_totalSpentTrip->setText("$" + QString::number(totalSpendingOnTrip));  // update/display total spent on trip
 
-    // clear the cart
     ui->listWidget_cartItem->clear();
     ui->listWidget_cartPrice->clear();
 }

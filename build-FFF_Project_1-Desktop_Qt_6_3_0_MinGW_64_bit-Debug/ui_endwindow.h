@@ -13,6 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -21,26 +22,30 @@ QT_BEGIN_NAMESPACE
 class Ui_endwindow
 {
 public:
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout;
     QLabel *label;
+    QPushButton *pushButton;
 
     void setupUi(QDialog *endwindow)
     {
         if (endwindow->objectName().isEmpty())
             endwindow->setObjectName(QString::fromUtf8("endwindow"));
         endwindow->resize(400, 300);
-        widget = new QWidget(endwindow);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(120, 100, 180, 58));
-        verticalLayout = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(endwindow);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(120, 100, 180, 58));
+        verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(widget);
+        label = new QLabel(layoutWidget);
         label->setObjectName(QString::fromUtf8("label"));
 
         verticalLayout->addWidget(label);
 
+        pushButton = new QPushButton(endwindow);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setGeometry(QRect(270, 260, 80, 22));
 
         retranslateUi(endwindow);
 
@@ -51,6 +56,7 @@ public:
     {
         endwindow->setWindowTitle(QCoreApplication::translate("endwindow", "Dialog", nullptr));
         label->setText(QCoreApplication::translate("endwindow", "Thank you. Have a safe trip", nullptr));
+        pushButton->setText(QCoreApplication::translate("endwindow", "Back to Main", nullptr));
     } // retranslateUi
 
 };

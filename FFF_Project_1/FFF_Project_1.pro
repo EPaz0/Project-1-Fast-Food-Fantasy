@@ -14,6 +14,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     restaurant.cpp \
+    shorttesttripfromdomino.cpp \
     signin.cpp
 
 HEADERS += \
@@ -21,12 +22,14 @@ HEADERS += \
     endwindow.h \
     mainwindow.h \
     restaurant.h \
+    shorttesttripfromdomino.h \
     signin.h
 
 FORMS += \
     closesttrip.ui \
     endwindow.ui \
     mainwindow.ui \
+    shorttesttripfromdomino.ui \
     signin.ui
 
 # Default rules for deployment.

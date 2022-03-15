@@ -207,6 +207,17 @@ void MainWindow::on_action10_Closet_triggered()
 
 }
 
+void MainWindow::on_actionShortest_Trip_triggered()
+{
+    hide();
+    tripFromDomino = new ShorttestTripFromDomino(this);
+    connect(this,SIGNAL(isAdmin()), tripFromDomino, SLOT(isAdmin()));
+    if (admin == true)
+        emit isAdmin();
+    tripFromDomino->show();
+}
+
+
 void MainWindow::on_pushButton_clicked()
 {
     ui->listWidget_price->clear();
@@ -253,6 +264,3 @@ void MainWindow::on_pushButton_clicked()
         ui->listWidget_name->addItem(k.at(i));
     }
 }
-
-
-
