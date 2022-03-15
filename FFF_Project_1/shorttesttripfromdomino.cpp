@@ -311,3 +311,18 @@ void ShorttestTripFromDomino::on_pushButton_5_clicked()
     ui->listWidget_cartPrice->clear();
 }
 
+
+void ShorttestTripFromDomino::on_pushButton_6_clicked()
+{
+   db.close();
+    const QString connectionName = db.connectionName();
+    db = QSqlDatabase();
+    QSqlDatabase::removeDatabase(connectionName);
+    hide();
+    endWindow = new endwindow(this);
+    if(admin == true)
+        emit AdminCheck();
+
+    endWindow->show();
+}
+

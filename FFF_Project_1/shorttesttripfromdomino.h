@@ -22,7 +22,6 @@ public:
     QString AddApostropheToString(QString name);
     int GetRestaurantIDUsingQSL(QString name);
     QString GetRestaurantNameUsingQSL(int id);
-     void isAdmin();
 
 signals:
     void Admin();
@@ -41,6 +40,10 @@ private slots:
     void on_pushButton_2_clicked();
 
     void on_pushButton_5_clicked();
+
+    void on_pushButton_6_clicked();
+
+    void isAdmin();
 
 private:
     Ui::ShorttestTripFromDomino *ui;
