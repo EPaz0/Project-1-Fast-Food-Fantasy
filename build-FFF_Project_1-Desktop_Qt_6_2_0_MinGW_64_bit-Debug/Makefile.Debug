@@ -722,6 +722,24 @@ debug/moc_mainwindow.cpp: ../FFF_Project_1/mainwindow.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qdatetime.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcalendar.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qlocale.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/QListWidgetItem \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qlistwidget.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qlistview.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qframe.h \
+		../../../../6.2.0/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		../../../../6.2.0/mingw81_64/include/QtCore/qitemselectionmodel.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qstyleoption.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../6.2.0/mingw81_64/include/QtGui/qvalidator.h \
+		../../../../6.2.0/mingw81_64/include/QtCore/qregularexpression.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qslider.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractslider.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qstyle.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qtabbar.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qrubberband.h \
 		../../../../6.2.0/mingw81_64/include/QtSql/QtSql \
 		../../../../6.2.0/mingw81_64/include/QtSql/QtSqlDepends \
 		../../../../6.2.0/mingw81_64/include/QtCore/QtCore \
@@ -729,7 +747,6 @@ debug/moc_mainwindow.cpp: ../FFF_Project_1/mainwindow.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qabstractanimation.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qabstracteventdispatcher.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qeventloop.h \
-		../../../../6.2.0/mingw81_64/include/QtCore/qabstractitemmodel.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qabstractnativeeventfilter.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qabstractproxymodel.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qanimationgroup.h \
@@ -743,7 +760,6 @@ debug/moc_mainwindow.cpp: ../FFF_Project_1/mainwindow.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcborarray.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcborvalue.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcborcommon.h \
-		../../../../6.2.0/mingw81_64/include/QtCore/qregularexpression.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/quuid.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcbormap.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcborstream.h \
@@ -778,7 +794,6 @@ debug/moc_mainwindow.cpp: ../FFF_Project_1/mainwindow.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qfuturesynchronizer.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qfuturewatcher.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qidentityproxymodel.h \
-		../../../../6.2.0/mingw81_64/include/QtCore/qitemselectionmodel.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qjnienvironment.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/QScopedPointer \
 		../../../../6.2.0/mingw81_64/include/QtCore/qjniobject.h \
@@ -847,19 +862,6 @@ debug/moc_mainwindow.cpp: ../FFF_Project_1/mainwindow.h \
 		../../../../6.2.0/mingw81_64/include/QtSql/qsqlquerymodel.h \
 		../../../../6.2.0/mingw81_64/include/QtSql/qsqlrelationaldelegate.h \
 		../../../../6.2.0/mingw81_64/include/QtWidgets/qstyleditemdelegate.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qstyleoption.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractspinbox.h \
-		../../../../6.2.0/mingw81_64/include/QtGui/qvalidator.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qslider.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractslider.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qstyle.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qtabbar.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qrubberband.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qframe.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qlistview.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractitemview.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
 		../../../../6.2.0/mingw81_64/include/QtWidgets/qcombobox.h \
 		../../../../6.2.0/mingw81_64/include/QtSql/qsqlrelationaltablemodel.h \
 		../../../../6.2.0/mingw81_64/include/QtSql/qsqltablemodel.h \
@@ -1629,6 +1631,24 @@ debug/main.o: ../FFF_Project_1/main.cpp ../FFF_Project_1/mainwindow.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qdatetime.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcalendar.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qlocale.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/QListWidgetItem \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qlistwidget.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qlistview.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qframe.h \
+		../../../../6.2.0/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		../../../../6.2.0/mingw81_64/include/QtCore/qitemselectionmodel.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qstyleoption.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../6.2.0/mingw81_64/include/QtGui/qvalidator.h \
+		../../../../6.2.0/mingw81_64/include/QtCore/qregularexpression.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qslider.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractslider.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qstyle.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qtabbar.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qrubberband.h \
 		../../../../6.2.0/mingw81_64/include/QtSql/QtSql \
 		../../../../6.2.0/mingw81_64/include/QtSql/QtSqlDepends \
 		../../../../6.2.0/mingw81_64/include/QtCore/QtCore \
@@ -1636,7 +1656,6 @@ debug/main.o: ../FFF_Project_1/main.cpp ../FFF_Project_1/mainwindow.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qabstractanimation.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qabstracteventdispatcher.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qeventloop.h \
-		../../../../6.2.0/mingw81_64/include/QtCore/qabstractitemmodel.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qabstractnativeeventfilter.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qabstractproxymodel.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qanimationgroup.h \
@@ -1650,7 +1669,6 @@ debug/main.o: ../FFF_Project_1/main.cpp ../FFF_Project_1/mainwindow.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcborarray.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcborvalue.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcborcommon.h \
-		../../../../6.2.0/mingw81_64/include/QtCore/qregularexpression.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/quuid.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcbormap.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcborstream.h \
@@ -1685,7 +1703,6 @@ debug/main.o: ../FFF_Project_1/main.cpp ../FFF_Project_1/mainwindow.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qfuturesynchronizer.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qfuturewatcher.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qidentityproxymodel.h \
-		../../../../6.2.0/mingw81_64/include/QtCore/qitemselectionmodel.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qjnienvironment.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/QScopedPointer \
 		../../../../6.2.0/mingw81_64/include/QtCore/qjniobject.h \
@@ -1754,19 +1771,6 @@ debug/main.o: ../FFF_Project_1/main.cpp ../FFF_Project_1/mainwindow.h \
 		../../../../6.2.0/mingw81_64/include/QtSql/qsqlquerymodel.h \
 		../../../../6.2.0/mingw81_64/include/QtSql/qsqlrelationaldelegate.h \
 		../../../../6.2.0/mingw81_64/include/QtWidgets/qstyleditemdelegate.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qstyleoption.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractspinbox.h \
-		../../../../6.2.0/mingw81_64/include/QtGui/qvalidator.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qslider.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractslider.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qstyle.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qtabbar.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qrubberband.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qframe.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qlistview.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractitemview.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
 		../../../../6.2.0/mingw81_64/include/QtWidgets/qcombobox.h \
 		../../../../6.2.0/mingw81_64/include/QtSql/qsqlrelationaltablemodel.h \
 		../../../../6.2.0/mingw81_64/include/QtSql/qsqltablemodel.h \
@@ -1940,6 +1944,24 @@ debug/mainwindow.o: ../FFF_Project_1/mainwindow.cpp ../FFF_Project_1/mainwindow.
 		../../../../6.2.0/mingw81_64/include/QtCore/qdatetime.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcalendar.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qlocale.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/QListWidgetItem \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qlistwidget.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qlistview.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qframe.h \
+		../../../../6.2.0/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		../../../../6.2.0/mingw81_64/include/QtCore/qitemselectionmodel.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qstyleoption.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../6.2.0/mingw81_64/include/QtGui/qvalidator.h \
+		../../../../6.2.0/mingw81_64/include/QtCore/qregularexpression.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qslider.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractslider.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qstyle.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qtabbar.h \
+		../../../../6.2.0/mingw81_64/include/QtWidgets/qrubberband.h \
 		../../../../6.2.0/mingw81_64/include/QtSql/QtSql \
 		../../../../6.2.0/mingw81_64/include/QtSql/QtSqlDepends \
 		../../../../6.2.0/mingw81_64/include/QtCore/QtCore \
@@ -1947,7 +1969,6 @@ debug/mainwindow.o: ../FFF_Project_1/mainwindow.cpp ../FFF_Project_1/mainwindow.
 		../../../../6.2.0/mingw81_64/include/QtCore/qabstractanimation.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qabstracteventdispatcher.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qeventloop.h \
-		../../../../6.2.0/mingw81_64/include/QtCore/qabstractitemmodel.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qabstractnativeeventfilter.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qabstractproxymodel.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qanimationgroup.h \
@@ -1961,7 +1982,6 @@ debug/mainwindow.o: ../FFF_Project_1/mainwindow.cpp ../FFF_Project_1/mainwindow.
 		../../../../6.2.0/mingw81_64/include/QtCore/qcborarray.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcborvalue.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcborcommon.h \
-		../../../../6.2.0/mingw81_64/include/QtCore/qregularexpression.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/quuid.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcbormap.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qcborstream.h \
@@ -1996,7 +2016,6 @@ debug/mainwindow.o: ../FFF_Project_1/mainwindow.cpp ../FFF_Project_1/mainwindow.
 		../../../../6.2.0/mingw81_64/include/QtCore/qfuturesynchronizer.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qfuturewatcher.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qidentityproxymodel.h \
-		../../../../6.2.0/mingw81_64/include/QtCore/qitemselectionmodel.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/qjnienvironment.h \
 		../../../../6.2.0/mingw81_64/include/QtCore/QScopedPointer \
 		../../../../6.2.0/mingw81_64/include/QtCore/qjniobject.h \
@@ -2065,19 +2084,6 @@ debug/mainwindow.o: ../FFF_Project_1/mainwindow.cpp ../FFF_Project_1/mainwindow.
 		../../../../6.2.0/mingw81_64/include/QtSql/qsqlquerymodel.h \
 		../../../../6.2.0/mingw81_64/include/QtSql/qsqlrelationaldelegate.h \
 		../../../../6.2.0/mingw81_64/include/QtWidgets/qstyleditemdelegate.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qstyleoption.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractspinbox.h \
-		../../../../6.2.0/mingw81_64/include/QtGui/qvalidator.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qslider.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractslider.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qstyle.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qtabbar.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qrubberband.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qframe.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qlistview.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractitemview.h \
-		../../../../6.2.0/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
 		../../../../6.2.0/mingw81_64/include/QtWidgets/qcombobox.h \
 		../../../../6.2.0/mingw81_64/include/QtSql/qsqlrelationaltablemodel.h \
 		../../../../6.2.0/mingw81_64/include/QtSql/qsqltablemodel.h \

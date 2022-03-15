@@ -49,18 +49,21 @@ public:
     QLabel *label_5;
     QLineEdit *lineEdit_2;
     QPushButton *pushButton;
-    QWidget *widget;
+    QWidget *layoutWidget2;
     QVBoxLayout *verticalLayout;
     QLabel *label_3;
     QHBoxLayout *horizontalLayout_4;
     QListWidget *listWidget_item;
     QListWidget *listWidget_price;
-    QWidget *widget1;
+    QWidget *layoutWidget3;
     QVBoxLayout *verticalLayout_2;
     QLabel *label_4;
     QHBoxLayout *horizontalLayout_5;
     QListWidget *listWidget_name;
     QListWidget *listWidget_distance;
+    QPushButton *editMenu;
+    QLineEdit *editMenuInput;
+    QLabel *editMenuLabel;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuAdmin;
@@ -131,25 +134,25 @@ public:
         pushButton = new QPushButton(centralwidget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setGeometry(QRect(50, 470, 93, 29));
-        widget = new QWidget(centralwidget);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(210, 90, 301, 341));
-        verticalLayout = new QVBoxLayout(widget);
+        layoutWidget2 = new QWidget(centralwidget);
+        layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
+        layoutWidget2->setGeometry(QRect(210, 90, 301, 341));
+        verticalLayout = new QVBoxLayout(layoutWidget2);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        label_3 = new QLabel(widget);
+        label_3 = new QLabel(layoutWidget2);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
         verticalLayout->addWidget(label_3);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        listWidget_item = new QListWidget(widget);
+        listWidget_item = new QListWidget(layoutWidget2);
         listWidget_item->setObjectName(QString::fromUtf8("listWidget_item"));
 
         horizontalLayout_4->addWidget(listWidget_item);
 
-        listWidget_price = new QListWidget(widget);
+        listWidget_price = new QListWidget(layoutWidget2);
         listWidget_price->setObjectName(QString::fromUtf8("listWidget_price"));
 
         horizontalLayout_4->addWidget(listWidget_price);
@@ -157,25 +160,25 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_4);
 
-        widget1 = new QWidget(centralwidget);
-        widget1->setObjectName(QString::fromUtf8("widget1"));
-        widget1->setGeometry(QRect(530, 90, 321, 341));
-        verticalLayout_2 = new QVBoxLayout(widget1);
+        layoutWidget3 = new QWidget(centralwidget);
+        layoutWidget3->setObjectName(QString::fromUtf8("layoutWidget3"));
+        layoutWidget3->setGeometry(QRect(530, 90, 321, 341));
+        verticalLayout_2 = new QVBoxLayout(layoutWidget3);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        label_4 = new QLabel(widget1);
+        label_4 = new QLabel(layoutWidget3);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
         verticalLayout_2->addWidget(label_4);
 
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        listWidget_name = new QListWidget(widget1);
+        listWidget_name = new QListWidget(layoutWidget3);
         listWidget_name->setObjectName(QString::fromUtf8("listWidget_name"));
 
         horizontalLayout_5->addWidget(listWidget_name);
 
-        listWidget_distance = new QListWidget(widget1);
+        listWidget_distance = new QListWidget(layoutWidget3);
         listWidget_distance->setObjectName(QString::fromUtf8("listWidget_distance"));
 
         horizontalLayout_5->addWidget(listWidget_distance);
@@ -183,10 +186,19 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_5);
 
+        editMenu = new QPushButton(centralwidget);
+        editMenu->setObjectName(QString::fromUtf8("editMenu"));
+        editMenu->setGeometry(QRect(150, 470, 80, 22));
+        editMenuInput = new QLineEdit(centralwidget);
+        editMenuInput->setObjectName(QString::fromUtf8("editMenuInput"));
+        editMenuInput->setGeometry(QRect(250, 470, 113, 21));
+        editMenuLabel = new QLabel(centralwidget);
+        editMenuLabel->setObjectName(QString::fromUtf8("editMenuLabel"));
+        editMenuLabel->setGeometry(QRect(370, 470, 131, 16));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 862, 26));
+        menubar->setGeometry(QRect(0, 0, 862, 21));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuAdmin = new QMenu(menubar);
@@ -262,6 +274,9 @@ public:
         pushButton->setText(QCoreApplication::translate("MainWindow", "Choose", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Menu", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "Distances (miles) to other Fast Food restaurants", nullptr));
+        editMenu->setText(QCoreApplication::translate("MainWindow", "edit Menu", nullptr));
+        editMenuInput->setPlaceholderText(QCoreApplication::translate("MainWindow", "Enter New Item", nullptr));
+        editMenuLabel->setText(QCoreApplication::translate("MainWindow", "press enter when done", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuAdmin->setTitle(QCoreApplication::translate("MainWindow", "Admin", nullptr));
         menuTrips->setTitle(QCoreApplication::translate("MainWindow", "Trips", nullptr));
