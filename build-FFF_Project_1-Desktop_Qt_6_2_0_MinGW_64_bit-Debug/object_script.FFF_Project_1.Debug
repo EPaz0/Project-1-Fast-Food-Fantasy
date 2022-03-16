@@ -3,9 +3,11 @@ debug/endwindow.o
 debug/main.o
 debug/mainwindow.o
 debug/restaurant.o
+debug/shorttesttripfromdomino.o
 debug/signin.o
 debug/qrc_resource.o
 debug/moc_closesttrip.o
 debug/moc_endwindow.o
 debug/moc_mainwindow.o
+debug/moc_shorttesttripfromdomino.o
 debug/moc_signin.o

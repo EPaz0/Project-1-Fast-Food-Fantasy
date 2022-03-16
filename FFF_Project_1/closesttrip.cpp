@@ -1,5 +1,7 @@
 #include "closesttrip.h"
 #include "ui_closesttrip.h"
+#include <QInputDialog>
+#include <QMessageBox>
 
 //#include <QListWidget>
 
@@ -207,6 +209,19 @@ void ClosestTrip::on_pushButton_clicked()
 
 
         ui->listWidget_cartPrice->addItem(QString::number(price));   // add price to cart widget
+
+        /*
+         * Used QInputDialog to prompt the user for the quantity of an item
+         * (QInputDialog itself has settings to create limitation for the number entered.)
+         */
+        bool ok = false;
+        int quantity;
+        while(!ok)
+        {
+            quantity = QInputDialog::getInt(this, tr("QInputDialog::getInt()"),
+                                         tr("Quantity:"), 1, 0, 100, 1, &ok);
+        }
+        ui->listWidget_2->addItem(QString::number(quantity));
     }
 }
 
@@ -224,6 +239,13 @@ void ClosestTrip::on_pushButton_2_clicked()
         ui->listWidget_cartPrice->removeItemWidget(itemPrice);
         delete item;
         delete itemPrice;
+
+        /*
+         * Used the middle column (the listWidget in the middle) to display the quantity associated with each ordered item
+         */
+        QListWidgetItem* itemQuantity = ui->listWidget_2->item(row);
+        ui->listWidget_2->removeItemWidget(itemQuantity);
+        delete itemQuantity;
     }
 }
 
@@ -231,11 +253,35 @@ void ClosestTrip::on_pushButton_2_clicked()
 // when done button is clicked
 void ClosestTrip::on_pushButton_5_clicked()
 {
+    /*
+     * This section of code checks if any item has an accumulative quantity of over 100,
+     * if so, a message box pops out and the function ends there
+     */
+    for(int i=0; i<ui->listWidget_cartItem->count();i++)
+    {
+        QListWidgetItem* temp1 = ui->listWidget_cartItem->item(i);
+        QString checkingRestaurant = temp1->text();
+        int count =0;
+        for(int j=0; j<ui->listWidget_cartItem->count(); j++)
+        {
+            QListWidgetItem* itemName = ui->listWidget_cartItem->item(j);
+            if(itemName->text() == checkingRestaurant)
+            {
+                count += ui->listWidget_2->item(j)->text().toInt();
+            }
+        }
+        if(count > 100)
+        {
+            QMessageBox::critical(this, "\"Quantity Limit Exceeded\"", "We're sorry, but we do not allow ordering more than 100 of the same menu item. Please remove items accordingly. Thank you.");
+            return;
+        }
+    }
+
     float totalSpentOnRestaurant = 0.0;
     for (int i = 0; i < ui->listWidget_cartPrice->count(); i++)
     {
         QListWidgetItem* item = ui->listWidget_cartPrice->item(i);
-        totalSpentOnRestaurant += item->text().toFloat();
+        totalSpentOnRestaurant += item->text().toFloat() * ui->listWidget_2->item(i)->text().toInt();
     }
 
     ui->lineEdit_totalOnRest->setText("$" + QString::number(totalSpentOnRestaurant));
@@ -245,6 +291,7 @@ void ClosestTrip::on_pushButton_5_clicked()
 
     ui->listWidget_cartItem->clear();
     ui->listWidget_cartPrice->clear();
+    ui->listWidget_2->clear();
 }
 
 QString ClosestTrip::AddApostropheToString(QString restaurantname)
