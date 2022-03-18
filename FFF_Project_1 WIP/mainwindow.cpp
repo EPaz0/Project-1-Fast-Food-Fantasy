@@ -274,8 +274,9 @@ void MainWindow::on_DeleteRestaurant_clicked()
 {
     QSqlDatabase dbb = QSqlDatabase::addDatabase("QSQLITE");
     QSqlQuery qry;
-    QSqlQuery qry2;
-    QSqlQuery qry3;
+
+
+
     dbb.setDatabaseName("restaurant.sqlite");
     QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
     dbb.setDatabaseName(dbPath);
@@ -284,22 +285,33 @@ void MainWindow::on_DeleteRestaurant_clicked()
     {
         qDebug() << "problem opening database";
     }
-    /*QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-
-    QSqlQuery query(db);
-    if (!db.open())
-    {
-        qDebug() << "problem opening database";
-    }*/
 
     if(restaurantSelected != -1)
     {
         QString stringQry;
+        QString DeleteMenu;
+        QString DeleteDistance;
+
 
         QListWidgetItem *it = ui->listWidget->takeItem(restaurantSelected);
 
-        stringQry = "DELETE FROM restaurantList WHERE id = " + QString::number(restaurantSelected);
+        stringQry = "DELETE FROM restaurantList  WHERE id = " + QString::number(restaurantSelected);
         qry.prepare(stringQry);
+        qry.exec();
+
+        DeleteMenu = "DELETE FROM menu  WHERE restaurantID = " + QString::number(restaurantSelected);
+        qry.prepare(DeleteMenu);
+        qry.exec();
+
+        DeleteDistance = "DELETE FROM distances  WHERE fromRestaurant = " + QString::number(restaurantSelected);
+        qry.prepare(DeleteDistance);
+        qry.exec();
+
+
+
+
+
+       // qry.prepare("DELETE restaurantList. menu FROM menu INNER JOIN menu reststaurantList.id = menu.restaurantID");
 
         /*stringQry =  "DELETE FROM menu WHERE restaurantID = " + QString::number(restaurantSelected);
         qry.prepare(stringQry);
@@ -309,19 +321,25 @@ void MainWindow::on_DeleteRestaurant_clicked()
 
         if(qry.exec())
         {
+            ui->listWidget_price->clear();
+            ui->listWidget_item->clear();
+            ui->listWidget_distance->clear();
+            ui->listWidget_name->clear();
+            ui->lineEdit->clear();
+            ui->lineEdit_2->clear();
+            ui->listWidget->setCurrentRow(-1);
             QMessageBox::critical(this,tr("Delete"),tr("Deleted"));
+            delete it;
+
 
         }
-        delete it;
-        ui->listWidget_price->clear();
-        ui->listWidget_item->clear();
-        ui->listWidget_distance->clear();
-        ui->listWidget_name->clear();
-        ui->lineEdit->clear();
-        ui->lineEdit_2->clear();
-        ui->listWidget->setCurrentRow(-1);
+
 
     }
+    dbb.close();
+    const QString connectionName = dbb.connectionName();
+    dbb = QSqlDatabase();
+    QSqlDatabase::removeDatabase(connectionName);
 }
 
 
