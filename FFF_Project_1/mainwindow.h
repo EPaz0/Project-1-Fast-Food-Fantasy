@@ -29,6 +29,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     int GetRestaurantIDUsingQSL(QString name);
+    double GetRestaurantPriceUsingQSL(QString name, QString menuItem);
+    QString AddApostropheToString(QString restaurantname);
 
 private slots:
     void on_actionLog_in_triggered();
@@ -41,12 +43,14 @@ private slots:
 
     void on_action10_Closet_triggered();
 
-    void on_editMenu_clicked();
+    //void on_editMenu_clicked();
 
     void on_listWidget_item_itemDoubleClicked(QListWidgetItem *item);
 
-    void on_editMenuInput_returnPressed();
+    //void on_editMenuInput_returnPressed();
 
+
+    void on_SubmitChange_clicked();
 
 signals:
     void isAdmin();
@@ -56,8 +60,6 @@ private:
     Signin *signin;
     ClosestTrip *tripFromSaddleback;
     QList<restaurant> restaurantList;
-    //QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //CAUSES PROBLEMS
-    //QSqlQuery qry;
     bool admin = false;
 };
 #endif // MAINWINDOW_H

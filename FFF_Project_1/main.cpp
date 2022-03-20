@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
     if(!query.exec("INSERT INTO restaurantList VALUES(1, 'MacDonald''s', 8),(2, 'Chipotle', 4.29),(3,'Domino''s Pizza', 12.41),(4, 'KFC', 7.56),(5,'Subway',2.67),(6,'In-N-Out Burger',5.94),(7,'Wendy''s',8.44),(8,'Jack in the Box',12.75),(9,'El Pollo Loco',9.19),(10,'Papa John''s Pizza',14.54)"))
       qWarning() << "ERROR: insert into restautantlist " << query.lastError().text();
 
-    if(!query.exec("CREATE TABLE menu (restaurantID INTEGER, item TEXT, price FLOAT, UNIQUE(restaurantID, item))"))
+    if(!query.exec("CREATE TABLE IF NOT EXISTS menu (restaurantID INTEGER, item TEXT, price FLOAT, UNIQUE(restaurantID, item))"))
       qWarning() << "ERROR: " << query.lastError().text();
 
     if(!query.exec("INSERT INTO menu VALUES(1, 'Big Mac', 3.99),(1,'French Fries',2.95),(1,'Hamburger',1.79),(1,'Double Cheeseburger',4.29),(1,'Cheeseburger', 2.29),(1,'Quarter Pounder with Cheese',4.99),(1,'Filet-O-Fish',3.33),(1,'McRib', 4.97)"))

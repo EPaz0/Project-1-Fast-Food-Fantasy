@@ -103,7 +103,7 @@ ClosestTrip::ClosestTrip(QWidget *parent) :
     }
     ui->lineEdit_totalDistance->setText(QString::number(totalDistance) + " miles");
 
-    QString item;
+   // QString item;
 
     // test sql - display info on closest trip list
 //    QSqlQuery qry;
@@ -256,6 +256,7 @@ int ClosestTrip::GetRestaurantIDUsingQSL(QString name)
         {
             id = qry.value(0).toInt();
         }
+
     }
     return id;
 }

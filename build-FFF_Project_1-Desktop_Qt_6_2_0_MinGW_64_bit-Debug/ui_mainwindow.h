@@ -61,9 +61,8 @@ public:
     QHBoxLayout *horizontalLayout_5;
     QListWidget *listWidget_name;
     QListWidget *listWidget_distance;
-    QPushButton *editMenu;
     QLineEdit *editMenuInput;
-    QLabel *editMenuLabel;
+    QPushButton *SubmitChange;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuAdmin;
@@ -186,15 +185,12 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_5);
 
-        editMenu = new QPushButton(centralwidget);
-        editMenu->setObjectName(QString::fromUtf8("editMenu"));
-        editMenu->setGeometry(QRect(150, 470, 80, 22));
         editMenuInput = new QLineEdit(centralwidget);
         editMenuInput->setObjectName(QString::fromUtf8("editMenuInput"));
         editMenuInput->setGeometry(QRect(250, 470, 113, 21));
-        editMenuLabel = new QLabel(centralwidget);
-        editMenuLabel->setObjectName(QString::fromUtf8("editMenuLabel"));
-        editMenuLabel->setGeometry(QRect(370, 470, 131, 16));
+        SubmitChange = new QPushButton(centralwidget);
+        SubmitChange->setObjectName(QString::fromUtf8("SubmitChange"));
+        SubmitChange->setGeometry(QRect(370, 470, 91, 22));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -274,9 +270,8 @@ public:
         pushButton->setText(QCoreApplication::translate("MainWindow", "Choose", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Menu", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "Distances (miles) to other Fast Food restaurants", nullptr));
-        editMenu->setText(QCoreApplication::translate("MainWindow", "edit Menu", nullptr));
         editMenuInput->setPlaceholderText(QCoreApplication::translate("MainWindow", "Enter New Item", nullptr));
-        editMenuLabel->setText(QCoreApplication::translate("MainWindow", "press enter when done", nullptr));
+        SubmitChange->setText(QCoreApplication::translate("MainWindow", "Submit Change", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuAdmin->setTitle(QCoreApplication::translate("MainWindow", "Admin", nullptr));
         menuTrips->setTitle(QCoreApplication::translate("MainWindow", "Trips", nullptr));
