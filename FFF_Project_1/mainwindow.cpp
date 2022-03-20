@@ -15,6 +15,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->actionUpdate_List->setDisabled(true);
     ui->actionLog_out->setDisabled(true);
+    //ui->editMenu->setVisible(false);
+    ui->editMenuInput->setVisible(false);
+    ui->SubmitChange->setVisible(false);
+
 
 
 //read text file and put info into restaurant vector
@@ -170,6 +174,15 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    //QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+   // db = QSqlDatabase();
+//    if(db.isOpen())
+//    {
+//        db.close();
+//        const QString connectionName = db.connectionName();
+//        db = QSqlDatabase();
+//        QSqlDatabase::removeDatabase(connectionName);
+//    }
     delete ui;
 }
 
@@ -187,6 +200,9 @@ void MainWindow::Admin()
     ui->actionLog_in->setDisabled(true);
     ui->actionLog_out->setDisabled(false);
     ui->actionUpdate_List->setDisabled(false);
+    //ui->editMenu->setVisible(true);
+    ui->editMenuInput->setVisible(true);
+    ui->SubmitChange->setVisible(true);
 }
 
 void MainWindow::on_actionLog_out_triggered()
@@ -194,6 +210,9 @@ void MainWindow::on_actionLog_out_triggered()
     ui->actionLog_in->setDisabled(false);
     ui->actionLog_out->setDisabled(true);
     ui->actionUpdate_List->setDisabled(true);
+    //ui->editMenu->setVisible(false);
+    ui->editMenuInput->setVisible(false);
+    ui->SubmitChange->setVisible(false);
 }
 
 void MainWindow::on_action10_Closet_triggered()
@@ -274,4 +293,164 @@ void MainWindow::on_pushButton_clicked()
     }
 }
 
+void MainWindow::on_listWidget_item_itemDoubleClicked(QListWidgetItem *item)
+{
+
+    QString MenuName = item->text();
+    ui->editMenuInput->text() = MenuName;
+}
+int MainWindow::GetRestaurantIDUsingQSL(QString name)
+{
+    int id = 0;
+    const QString DRIVER("QSQLITE");
+    if (QSqlDatabase::isDriverAvailable(DRIVER))
+       {QSqlDatabase db = QSqlDatabase::addDatabase(DRIVER);
+    QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
+    db.setDatabaseName(dbPath);
+    db.open();
+    if (!db.open())
+    {
+        qDebug() << "problem opening database";
+    }
+    QSqlQuery qry;
+    QString stringQry = "SELECT id FROM restaurantList WHERE restaurantName = '" + name + "'";
+    qry.prepare(stringQry);
+    if (qry.exec())
+    {
+        while (qry.next())
+        {
+            id = qry.value(0).toInt();
+        }
+    }
+    db.close();
+    QString connectionName = db.connectionName();
+    db = QSqlDatabase();
+    QSqlDatabase::removeDatabase(connectionName);
+    }
+    return id;
+}
+double MainWindow::GetRestaurantPriceUsingQSL(QString name, QString menuItem)
+{
+    double price = 0;
+
+    int id = GetRestaurantIDUsingQSL(name);
+    const QString DRIVER("QSQLITE");
+    if (QSqlDatabase::isDriverAvailable(DRIVER))
+       {QSqlDatabase db = QSqlDatabase::addDatabase(DRIVER);
+    QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
+    db.setDatabaseName(dbPath);
+    db.open();
+    if (!db.open())
+    {
+        qDebug() << "problem opening database";
+    }
+
+    QSqlQuery qry;
+
+    QString stringQry = "SELECT * FROM menu WHERE restaurantID = " + QString::number(id) + " AND item = '" + menuItem + "'"; //" + QString::number(id) + " AND item = '"menuItem"'"
+    qry.prepare(stringQry);
+    if (qry.exec())
+    {
+        while (qry.next())
+        {
+            price = qry.value(2).toDouble();
+        }
+    }
+    QString connectionName = db.connectionName();
+    db = QSqlDatabase();
+    QSqlDatabase::removeDatabase(connectionName);
+    }
+    return price;
+}
+
+
+void MainWindow::on_SubmitChange_clicked()
+{
+
+    QListWidgetItem* cur = ui->listWidget_price->currentItem();
+
+  if(ui->listWidget_item->currentItem()->isSelected() && ui->listWidget->currentItem()->isSelected() && (cur == NULL))
+{
+   QString MenuName = ui->editMenuInput->text();
+   QString restaurantname = ui->listWidget->currentItem()->text();
+   QString MenuItem = ui->listWidget_item->currentItem()->text();
+
+        QString restName;
+        restName = AddApostropheToString(restaurantname);
+        int restaurantId = GetRestaurantIDUsingQSL(restName);
+        double prices = static_cast<double>(GetRestaurantPriceUsingQSL(restName, MenuItem));
+
+        const QString DRIVER("QSQLITE");
+        if (QSqlDatabase::isDriverAvailable(DRIVER))
+           {QSqlDatabase db = QSqlDatabase::addDatabase(DRIVER);
+        QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
+        db.setDatabaseName(dbPath);
+        db.open();
+
+        QSqlQuery qry(db);
+        QString stringQry = "UPDATE menu SET item = '" + MenuName + "' WHERE restaurantID = " + QString::number(restaurantId) + " AND price = " + QString::number(prices);
+        qry.prepare(stringQry);
+        if(!qry.exec(stringQry))
+            qWarning() << "ERROR: UPDATING menu" << qry.lastError().text();
+        if(MenuItem != MenuName)
+            qDebug() << "Menu Item Updated ";
+        db.close();
+        QString connectionName = db.connectionName();
+        db = QSqlDatabase();
+        QSqlDatabase::removeDatabase(connectionName);
+
+    }
+
+    ui->listWidget_item->currentItem()->setText(MenuName);
+    }
+    else
+   {
+   QString MenuPrice = ui->editMenuInput->text();
+   QString restaurantname = ui->listWidget->currentItem()->text();
+   QString MenuItem = ui->listWidget_item->currentItem()->text();
+   QString Price = ui->listWidget_price->currentItem()->text();
+
+      QString restName = AddApostropheToString(restaurantname);
+        int restaurantId = GetRestaurantIDUsingQSL(restName);
+
+        const QString DRIVER("QSQLITE");
+        if (QSqlDatabase::isDriverAvailable(DRIVER))
+           {QSqlDatabase db = QSqlDatabase::addDatabase(DRIVER);
+        QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
+        db.setDatabaseName(dbPath);
+        db.open();
+
+        QSqlQuery qry(db);
+        QString stringQry = "UPDATE menu SET price = " + MenuPrice + " WHERE restaurantID = " + QString::number(restaurantId) + " AND item = '" + MenuItem + "'";
+        qry.prepare(stringQry);
+        if(!qry.exec(stringQry))
+            qWarning() << "ERROR: UPDATING menu" << qry.lastError().text();
+        if(Price != MenuPrice)
+            qDebug() << "Menu Price Updated ";
+        db.close();
+        QString connectionName = db.connectionName();
+        db = QSqlDatabase();
+        QSqlDatabase::removeDatabase(connectionName);
+
+    }
+
+    ui->listWidget_price->currentItem()->setText("$" + MenuPrice);
+    }
+}
+
+QString MainWindow::AddApostropheToString(QString restaurantname)
+{
+    // change to sql query format when string contains apostrophe (need to add one more ' to the query)
+    if (restaurantname == "MacDonald’s")
+        restaurantname = "MacDonald''s";
+    else
+        qWarning() << "wrong name" << restaurantname;
+    if (restaurantname == "Domino's Pizza")
+        restaurantname = "Domino''s Pizza";
+    if (restaurantname == "Wendy's")
+        restaurantname = "Wendy''s";
+    if (restaurantname == "Papa John's Pizza")
+        restaurantname = "Papa John''s Pizza";
+    return restaurantname;
+}
 

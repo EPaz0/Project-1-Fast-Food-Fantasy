@@ -9,6 +9,7 @@
 #include <QStandardPaths>
 #include <QDir>
 #include <QList>
+#include <QListWidgetItem>
 #include <QtSql>
 #include "signin.h"
 #include "closesttrip.h"
@@ -29,6 +30,9 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    int GetRestaurantIDUsingQSL(QString name);
+    double GetRestaurantPriceUsingQSL(QString name, QString menuItem);
+    QString AddApostropheToString(QString restaurantname);
 
 private slots:
     void on_actionLog_in_triggered();
@@ -40,6 +44,10 @@ private slots:
     void on_pushButton_clicked();
 
     void on_action10_Closet_triggered();
+
+    void on_listWidget_item_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_SubmitChange_clicked();
 
     void on_actionShortest_Trip_triggered();
 
