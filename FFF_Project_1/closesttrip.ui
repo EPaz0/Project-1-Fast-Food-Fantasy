@@ -144,16 +144,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QListView" name="listView_2">
-   <property name="geometry">
-    <rect>
-     <x>620</x>
-     <y>130</y>
-     <width>41</width>
-     <height>191</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
@@ -236,7 +226,7 @@
     <string>Finish</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -267,6 +257,16 @@
      <widget class="QLineEdit" name="lineEdit_totalSpentTrip"/>
     </item>
    </layout>
+  </widget>
+  <widget class="QListWidget" name="listWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>130</y>
+     <width>41</width>
+     <height>191</height>
+    </rect>
+   </property>
   </widget>
  </widget>
  <resources/>

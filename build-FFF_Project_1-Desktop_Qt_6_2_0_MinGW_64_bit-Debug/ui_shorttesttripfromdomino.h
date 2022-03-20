@@ -15,7 +15,6 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListView>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
@@ -45,7 +44,6 @@ public:
     QLabel *label_3;
     QPushButton *pushButton_6;
     QPushButton *pushButton_3;
-    QListView *listView_2;
     QLabel *label_2;
     QPushButton *pushButton_4;
     QLineEdit *name;
@@ -55,6 +53,7 @@ public:
     QPushButton *pushButton_start;
     QLabel *label_10;
     QLineEdit *lineEdit_noOfRes;
+    QListWidget *listWidget_2;
 
     void setupUi(QDialog *ShorttestTripFromDomino)
     {
@@ -129,9 +128,6 @@ public:
         pushButton_3 = new QPushButton(ShorttestTripFromDomino);
         pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
         pushButton_3->setGeometry(QRect(750, 540, 93, 29));
-        listView_2 = new QListView(ShorttestTripFromDomino);
-        listView_2->setObjectName(QString::fromUtf8("listView_2"));
-        listView_2->setGeometry(QRect(730, 210, 41, 191));
         label_2 = new QLabel(ShorttestTripFromDomino);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(170, 90, 161, 31));
@@ -166,6 +162,9 @@ public:
         lineEdit_noOfRes = new QLineEdit(ShorttestTripFromDomino);
         lineEdit_noOfRes->setObjectName(QString::fromUtf8("lineEdit_noOfRes"));
         lineEdit_noOfRes->setGeometry(QRect(170, 10, 41, 41));
+        listWidget_2 = new QListWidget(ShorttestTripFromDomino);
+        listWidget_2->setObjectName(QString::fromUtf8("listWidget_2"));
+        listWidget_2->setGeometry(QRect(730, 210, 41, 191));
 
         retranslateUi(ShorttestTripFromDomino);
 

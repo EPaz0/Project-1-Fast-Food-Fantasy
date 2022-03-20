@@ -226,6 +226,17 @@ void MainWindow::on_action10_Closet_triggered()
 
 }
 
+void MainWindow::on_actionShortest_Trip_triggered()
+{
+    hide();
+    tripFromDomino = new ShorttestTripFromDomino(this);
+    connect(this,SIGNAL(isAdmin()), tripFromDomino, SLOT(isAdmin()));
+    if (admin == true)
+        emit isAdmin();
+    tripFromDomino->show();
+}
+
+
 void MainWindow::on_pushButton_clicked()
 {
     ui->listWidget_price->clear();
@@ -273,100 +284,12 @@ void MainWindow::on_pushButton_clicked()
     }
 }
 
-
-
-/*
-void MainWindow::on_editMenu_clicked()
-{
-    ui->listWidget_price->clear();
-    ui->listWidget_item->clear();
-    ui->listWidget_distance->clear();
-    ui->listWidget_name->clear();
-
-    // once a restaurant is chosen from the listWidget, its information will be displayed
-    ui->lineEdit->setText(ui->listWidget->currentItem()->text());  // display restaurant  name
-
-
-    ui->lineEdit_2->setText(ui->listWidget->currentItem()->data(Qt::UserRole).toString()); // display distance to Saddleback College
-
-    // display menu list
-    QVariant listMenuName = (ui->listWidget->currentItem()->data(Qt::Key_1));
-    QList<QString> q = listMenuName.toStringList();
-    for (int i = 0; i < q.size(); i++)
-    {
-        ui->listWidget_item->addItem(q.at(i));
-    }
-
-    // display item menu price
-    QVariant listMenuPrice = (ui->listWidget->currentItem()->data(Qt::Key_2));
-    QList<QString> p = listMenuPrice.toStringList();
-    for (int i = 0; i < p.size(); i++)
-    {
-        ui->listWidget_price->addItem("$" + p.at(i));
-    }
-
-    // display distance
-    QVariant listDistance = (ui->listWidget->currentItem()->data(Qt::Key_3));
-    QList<QString> j = listDistance.toStringList();
-    for (int i = 0; i < j.size(); i++)
-    {
-        ui->listWidget_distance->addItem(j.at(i) + " miles");
-    }
-
-
-    // display distance
-    QVariant listRestaurantName = (ui->listWidget->currentItem()->data(Qt::Key_4));
-    QList<QString> k = listRestaurantName.toStringList();
-    for (int i = 0; i < k.size(); i++)
-    {
-        ui->listWidget_name->addItem(k.at(i));
-    }
-
-}*/
-
-
 void MainWindow::on_listWidget_item_itemDoubleClicked(QListWidgetItem *item)
 {
 
     QString MenuName = item->text();
-    //ui->listWidget_item->isEnabled();
-    //item->setFlags (item->flags () | Qt::ItemIsEditable);
-    //ui->listWidget_item->editItem(item);
-    //MenuName = item->text();
     ui->editMenuInput->text() = MenuName;
 }
-/*
-void MainWindow::on_editMenuInput_returnPressed()
-{
-    QString MenuName = ui->editMenuInput->text();
-    QString restaurantname = ui->listWidget->currentItem()->text();
-    QString MenuItem = ui->listWidget_item->currentItem()->text();
-
-         QString restName;
-         restName = AddApostropheToString(restaurantname);
-         int restaurantId = GetRestaurantIDUsingQSL(restName);
-         double prices = static_cast<double>(GetRestaurantPriceUsingQSL(restName, MenuItem));
-
-         const QString DRIVER("QSQLITE");
-         if (QSqlDatabase::isDriverAvailable(DRIVER))
-            {QSqlDatabase db = QSqlDatabase::addDatabase(DRIVER);
-         QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
-         db.setDatabaseName(dbPath);
-         db.open();
-
-         QSqlQuery qry(db);
-         QString stringQry = "UPDATE menu SET item = '" + MenuName + "' WHERE restaurantID = " + QString::number(restaurantId) + " AND price = " + QString::number(prices);
-         qry.prepare(stringQry);
-         if(!qry.exec(stringQry))
-             qWarning() << "ERROR: UPDATING menu" << qry.lastError().text();
-         db.close();
-         QString connectionName = db.connectionName();
-         db = QSqlDatabase();
-         QSqlDatabase::removeDatabase(connectionName);
-
-     }
-     ui->listWidget_item->currentItem()->text() = MenuName;
-}*/
 int MainWindow::GetRestaurantIDUsingQSL(QString name)
 {
     int id = 0;

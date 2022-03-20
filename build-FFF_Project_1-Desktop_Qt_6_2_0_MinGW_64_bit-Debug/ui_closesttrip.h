@@ -15,7 +15,6 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListView>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
@@ -36,7 +35,6 @@ public:
     QPushButton *pushButton;
     QPushButton *pushButton_2;
     QLineEdit *lineEdit_totalOnRest;
-    QListView *listView_2;
     QPushButton *pushButton_3;
     QPushButton *pushButton_4;
     QListWidget *listWidget_menu;
@@ -44,12 +42,13 @@ public:
     QPushButton *pushButton_5;
     QListWidget *listWidget_cartPrice;
     QPushButton *pushButton_6;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
     QLabel *label_7;
     QLineEdit *lineEdit_totalDistance;
     QLabel *label_6;
     QLineEdit *lineEdit_totalSpentTrip;
+    QListWidget *listWidget_2;
 
     void setupUi(QDialog *ClosestTrip)
     {
@@ -89,9 +88,6 @@ public:
         lineEdit_totalOnRest = new QLineEdit(ClosestTrip);
         lineEdit_totalOnRest->setObjectName(QString::fromUtf8("lineEdit_totalOnRest"));
         lineEdit_totalOnRest->setGeometry(QRect(630, 370, 113, 26));
-        listView_2 = new QListView(ClosestTrip);
-        listView_2->setObjectName(QString::fromUtf8("listView_2"));
-        listView_2->setGeometry(QRect(620, 130, 41, 191));
         pushButton_3 = new QPushButton(ClosestTrip);
         pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
         pushButton_3->setGeometry(QRect(640, 460, 93, 29));
@@ -113,32 +109,35 @@ public:
         pushButton_6 = new QPushButton(ClosestTrip);
         pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
         pushButton_6->setGeometry(QRect(740, 460, 93, 29));
-        widget = new QWidget(ClosestTrip);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(40, 450, 575, 28));
-        horizontalLayout = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(ClosestTrip);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(40, 450, 575, 28));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        label_7 = new QLabel(widget);
+        label_7 = new QLabel(layoutWidget);
         label_7->setObjectName(QString::fromUtf8("label_7"));
 
         horizontalLayout->addWidget(label_7);
 
-        lineEdit_totalDistance = new QLineEdit(widget);
+        lineEdit_totalDistance = new QLineEdit(layoutWidget);
         lineEdit_totalDistance->setObjectName(QString::fromUtf8("lineEdit_totalDistance"));
 
         horizontalLayout->addWidget(lineEdit_totalDistance);
 
-        label_6 = new QLabel(widget);
+        label_6 = new QLabel(layoutWidget);
         label_6->setObjectName(QString::fromUtf8("label_6"));
 
         horizontalLayout->addWidget(label_6);
 
-        lineEdit_totalSpentTrip = new QLineEdit(widget);
+        lineEdit_totalSpentTrip = new QLineEdit(layoutWidget);
         lineEdit_totalSpentTrip->setObjectName(QString::fromUtf8("lineEdit_totalSpentTrip"));
 
         horizontalLayout->addWidget(lineEdit_totalSpentTrip);
 
+        listWidget_2 = new QListWidget(ClosestTrip);
+        listWidget_2->setObjectName(QString::fromUtf8("listWidget_2"));
+        listWidget_2->setGeometry(QRect(620, 130, 41, 191));
 
         retranslateUi(ClosestTrip);
 
