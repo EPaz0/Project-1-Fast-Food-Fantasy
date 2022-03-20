@@ -236,6 +236,15 @@ void MainWindow::on_actionShortest_Trip_triggered()
     tripFromDomino->show();
 }
 
+void MainWindow::on_actionCustom_Trip_triggered()
+{
+    hide();
+    tripCustomized = new customtrip(this);
+    connect(this,SIGNAL(isAdmin()), tripCustomized, SLOT(isAdmin()));
+    if (admin == true)
+        emit isAdmin();
+    tripCustomized->show();
+}
 
 void MainWindow::on_pushButton_clicked()
 {
@@ -444,3 +453,4 @@ QString MainWindow::AddApostropheToString(QString restaurantname)
         restaurantname = "Papa John''s Pizza";
     return restaurantname;
 }
+
