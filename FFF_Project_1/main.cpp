@@ -9,20 +9,13 @@ int main(int argc, char *argv[])
     MainWindow w;
 
 
-    //QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-
     const QString DRIVER("QSQLITE");
-    //db = QSqlDatabase();
-    //const QString connectionName = db.connectionName();
 
-    //QSqlDatabase::removeDatabase(connectionName);
     if (QSqlDatabase::isDriverAvailable(DRIVER))
     {QSqlDatabase db = QSqlDatabase::addDatabase(DRIVER);
 
     QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
     db.setDatabaseName(dbPath);
-
-    //db.setDatabaseName("c:\\sql\\restaurant.sqlite");
 
 
     if (!db.open())
