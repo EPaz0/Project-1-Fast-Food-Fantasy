@@ -3,7 +3,6 @@
 #include <QInputDialog>
 #include <QMessageBox>
 
-//#include <QListWidget>
 
 ClosestTrip::ClosestTrip(QWidget *parent) :
     QDialog(parent),
@@ -24,7 +23,7 @@ ClosestTrip::ClosestTrip(QWidget *parent) :
     }
     ui->listWidget->clear();
     QString stringQry;
-    QString restaurant;
+   // QString restaurant;
     float totalDistance = 0;
 
 
@@ -107,21 +106,6 @@ ClosestTrip::ClosestTrip(QWidget *parent) :
     }
 
     ui->lineEdit_totalDistance->setText(QString::number(totalDistance) + " miles");
-
-    QString item;
-
-    // test sql - display info on closest trip list
-//    QSqlQuery qry;
-//    qry.prepare("select restaurantName from restaurantList");
-
-//    if (qry.exec())
-//    {
-//        while (qry.next())
-//        {
-//            item = qry.value(0).toString();
-//             ui->listWidget->addItem(item);
-//        }
-//    }
 
 }
 
@@ -319,6 +303,7 @@ int ClosestTrip::GetRestaurantIDUsingQSL(QString name)
         {
             id = qry.value(0).toInt();
         }
+
     }
     return id;
 }
