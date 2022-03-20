@@ -15,6 +15,7 @@
 #include "endwindow.h"
 #include "restaurant.h"
 #include "shorttesttripfromdomino.h"
+#include "customtrip.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -42,6 +43,8 @@ private slots:
 
     void on_actionShortest_Trip_triggered();
 
+    void on_actionCustom_Trip_triggered();
+
 signals:
     void isAdmin();
 
@@ -50,6 +53,7 @@ private:
     Signin *signin;
     ClosestTrip *tripFromSaddleback;
     ShorttestTripFromDomino *tripFromDomino;
+    customtrip *tripCustomized;
     QList<restaurant> restaurantList;
     bool admin = false;
 };

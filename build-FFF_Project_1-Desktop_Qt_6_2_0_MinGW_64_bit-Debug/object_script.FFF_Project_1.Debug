@@ -1,4 +1,5 @@
 debug/closesttrip.o
+debug/customtrip.o
 debug/endwindow.o
 debug/main.o
 debug/mainwindow.o
@@ -7,6 +8,7 @@ debug/shorttesttripfromdomino.o
 debug/signin.o
 debug/qrc_resource.o
 debug/moc_closesttrip.o
+debug/moc_customtrip.o
 debug/moc_endwindow.o
 debug/moc_mainwindow.o
 debug/moc_shorttesttripfromdomino.o

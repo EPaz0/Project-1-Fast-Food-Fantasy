@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     closesttrip.cpp \
+    customtrip.cpp \
     endwindow.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
 
 HEADERS += \
     closesttrip.h \
+    customtrip.h \
     endwindow.h \
     mainwindow.h \
     restaurant.h \
@@ -27,6 +29,7 @@ HEADERS += \
 
 FORMS += \
     closesttrip.ui \
+    customtrip.ui \
     endwindow.ui \
     mainwindow.ui \
     shorttesttripfromdomino.ui \

@@ -1,4 +1,5 @@
 release/closesttrip.o
+release/customtrip.o
 release/endwindow.o
 release/main.o
 release/mainwindow.o
@@ -7,6 +8,7 @@ release/shorttesttripfromdomino.o
 release/signin.o
 release/qrc_resource.o
 release/moc_closesttrip.o
+release/moc_customtrip.o
 release/moc_endwindow.o
 release/moc_mainwindow.o
 release/moc_shorttesttripfromdomino.o
