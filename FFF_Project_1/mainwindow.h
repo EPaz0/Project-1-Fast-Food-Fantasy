@@ -53,6 +53,14 @@ private slots:
 
     void on_actionCustom_Trip_triggered();
 
+    void on_listWidget_price_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_deleteMenuItem_clicked();
+
+    void on_addMenu_clicked();
+
+    void on_SubmitNew_clicked();
+
 signals:
     void isAdmin();
 
