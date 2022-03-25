@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
         qWarning() << "ERROR: create table restaurantlist" << query.lastError().text();
 
     if(!query.exec("INSERT INTO restaurantList VALUES(1, 'MacDonald''s', 8),(2, 'Chipotle', 4.29),(3,'Domino''s Pizza', 12.41),(4, 'KFC', 7.56),(5,'Subway',2.67),(6,'In-N-Out Burger',5.94),(7,'Wendy''s',8.44),(8,'Jack in the Box',12.75),(9,'El Pollo Loco',9.19),(10,'Papa John''s Pizza',14.54)"))
-      qWarning() << "ERROR: insert into restautantlist " << query.lastError().text();
+      qWarning() << "ERROR: insert into restaurantlist " << query.lastError().text();
 
     if(!query.exec("CREATE TABLE IF NOT EXISTS menu (restaurantID INTEGER, item TEXT, price FLOAT, UNIQUE(restaurantID, item))"))
       qWarning() << "ERROR: " << query.lastError().text();

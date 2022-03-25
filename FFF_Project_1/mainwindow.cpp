@@ -15,10 +15,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->actionUpdate_List->setDisabled(true);
     ui->actionLog_out->setDisabled(true);
-    //ui->editMenu->setVisible(false);
     ui->editMenuInput->setVisible(false);
     ui->SubmitChange->setVisible(false);
-
+    ui->addMenu->setVisible(false);
+    ui->deleteMenuItem->setVisible(false);
 
 
 //read text file and put info into restaurant vector
@@ -200,9 +200,10 @@ void MainWindow::Admin()
     ui->actionLog_in->setDisabled(true);
     ui->actionLog_out->setDisabled(false);
     ui->actionUpdate_List->setDisabled(false);
-    //ui->editMenu->setVisible(true);
     ui->editMenuInput->setVisible(true);
     ui->SubmitChange->setVisible(true);
+    ui->addMenu->setVisible(true);
+    ui->deleteMenuItem->setVisible(true);
 }
 
 void MainWindow::on_actionLog_out_triggered()
@@ -210,9 +211,10 @@ void MainWindow::on_actionLog_out_triggered()
     ui->actionLog_in->setDisabled(false);
     ui->actionLog_out->setDisabled(true);
     ui->actionUpdate_List->setDisabled(true);
-    //ui->editMenu->setVisible(false);
     ui->editMenuInput->setVisible(false);
     ui->SubmitChange->setVisible(false);
+    ui->addMenu->setVisible(false);
+    ui->deleteMenuItem->setVisible(false);
 }
 
 void MainWindow::on_action10_Closet_triggered()
@@ -297,7 +299,8 @@ void MainWindow::on_listWidget_item_itemDoubleClicked(QListWidgetItem *item)
 {
 
     QString MenuName = item->text();
-    ui->editMenuInput->text() = MenuName;
+    ui->editMenuInput->clear();
+    ui->editMenuInput->setPlaceholderText(MenuName);
 }
 int MainWindow::GetRestaurantIDUsingQSL(QString name)
 {
@@ -313,6 +316,7 @@ int MainWindow::GetRestaurantIDUsingQSL(QString name)
         qDebug() << "problem opening database";
     }
     QSqlQuery qry;
+    //qWarning() << "getname name: " << name;
     QString stringQry = "SELECT id FROM restaurantList WHERE restaurantName = '" + name + "'";
     qry.prepare(stringQry);
     if (qry.exec())
@@ -327,6 +331,7 @@ int MainWindow::GetRestaurantIDUsingQSL(QString name)
     db = QSqlDatabase();
     QSqlDatabase::removeDatabase(connectionName);
     }
+    //qWarning() << "id: " << id;
     return id;
 }
 double MainWindow::GetRestaurantPriceUsingQSL(QString name, QString menuItem)
@@ -346,8 +351,9 @@ double MainWindow::GetRestaurantPriceUsingQSL(QString name, QString menuItem)
     }
 
     QSqlQuery qry;
-
-    QString stringQry = "SELECT * FROM menu WHERE restaurantID = " + QString::number(id) + " AND item = '" + menuItem + "'"; //" + QString::number(id) + " AND item = '"menuItem"'"
+//qWarning() << "getprice name: " << name;
+//qWarning() << "getprice menu: " << menuItem;
+    QString stringQry = "SELECT * FROM menu WHERE restaurantID = " + QString::number(id) + " AND item = '" + menuItem + "'";
     qry.prepare(stringQry);
     if (qry.exec())
     {
@@ -360,6 +366,7 @@ double MainWindow::GetRestaurantPriceUsingQSL(QString name, QString menuItem)
     db = QSqlDatabase();
     QSqlDatabase::removeDatabase(connectionName);
     }
+    //qWarning() << "price: " << price;
     return price;
 }
 
@@ -370,16 +377,15 @@ void MainWindow::on_SubmitChange_clicked()
     QListWidgetItem* cur = ui->listWidget_price->currentItem();
 
   if(ui->listWidget_item->currentItem()->isSelected() && ui->listWidget->currentItem()->isSelected() && (cur == NULL))
-{
-   QString MenuName = ui->editMenuInput->text();
-   QString restaurantname = ui->listWidget->currentItem()->text();
-   QString MenuItem = ui->listWidget_item->currentItem()->text();
+    {
+         QString MenuName = ui->editMenuInput->text();
+         QString restaurantname = ui->listWidget->currentItem()->text();
+         QString MenuItem = ui->listWidget_item->currentItem()->text();
+         QString restName = AddApostropheToString(restaurantname);
+         int restaurantId = GetRestaurantIDUsingQSL(restName);
+         double prices = GetRestaurantPriceUsingQSL(restName, MenuItem);
 
-        QString restName;
-        restName = AddApostropheToString(restaurantname);
-        int restaurantId = GetRestaurantIDUsingQSL(restName);
-        double prices = static_cast<double>(GetRestaurantPriceUsingQSL(restName, MenuItem));
-
+         //reopen database
         const QString DRIVER("QSQLITE");
         if (QSqlDatabase::isDriverAvailable(DRIVER))
            {QSqlDatabase db = QSqlDatabase::addDatabase(DRIVER);
@@ -388,6 +394,7 @@ void MainWindow::on_SubmitChange_clicked()
         db.open();
 
         QSqlQuery qry(db);
+        //qWarning() << "price: " << prices << "menu: " << MenuName << "id: " << restaurantId;
         QString stringQry = "UPDATE menu SET item = '" + MenuName + "' WHERE restaurantID = " + QString::number(restaurantId) + " AND price = " + QString::number(prices);
         qry.prepare(stringQry);
         if(!qry.exec(stringQry))
@@ -441,16 +448,66 @@ void MainWindow::on_SubmitChange_clicked()
 QString MainWindow::AddApostropheToString(QString restaurantname)
 {
     // change to sql query format when string contains apostrophe (need to add one more ' to the query)
-    if (restaurantname == "MacDonald’s")
-        restaurantname = "MacDonald''s";
-    else
-        qWarning() << "wrong name" << restaurantname;
-    if (restaurantname == "Domino's Pizza")
-        restaurantname = "Domino''s Pizza";
-    if (restaurantname == "Wendy's")
-        restaurantname = "Wendy''s";
-    if (restaurantname == "Papa John's Pizza")
-        restaurantname = "Papa John''s Pizza";
+
+    if(restaurantname.contains("’"))
+    {
+        auto parts = restaurantname.split(QLatin1Char('s'));
+        QString first = parts.at(0);
+        QString second = parts.at(1);
+
+        first.chop(1);
+        restaurantname = first + "\'\'s" + second;
+    }
+
     return restaurantname;
+
+}
+
+
+void MainWindow::on_listWidget_price_itemDoubleClicked(QListWidgetItem *item)
+{
+    item->setSelected(false);
+    ui->listWidget_price->setCurrentItem(NULL);
+}
+
+
+void MainWindow::on_deleteMenuItem_clicked()
+{
+    QString restaurantname = ui->listWidget->currentItem()->text();
+    QString MenuItem = ui->listWidget_item->currentItem()->text();
+    QString restName = AddApostropheToString(restaurantname);
+    int restaurantId = GetRestaurantIDUsingQSL(restName);
+    double prices = GetRestaurantPriceUsingQSL(restName, MenuItem);
+
+    const QString DRIVER("QSQLITE");
+    if (QSqlDatabase::isDriverAvailable(DRIVER))
+       {QSqlDatabase db = QSqlDatabase::addDatabase(DRIVER);
+    QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
+    db.setDatabaseName(dbPath);
+    db.open();
+
+    QSqlQuery qry(db);
+    QString stringQry = "DELETE FROM menu WHERE price = " + QString::number(prices) + " AND restaurantID = " + QString::number(restaurantId) + " AND item = '" + MenuItem + "'";
+    qry.prepare(stringQry);
+    if(!qry.exec(stringQry))
+        qWarning() << "ERROR: Deleting from menu" << qry.lastError().text();
+    ui->listWidget_item->currentItem()->setHidden(true);
+    ui->listWidget_price->setCurrentRow(ui->listWidget_item->currentRow());
+    ui->listWidget_price->currentItem()->setHidden(true);
+    db.close();
+    QString connectionName = db.connectionName();
+    db = QSqlDatabase();
+    QSqlDatabase::removeDatabase(connectionName);
+    }
+}
+
+
+void MainWindow::on_addMenu_clicked()
+{
+    ui->listWidget_item->addItem("NewItem");
+    ui->listWidget_price->addItem("NewPrice");
+    ui->listWidget_item->editItem(ui->listWidget_item->currentItem());
+    ui->listWidget_price->editItem(ui->listWidget_price->currentItem());
+
 }
 
