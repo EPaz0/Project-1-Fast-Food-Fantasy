@@ -19,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->SubmitChange->setVisible(false);
     ui->addMenu->setVisible(false);
     ui->deleteMenuItem->setVisible(false);
+    ui->editNewItem->setVisible(false);
+    ui->editNewPrice->setVisible(false);
+    ui->SubmitNew->setVisible(false);
 
 
 //read text file and put info into restaurant vector
@@ -504,10 +507,45 @@ void MainWindow::on_deleteMenuItem_clicked()
 
 void MainWindow::on_addMenu_clicked()
 {
-    ui->listWidget_item->addItem("NewItem");
-    ui->listWidget_price->addItem("NewPrice");
-    ui->listWidget_item->editItem(ui->listWidget_item->currentItem());
-    ui->listWidget_price->editItem(ui->listWidget_price->currentItem());
-
+    //enable new menu item edits and submit button
+    ui->editNewItem->setVisible(true);
+    ui->editNewPrice->setVisible(true);
+    ui->SubmitNew->setVisible(true);
 }
+
+
+void MainWindow::on_SubmitNew_clicked()
+{
+    //add new item and price to list
+    QListWidgetItem* ItemName = new QListWidgetItem(ui->editNewItem->text());
+    QListWidgetItem* ItemPrice = new QListWidgetItem("$" + ui->editNewPrice->text());
+    ui->listWidget_item->addItem(ItemName);
+    ui->listWidget_price->addItem(ItemPrice);
+
+    //get current restaurant name and add new info to the database
+    QString restaurantname = ui->listWidget->currentItem()->text();
+    QString restName = AddApostropheToString(restaurantname);
+      int restaurantId = GetRestaurantIDUsingQSL(restName);
+
+      const QString DRIVER("QSQLITE");
+      if (QSqlDatabase::isDriverAvailable(DRIVER))
+         {QSqlDatabase db = QSqlDatabase::addDatabase(DRIVER);
+      QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
+      db.setDatabaseName(dbPath);
+      db.open();
+      QSqlQuery qry(db);
+
+      qry.prepare("INSERT INTO menu VALUES(:restaurantID, :item, :price)");
+      qry.bindValue(":restaurantID", restaurantId);
+      qry.bindValue(":item", ui->editNewItem->text());
+      qry.bindValue(":price", ui->editNewPrice->text());
+      if(!qry.exec())
+          qWarning() << "ERROR: UPDATING menu" << qry.lastError().text();
+
+      db.close();
+      QString connectionName = db.connectionName();
+      db = QSqlDatabase();
+      QSqlDatabase::removeDatabase(connectionName);
+
+}}
 

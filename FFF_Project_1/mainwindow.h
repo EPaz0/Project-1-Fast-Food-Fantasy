@@ -59,6 +59,8 @@ private slots:
 
     void on_addMenu_clicked();
 
+    void on_SubmitNew_clicked();
+
 signals:
     void isAdmin();
 
