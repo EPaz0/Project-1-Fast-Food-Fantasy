@@ -24,156 +24,83 @@ MainWindow::MainWindow(QWidget *parent)
     ui->SubmitNew->setVisible(false);
 
 
-//read text file and put info into restaurant vector
-    QFile file(":/txt/CS1D_Spring_2022_Fast_Food_Project.txt");
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+    QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
+    db.setDatabaseName(dbPath);
+
+    if (!db.open())
     {
-        restaurant *aRestaurant;
-
-        QTextStream in(&file);
-        while (!in.atEnd())
-        {
-            QString aRestaurantName;
-            int aRestaurantNumber;
-            QVector<distanceInfo> aDistanceList;
-            float aDistanceToSaddleback;
-            QList<menuItem> aMenu;
-
-            QString line = in.readLine();
-            do
-            {
-                line.remove(0,1);
-            }while(line.at(0)!=':');
-            line.remove(0,1);
-            line.remove(0,1);
-            aRestaurantName = line;
-
-            line = in.readLine();
-            do
-            {
-                line.remove(0,1);
-            }while(!line.at(0).isDigit());
-            aRestaurantNumber = line.toInt();
-
-            line = in.readLine();
-            do
-            {
-                line.remove(0,1);
-            }while(!line.at(0).isDigit());
-            line.replace(" ", "");
-            int numberOfDistances = line.toInt();
-
-            for(int i=0;i<numberOfDistances;i++)
-            {
-                line = in.readLine();
-                QString temp;
-                do
-                {
-                    temp.push_back(line.at(0));
-                    line.remove(0,1);
-                }while(!line.at(0).isSpace());
-                line.remove(0,1);
-                distanceInfo info;
-                info.toWhich = temp.toInt();
-                info.distance = line.toFloat();
-                aDistanceList.push_back(info);
-            }
-
-            line = in.readLine();
-            QString anotherTemp;
-            do
-            {
-                anotherTemp.push_back(line.at(0));
-                line.remove(0,1);
-            }while(!line.at(0).isSpace());
-            aDistanceToSaddleback = anotherTemp.toFloat();
-
-            line = in.readLine();
-            anotherTemp = "";
-            do
-            {
-                anotherTemp.push_back(line.at(0));
-                line.remove(0,1);
-            }while(!line.at(0).isSpace());
-            int numberOfRestaurants;
-            numberOfRestaurants = anotherTemp.toInt();
-
-            for(int i=0;i<numberOfRestaurants;i++)
-            {
-                menuItem item;
-                line = in.readLine();
-                item.itemName = line;
-                line = in.readLine();
-                item.itemPrice = line.toFloat();
-                aMenu.push_back(item);
-            }
-            line = in.readLine();
-
-            aRestaurant = new restaurant;
-            aRestaurant -> setDistanceList(aDistanceList);
-            aRestaurant -> setDistanceToSaddleback(aDistanceToSaddleback);
-            aRestaurant -> setMenu(aMenu);
-            aRestaurant -> setRestaurantName(aRestaurantName);
-            aRestaurant -> setRestaurantNumber(aRestaurantNumber);
-            restaurantList.push_back(*aRestaurant);
-            delete aRestaurant;
-        }
-        file.close();
+        qDebug() << "problem opening database";
     }
+    ui->listWidget->clear();
 
+    int resID;
+    QString resName;
+    float distanceFromSaddleback;
+    QString stringQry;
 
-    // add each restaurant in the restaurant list to the main listWidget
-    for (int i = 0; i < restaurantList.size(); i++)
+    qry.prepare("SELECT * FROM restaurantList");
+    if (qry.exec())
     {
-        restaurant res = restaurantList.at(i);
-        QListWidgetItem* item = new QListWidgetItem(res.getRestaurantName());  // add name of restaurant
-        item->setData(Qt::UserRole, QString::number(res.getDistanceToSaddleback())); // store distance to Saddleback to the current widget item
-
-        QVariant listMenuName;
-        QList<QString> menuItemName;
-        for (int i = 0; i < res.getMenu().size(); i++)
+        while (qry.next())
         {
-            menuItemName.append(res.getMenu().at(i).itemName);
-        }
-        listMenuName = menuItemName;
-        item->setData(Qt::Key_1, listMenuName);  // store menu name to the current widget item
+            resName = qry.value(1).toString();
+            ui->listWidget->addItem(resName);   // add restaurant name to the list widget, display
+            distanceFromSaddleback = qry.value(2).toFloat();
+            resID = qry.value(0).toInt();
 
+            restaurant resObj;  // create each restaurant obj and set info
+            resObj.setRestaurantName(resName);
+            resObj.setDistanceToSaddleback(distanceFromSaddleback);
+            resObj.setRestaurantNumber(resID);
 
-        QList<QVariant> listMenuPrice;
-        for (int i = 0; i < res.getMenu().size(); i++)
-        {
-            listMenuPrice.append(QString::number(res.getMenu().at(i).itemPrice));
-        }
-        item->setData(Qt::Key_2, listMenuPrice);  // store menu price to the current widget item
+            // add menu list
+            menuItem eachMenuItem;
+            QList<menuItem> resMenu;
+            QSqlQuery subQuery;
+            stringQry = "SELECT item,price FROM menu WHERE restaurantID = " + QString::number(resID);
+            subQuery.prepare(stringQry);
 
-
-        QList<QVariant> distanceToOthers;
-        QList<QString> distanceToOthersRestaurant;
-        int restaurantId;
-        for (int i = 0; i < res.getDistanceList().size(); i++)
-        {
-            if (res.getDistanceList().at(i).distance != 0.0)    // not display itself (ex: in McDonald not display McDonald 0.0)
+            if (subQuery.exec())
             {
-                distanceToOthers.append(QString::number(res.getDistanceList().at(i).distance));
-
-                restaurantId = res.getDistanceList().at(i).toWhich;
-
-                for (int j = 0; j < restaurantList.size(); j++)
+                while (subQuery.next())
                 {
-                  if (restaurantList.at(j).getRestaurantNumber() == restaurantId)
-                     distanceToOthersRestaurant.append(restaurantList.at(j).getRestaurantName());
+                    eachMenuItem.itemName = subQuery.value(0).toString();
+                    eachMenuItem.itemPrice = subQuery.value(1).toFloat();
+                    resMenu.append(eachMenuItem);
                 }
             }
+            else
+                qDebug() << "ERROR: unable to get menu item, price from database";
+
+            resObj.setMenu(resMenu);  // set the menu of restaurant obj
+
+            // add distance list
+            distanceInfo eachDistance;
+            QVector<distanceInfo> resDistance;
+            stringQry = "SELECT toRestaurant, distance FROM distances WHERE fromRestaurant = " + QString::number(resID);
+            subQuery.prepare(stringQry);
+            if (subQuery.exec())
+            {
+                while (subQuery.next())
+                {
+                    eachDistance.toWhich  = subQuery.value(0).toInt();
+                    eachDistance.distance = subQuery.value(1).toFloat();
+                    resDistance.append(eachDistance);
+                }
+            }
+            else
+                qDebug() << "ERROR: unable to get menu distance from other restaurant from database";
+
+            resObj.setDistanceList(resDistance); // set the distance list of restaurant obj
+
+
+
+            // add this restaurant to the restaurant list
+            restaurantList.append(resObj);
         }
-        item->setData(Qt::Key_3, distanceToOthers);  // store distance to the current widget item
-        item->setData(Qt::Key_4, distanceToOthersRestaurant); // store other restaurants' names to the current widget item
-
-
-        ui->listWidget->insertItem(1, item);  // insert item with all info stored to widget
-
     }
-
 }
+
 
 MainWindow::~MainWindow()
 {
@@ -258,44 +185,39 @@ void MainWindow::on_pushButton_clicked()
     ui->listWidget_distance->clear();
     ui->listWidget_name->clear();
 
+    restaurant thisRestaurant;
+
     // once a restaurant is chosen from the listWidget, its information will be displayed
-    ui->lineEdit->setText(ui->listWidget->currentItem()->text());  // display restaurant  name
+    QString resName = ui->listWidget->currentItem()->text();
+    ui->lineEdit->setText(resName);  // display restaurant  name
 
-
-    ui->lineEdit_2->setText(ui->listWidget->currentItem()->data(Qt::UserRole).toString()); // display distance to Saddleback College
-
-    // display menu list
-    QVariant listMenuName = (ui->listWidget->currentItem()->data(Qt::Key_1));
-    QList<QString> q = listMenuName.toStringList();
-    for (int i = 0; i < q.size(); i++)
+    for (int i = 0; i < restaurantList.size(); i++)
     {
-        ui->listWidget_item->addItem(q.at(i));
+        if (restaurantList[i].getRestaurantName() == resName)
+            thisRestaurant = restaurantList[i];
     }
 
-    // display item menu price
-    QVariant listMenuPrice = (ui->listWidget->currentItem()->data(Qt::Key_2));
-    QList<QString> p = listMenuPrice.toStringList();
-    for (int i = 0; i < p.size(); i++)
+    // display distance to Saddleback
+    ui->lineEdit_2->setText(QString::number(thisRestaurant.getDistanceToSaddleback()));
+
+    // display menu (item names and item prices)
+    QList<menuItem> resMenu = thisRestaurant.getMenu();
+    for (int i = 0; i < resMenu.size(); i++)
     {
-        ui->listWidget_price->addItem("$" + p.at(i));
+        ui->listWidget_item->addItem(resMenu.at(i).itemName);
+        ui->listWidget_price->addItem(QString::number(resMenu.at(i).itemPrice));
     }
 
-    // display distance
-    QVariant listDistance = (ui->listWidget->currentItem()->data(Qt::Key_3));
-    QList<QString> j = listDistance.toStringList();
-    for (int i = 0; i < j.size(); i++)
+    // display distance to others
+    QVector<distanceInfo> resDistanceList = thisRestaurant.getDistanceList();
+    QString toWhichName;
+    for (int i = 0; i < resDistanceList.size(); i++)
     {
-        ui->listWidget_distance->addItem(j.at(i) + " miles");
+        toWhichName = GetRestaurantNameUsingQSL(resDistanceList.at(i).toWhich);
+        ui->listWidget_name->addItem(toWhichName);
+        ui->listWidget_distance->addItem(QString::number(resDistanceList.at(i).distance));
     }
 
-
-    // display distance
-    QVariant listRestaurantName = (ui->listWidget->currentItem()->data(Qt::Key_4));
-    QList<QString> k = listRestaurantName.toStringList();
-    for (int i = 0; i < k.size(); i++)
-    {
-        ui->listWidget_name->addItem(k.at(i));
-    }
 }
 
 void MainWindow::on_listWidget_item_itemDoubleClicked(QListWidgetItem *item)
@@ -305,6 +227,43 @@ void MainWindow::on_listWidget_item_itemDoubleClicked(QListWidgetItem *item)
     ui->editMenuInput->clear();
     ui->editMenuInput->setPlaceholderText(MenuName);
 }
+
+
+QString MainWindow::GetRestaurantNameUsingQSL(int id)
+{
+   QString name;
+
+   //reopen database
+  const QString DRIVER("QSQLITE");
+  if (QSqlDatabase::isDriverAvailable(DRIVER))
+     {QSqlDatabase db = QSqlDatabase::addDatabase(DRIVER);
+  QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
+  db.setDatabaseName(dbPath);
+  db.open();
+
+   QSqlQuery qry(db);
+   QString stringQry = "SELECT restaurantName FROM restaurantList WHERE id = " + QString::number(id);
+   qry.prepare(stringQry);
+   if (qry.exec())
+   {
+       while (qry.next())
+       {
+           name = qry.value(0).toString();
+       }
+   }
+   else
+       qDebug() << "ERROR: unable to get restaurantname from database";
+
+   db.close();
+   QString connectionName = db.connectionName();
+   db = QSqlDatabase();
+   QSqlDatabase::removeDatabase(connectionName);
+   }
+
+   return name;
+}
+
+
 int MainWindow::GetRestaurantIDUsingQSL(QString name)
 {
     int id = 0;
@@ -314,6 +273,7 @@ int MainWindow::GetRestaurantIDUsingQSL(QString name)
     QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
     db.setDatabaseName(dbPath);
     db.open();
+
     if (!db.open())
     {
         qDebug() << "problem opening database";
@@ -329,6 +289,8 @@ int MainWindow::GetRestaurantIDUsingQSL(QString name)
             id = qry.value(0).toInt();
         }
     }
+    else
+        qDebug() << "ERROR: couldn't get id";
     db.close();
     QString connectionName = db.connectionName();
     db = QSqlDatabase();
@@ -337,6 +299,7 @@ int MainWindow::GetRestaurantIDUsingQSL(QString name)
     //qWarning() << "id: " << id;
     return id;
 }
+
 double MainWindow::GetRestaurantPriceUsingQSL(QString name, QString menuItem)
 {
     double price = 0;
@@ -365,6 +328,8 @@ double MainWindow::GetRestaurantPriceUsingQSL(QString name, QString menuItem)
             price = qry.value(2).toDouble();
         }
     }
+    else
+        qDebug() << "ERROR: couldn't get price";
     QString connectionName = db.connectionName();
     db = QSqlDatabase();
     QSqlDatabase::removeDatabase(connectionName);
@@ -374,9 +339,9 @@ double MainWindow::GetRestaurantPriceUsingQSL(QString name, QString menuItem)
 }
 
 
+
 void MainWindow::on_SubmitChange_clicked()
 {
-
     QListWidgetItem* cur = ui->listWidget_price->currentItem();
 
   if(ui->listWidget_item->currentItem()->isSelected() && ui->listWidget->currentItem()->isSelected() && (cur == NULL))
@@ -396,19 +361,15 @@ void MainWindow::on_SubmitChange_clicked()
         db.setDatabaseName(dbPath);
         db.open();
 
-        QSqlQuery qry(db);
+         QSqlQuery qry(db);
         //qWarning() << "price: " << prices << "menu: " << MenuName << "id: " << restaurantId;
+
         QString stringQry = "UPDATE menu SET item = '" + MenuName + "' WHERE restaurantID = " + QString::number(restaurantId) + " AND price = " + QString::number(prices);
         qry.prepare(stringQry);
         if(!qry.exec(stringQry))
             qWarning() << "ERROR: UPDATING menu" << qry.lastError().text();
         if(MenuItem != MenuName)
             qDebug() << "Menu Item Updated ";
-        db.close();
-        QString connectionName = db.connectionName();
-        db = QSqlDatabase();
-        QSqlDatabase::removeDatabase(connectionName);
-
     }
 
     ui->listWidget_item->currentItem()->setText(MenuName);
@@ -437,21 +398,22 @@ void MainWindow::on_SubmitChange_clicked()
             qWarning() << "ERROR: UPDATING menu" << qry.lastError().text();
         if(Price != MenuPrice)
             qDebug() << "Menu Price Updated ";
-        db.close();
-        QString connectionName = db.connectionName();
-        db = QSqlDatabase();
-        QSqlDatabase::removeDatabase(connectionName);
-
     }
 
     ui->listWidget_price->currentItem()->setText("$" + MenuPrice);
     }
+
+  db.close();
+  QString connectionName = db.connectionName();
+  db = QSqlDatabase();
+  QSqlDatabase::removeDatabase(connectionName);
 }
 
 QString MainWindow::AddApostropheToString(QString restaurantname)
 {
     // change to sql query format when string contains apostrophe (need to add one more ' to the query)
 
+    /*
     if(restaurantname.contains("’"))
     {
         auto parts = restaurantname.split(QLatin1Char('s'));
@@ -460,10 +422,18 @@ QString MainWindow::AddApostropheToString(QString restaurantname)
 
         first.chop(1);
         restaurantname = first + "\'\'s" + second;
-    }
+    } */
 
+    // change to sql query format when string contains apostrophe (need to add one more ' to the query)
+    if (restaurantname == "MacDonald's")
+        restaurantname = "MacDonald''s";
+    if (restaurantname == "Domino's Pizza")
+        restaurantname = "Domino''s Pizza";
+    if (restaurantname == "Wendy's")
+        restaurantname = "Wendy''s";
+    if (restaurantname == "Papa John's Pizza")
+        restaurantname = "Papa John''s Pizza";
     return restaurantname;
-
 }
 
 
