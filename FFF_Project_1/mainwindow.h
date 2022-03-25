@@ -75,7 +75,7 @@ private:
     bool admin = false;
 
     // import the table already created
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    QSqlQuery qry;
+//    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+//    QSqlQuery qry;
 };
 #endif // MAINWINDOW_H

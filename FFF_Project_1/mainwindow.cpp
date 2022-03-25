@@ -23,9 +23,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->editNewPrice->setVisible(false);
     ui->SubmitNew->setVisible(false);
 
+    const QString DRIVER("QSQLITE");
+
+    if (QSqlDatabase::isDriverAvailable(DRIVER))
+    {QSqlDatabase db = QSqlDatabase::addDatabase(DRIVER);
 
     QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
     db.setDatabaseName(dbPath);
+    QSqlQuery qry(db);
+//    QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
+//    db.setDatabaseName(dbPath);
 
     if (!db.open())
     {
@@ -99,8 +106,12 @@ MainWindow::MainWindow(QWidget *parent)
             restaurantList.append(resObj);
         }
     }
+    db.close();
+    QString connectionName = db.connectionName();
+    db = QSqlDatabase();
+    QSqlDatabase::removeDatabase(connectionName);
+    }
 }
-
 
 MainWindow::~MainWindow()
 {
@@ -278,8 +289,8 @@ int MainWindow::GetRestaurantIDUsingQSL(QString name)
     {
         qDebug() << "problem opening database";
     }
-    QSqlQuery qry;
-    //qWarning() << "getname name: " << name;
+    QSqlQuery qry(db);
+    qWarning() << "getname name: " << name;
     QString stringQry = "SELECT id FROM restaurantList WHERE restaurantName = '" + name + "'";
     qry.prepare(stringQry);
     if (qry.exec())
@@ -296,7 +307,7 @@ int MainWindow::GetRestaurantIDUsingQSL(QString name)
     db = QSqlDatabase();
     QSqlDatabase::removeDatabase(connectionName);
     }
-    //qWarning() << "id: " << id;
+    qWarning() << "id: " << id;
     return id;
 }
 
@@ -317,8 +328,8 @@ double MainWindow::GetRestaurantPriceUsingQSL(QString name, QString menuItem)
     }
 
     QSqlQuery qry;
-//qWarning() << "getprice name: " << name;
-//qWarning() << "getprice menu: " << menuItem;
+qWarning() << "getprice name: " << name;
+qWarning() << "getprice menu: " << menuItem;
     QString stringQry = "SELECT * FROM menu WHERE restaurantID = " + QString::number(id) + " AND item = '" + menuItem + "'";
     qry.prepare(stringQry);
     if (qry.exec())
@@ -362,7 +373,7 @@ void MainWindow::on_SubmitChange_clicked()
         db.open();
 
          QSqlQuery qry(db);
-        //qWarning() << "price: " << prices << "menu: " << MenuName << "id: " << restaurantId;
+        qWarning() << "price: " << prices << "menu: " << MenuName << "id: " << restaurantId;
 
         QString stringQry = "UPDATE menu SET item = '" + MenuName + "' WHERE restaurantID = " + QString::number(restaurantId) + " AND price = " + QString::number(prices);
         qry.prepare(stringQry);
@@ -370,10 +381,15 @@ void MainWindow::on_SubmitChange_clicked()
             qWarning() << "ERROR: UPDATING menu" << qry.lastError().text();
         if(MenuItem != MenuName)
             qDebug() << "Menu Item Updated ";
-    }
+
 
     ui->listWidget_item->currentItem()->setText(MenuName);
+    db.close();
+    QString connectionName = db.connectionName();
+    db = QSqlDatabase();
+    QSqlDatabase::removeDatabase(connectionName);
     }
+  }
     else
    {
    QString MenuPrice = ui->editMenuInput->text();
@@ -398,23 +414,25 @@ void MainWindow::on_SubmitChange_clicked()
             qWarning() << "ERROR: UPDATING menu" << qry.lastError().text();
         if(Price != MenuPrice)
             qDebug() << "Menu Price Updated ";
-    }
+
 
     ui->listWidget_price->currentItem()->setText("$" + MenuPrice);
-    }
+
 
   db.close();
   QString connectionName = db.connectionName();
   db = QSqlDatabase();
   QSqlDatabase::removeDatabase(connectionName);
+          }
+   }
 }
 
 QString MainWindow::AddApostropheToString(QString restaurantname)
 {
     // change to sql query format when string contains apostrophe (need to add one more ' to the query)
 
-    /*
-    if(restaurantname.contains("’"))
+
+    if(restaurantname.contains("’") || restaurantname.contains('\''))
     {
         auto parts = restaurantname.split(QLatin1Char('s'));
         QString first = parts.at(0);
@@ -422,17 +440,17 @@ QString MainWindow::AddApostropheToString(QString restaurantname)
 
         first.chop(1);
         restaurantname = first + "\'\'s" + second;
-    } */
+    }
 
     // change to sql query format when string contains apostrophe (need to add one more ' to the query)
-    if (restaurantname == "MacDonald's")
-        restaurantname = "MacDonald''s";
-    if (restaurantname == "Domino's Pizza")
-        restaurantname = "Domino''s Pizza";
-    if (restaurantname == "Wendy's")
-        restaurantname = "Wendy''s";
-    if (restaurantname == "Papa John's Pizza")
-        restaurantname = "Papa John''s Pizza";
+//    if (restaurantname == "MacDonald's")
+//        restaurantname = "MacDonald''s";
+//    if (restaurantname == "Domino's Pizza")
+//        restaurantname = "Domino''s Pizza";
+//    if (restaurantname == "Wendy's")
+//        restaurantname = "Wendy''s";
+//    if (restaurantname == "Papa John's Pizza")
+//        restaurantname = "Papa John''s Pizza";
     return restaurantname;
 }
 
@@ -517,5 +535,6 @@ void MainWindow::on_SubmitNew_clicked()
       db = QSqlDatabase();
       QSqlDatabase::removeDatabase(connectionName);
 
-}}
+           }
+}
 
