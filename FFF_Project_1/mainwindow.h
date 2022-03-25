@@ -33,6 +33,7 @@ public:
     int GetRestaurantIDUsingQSL(QString name);
     double GetRestaurantPriceUsingQSL(QString name, QString menuItem);
     QString AddApostropheToString(QString restaurantname);
+    QString GetRestaurantNameUsingQSL(int id);
 
 private slots:
     void on_actionLog_in_triggered();
@@ -72,5 +73,9 @@ private:
     customtrip *tripCustomized;
     QList<restaurant> restaurantList;
     bool admin = false;
+
+    // import the table already created
+//    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+//    QSqlQuery qry;
 };
 #endif // MAINWINDOW_H
