@@ -459,7 +459,7 @@ void MainWindow::on_deleteMenuItem_clicked()
         resMenu.removeAt(ui->listWidget_item->currentRow());
 
 thisRestaurant.setMenu(resMenu);
-restaurantList[0] = thisRestaurant;
+restaurantList[restaurantId-1] = thisRestaurant;
 
     const QString DRIVER("QSQLITE");
     if (QSqlDatabase::isDriverAvailable(DRIVER))
@@ -528,7 +528,7 @@ void MainWindow::on_SubmitNew_clicked()
               eachMenuItem.itemPrice = (ui->editNewPrice->text().toFloat());
                  resMenu.append(eachMenuItem);
 thisRestaurant.setMenu(resMenu);
-restaurantList[0] = thisRestaurant;
+restaurantList[restaurantId-1] = thisRestaurant;
 
       const QString DRIVER("QSQLITE");
       if (QSqlDatabase::isDriverAvailable(DRIVER))
