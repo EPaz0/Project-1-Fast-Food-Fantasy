@@ -16,6 +16,11 @@ class customtrip : public QDialog
     Q_OBJECT
 
 public:
+    struct revenueRecord
+    {
+        QString restaurantName;
+        float revenue;
+    };
     explicit customtrip(QWidget *parent = nullptr);
     QString AddApostropheToString(QString name);
     int GetRestaurantIDUsingQSL(QString name);
@@ -55,6 +60,7 @@ private:
     float totalSpendingOnTrip = 0.0;
     bool admin = false;
     QList<QString> list;
+    QList<revenueRecord> revenueRecords;
 };
 
 #endif // CUSTOMTRIP_H

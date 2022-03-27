@@ -63,6 +63,11 @@ public:
     QListWidget *listWidget_distance;
     QLineEdit *editMenuInput;
     QPushButton *SubmitChange;
+    QPushButton *addMenu;
+    QPushButton *deleteMenuItem;
+    QLineEdit *editNewItem;
+    QLineEdit *editNewPrice;
+    QPushButton *SubmitNew;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuAdmin;
@@ -116,7 +121,7 @@ public:
 
         layoutWidget1 = new QWidget(centralwidget);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(480, 440, 275, 28));
+        layoutWidget1->setGeometry(QRect(560, 430, 275, 28));
         horizontalLayout_3 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
@@ -191,6 +196,21 @@ public:
         SubmitChange = new QPushButton(centralwidget);
         SubmitChange->setObjectName(QString::fromUtf8("SubmitChange"));
         SubmitChange->setGeometry(QRect(370, 470, 91, 22));
+        addMenu = new QPushButton(centralwidget);
+        addMenu->setObjectName(QString::fromUtf8("addMenu"));
+        addMenu->setGeometry(QRect(210, 430, 31, 22));
+        deleteMenuItem = new QPushButton(centralwidget);
+        deleteMenuItem->setObjectName(QString::fromUtf8("deleteMenuItem"));
+        deleteMenuItem->setGeometry(QRect(240, 430, 31, 22));
+        editNewItem = new QLineEdit(centralwidget);
+        editNewItem->setObjectName(QString::fromUtf8("editNewItem"));
+        editNewItem->setGeometry(QRect(280, 430, 101, 21));
+        editNewPrice = new QLineEdit(centralwidget);
+        editNewPrice->setObjectName(QString::fromUtf8("editNewPrice"));
+        editNewPrice->setGeometry(QRect(400, 430, 61, 21));
+        SubmitNew = new QPushButton(centralwidget);
+        SubmitNew->setObjectName(QString::fromUtf8("SubmitNew"));
+        SubmitNew->setGeometry(QRect(470, 430, 51, 22));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -272,6 +292,11 @@ public:
         label_4->setText(QCoreApplication::translate("MainWindow", "Distances (miles) to other Fast Food restaurants", nullptr));
         editMenuInput->setPlaceholderText(QCoreApplication::translate("MainWindow", "Enter New Item", nullptr));
         SubmitChange->setText(QCoreApplication::translate("MainWindow", "Submit Change", nullptr));
+        addMenu->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
+        deleteMenuItem->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
+        editNewItem->setPlaceholderText(QCoreApplication::translate("MainWindow", "New Item Name", nullptr));
+        editNewPrice->setPlaceholderText(QCoreApplication::translate("MainWindow", "New Price", nullptr));
+        SubmitNew->setText(QCoreApplication::translate("MainWindow", "Submit", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuAdmin->setTitle(QCoreApplication::translate("MainWindow", "Admin", nullptr));
         menuTrips->setTitle(QCoreApplication::translate("MainWindow", "Trips", nullptr));

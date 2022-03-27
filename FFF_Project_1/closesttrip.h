@@ -19,6 +19,11 @@ class ClosestTrip : public QDialog
     Q_OBJECT
 
 public:
+    struct revenueRecord
+    {
+        QString restaurantName;
+        float revenue;
+    };
     explicit ClosestTrip(QWidget *parent = nullptr);
     QString AddApostropheToString(QString name);
     int GetRestaurantIDUsingQSL(QString name);
@@ -53,7 +58,7 @@ private:
     QSqlQuery qry;
     float totalSpendingOnTrip = 0.0;
     bool admin = false;
-
+    QList<revenueRecord> revenueRecords;
 };
 
 #endif // CLOSESTTRIP_H

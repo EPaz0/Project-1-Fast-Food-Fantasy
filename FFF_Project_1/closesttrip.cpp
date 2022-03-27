@@ -107,6 +107,14 @@ ClosestTrip::ClosestTrip(QWidget *parent) :
 
     ui->lineEdit_totalDistance->setText(QString::number(totalDistance) + " miles");
 
+    for(int i=0; i<ui->listWidget->count(); i++)
+    {
+        QListWidgetItem* item = ui->listWidget->item(i);
+        revenueRecord aRec;
+        aRec.restaurantName = item->text();
+        aRec.revenue = 0.0;
+        revenueRecords.push_back(aRec);
+    }
 }
 
 ClosestTrip::~ClosestTrip()
@@ -123,10 +131,12 @@ ClosestTrip::~ClosestTrip()
 // purpose: display menu (item and prices)
 void ClosestTrip::on_pushButton_4_clicked()
 {
+    ui->pushButton_5->setDisabled(false);
     ui->listWidget_menu->clear();
     ui->listWidget_price->clear();
     ui->listWidget_cartItem->clear();
     ui->listWidget_cartPrice->clear();
+    ui->listWidget_2->clear();
     ui->lineEdit_totalOnRest->clear();
 
     if (ui->listWidget->selectedItems().size() != 0)  // check if restaurant is selected or not
@@ -270,12 +280,23 @@ void ClosestTrip::on_pushButton_5_clicked()
 
     ui->lineEdit_totalOnRest->setText("$" + QString::number(totalSpentOnRestaurant));
 
+    for(int i=0; i<revenueRecords.size(); i++)
+    {
+        if(revenueRecords.at(i).restaurantName == ui->name->text())
+            revenueRecords[i].revenue = totalSpentOnRestaurant;
+    }
+
     totalSpendingOnTrip += totalSpentOnRestaurant;  // add total spent on this restaurant to total spent on trip
     ui->lineEdit_totalSpentTrip->setText("$" + QString::number(totalSpendingOnTrip));  // update/display total spent on trip
 
     ui->listWidget_cartItem->clear();
     ui->listWidget_cartPrice->clear();
     ui->listWidget_2->clear();
+    ui->listWidget->currentItem()->setFlags(ui->listWidget->currentItem()->flags() & ~Qt::ItemIsEnabled);
+    ui->listWidget_menu->clear();
+    ui->listWidget_price->clear();
+    ui->name->clear();
+    ui->pushButton_5->setDisabled(true);
 }
 
 QString ClosestTrip::AddApostropheToString(QString restaurantname)
@@ -345,11 +366,52 @@ void ClosestTrip::on_pushButton_6_clicked()
     db = QSqlDatabase();
     QSqlDatabase::removeDatabase(connectionName);
     hide();
+    if(admin == true)
+        emit Admin();
+    else
+        emit backMain();
+    if(!ui->lineEdit_totalDistance->text().isEmpty())
+    {
+        QString output;
+        output += "The total distance for the trip was ";
+        output += ui->lineEdit_totalDistance->text();
+        output += "\n";
+        output += "------------------------------------------";
+        output += "\n";
+        output += "The total revenue at each individual restuarant:";
+        output += "\n";
+        for(int i=0; i<revenueRecords.size(); i++)
+        {
+            QString name = revenueRecords[i].restaurantName;
+            QString amount = QString::number(revenueRecords[i].revenue);
+            name = name.leftJustified(30, ' ');
+            output += name;
+            output += "$";
+            output += amount;
+            output += "\n";
+        }
+        output += "------------------------------------------";
+        output += "\n";
+        output += "The grand total for the trip was ";
+        if(ui->lineEdit_totalSpentTrip->text().isEmpty())
+            output += "$0.00";
+        else
+            output += ui->lineEdit_totalSpentTrip->text();
+
+        QMessageBox::about(this, "TRIP SUMMARY", output);
+    }
+    /*
+    db.close();
+    const QString connectionName = db.connectionName();
+    db = QSqlDatabase();
+    QSqlDatabase::removeDatabase(connectionName);
+    hide();
     endWindow = new endwindow(this);
     if(admin == true)
         emit AdminCheck();
 
     endWindow->show();
+    */
 }
 
 void ClosestTrip::isAdmin()

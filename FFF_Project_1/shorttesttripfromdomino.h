@@ -17,6 +17,11 @@ class ShorttestTripFromDomino : public QDialog
     Q_OBJECT
 
 public:
+    struct revenueRecord
+    {
+        QString restaurantName;
+        float revenue;
+    };
     explicit ShorttestTripFromDomino(QWidget *parent = nullptr);
     ~ShorttestTripFromDomino();
     QString AddApostropheToString(QString name);
@@ -53,6 +58,7 @@ private:
     QSqlQuery qry;
     float totalSpendingOnTrip = 0.0;
     bool admin = false;
+    QList<revenueRecord> revenueRecords;
 };
 
 #endif // SHORTTESTTRIPFROMDOMINO_H
