@@ -46,14 +46,15 @@ void customtrip::isAdmin()
 QString customtrip::AddApostropheToString(QString restaurantname)
 {
    // change to sql query format when string contains apostrophe (need to add one more ' to the query)
-   if (restaurantname == "MacDonald's")
-       restaurantname = "MacDonald''s";
-   if (restaurantname == "Domino's Pizza")
-       restaurantname = "Domino''s Pizza";
-   if (restaurantname == "Wendy's")
-       restaurantname = "Wendy''s";
-   if (restaurantname == "Papa John's Pizza")
-       restaurantname = "Papa John''s Pizza";
+    if(restaurantname.contains("’") || restaurantname.contains('\''))
+    {
+        auto parts = restaurantname.split(QLatin1Char('s'));
+        QString first = parts.at(0);
+        QString second = parts.at(1);
+
+        first.chop(1);
+        restaurantname = first + "\'\'s" + second;
+    }
    return restaurantname;
 }
 
