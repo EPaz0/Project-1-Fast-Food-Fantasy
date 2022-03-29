@@ -62,6 +62,10 @@ private slots:
 
     void on_SubmitNew_clicked();
 
+    void on_listWidget_price_itemClicked(QListWidgetItem *item);
+
+    void on_actionUpdate_List_triggered();
+
 signals:
     void isAdmin();
 

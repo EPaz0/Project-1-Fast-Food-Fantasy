@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     MainWindow w;
 
 
-    /*
+/*
     const QString DRIVER("QSQLITE");
 
     if (QSqlDatabase::isDriverAvailable(DRIVER))

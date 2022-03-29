@@ -60,7 +60,7 @@ Chicken burrito
 
 Name of Fast Food restaurant: Domino’s Pizza
 Fast Food restaurant number 3
-Distance (miles) to other Fast Food restaurants - 10  
+Distance (miles) to other Fast Food restaurants - 10
 1 15.4
 2 15.1
 3 0.0
@@ -86,7 +86,7 @@ Mushroom and pepperoni pizza
 
 Name of Fast Food restaurant: KFC
 Fast Food restaurant number 4
-Distance (miles) to other Fast Food restaurants - 10   
+Distance (miles) to other Fast Food restaurants - 10
 1 11.5
 2 14.8
 3 4.3
