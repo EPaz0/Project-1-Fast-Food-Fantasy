@@ -272,6 +272,8 @@ void customtrip::on_pushButton_10_clicked()
        aRec.revenue = 0.0;
        revenueRecords.push_back(aRec);
    }
+
+   ui->listWidget_3->setDisabled(true);
 }
 
 // this is the action set when "choose" button is clicked
@@ -313,6 +315,9 @@ void customtrip::on_pushButton_4_clicked()
             }
         }
     }
+
+    ui->listWidget->setDisabled(true);
+    ui->pushButton_4->setDisabled(true);
 }
 
 // this is the action set when "add" button is clicked
@@ -438,7 +443,9 @@ void customtrip::on_pushButton_5_clicked()
     ui->listWidget->currentItem()->setFlags(ui->listWidget->currentItem()->flags() & ~Qt::ItemIsEnabled);
     ui->listWidget_menu->clear();
     ui->listWidget_price->clear();
-    ui->name->clear();
     ui->pushButton_5->setDisabled(true);
+
+    ui->listWidget->setDisabled(false);
+    ui->pushButton_4->setDisabled(false);
 }
 

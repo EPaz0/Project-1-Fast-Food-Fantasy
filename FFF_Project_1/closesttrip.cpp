@@ -166,6 +166,9 @@ void ClosestTrip::on_pushButton_4_clicked()
             }
         }
     }
+
+    ui->listWidget->setDisabled(true);
+    ui->pushButton_4->setDisabled(true);
 }
 
 
@@ -295,8 +298,10 @@ void ClosestTrip::on_pushButton_5_clicked()
     ui->listWidget->currentItem()->setFlags(ui->listWidget->currentItem()->flags() & ~Qt::ItemIsEnabled);
     ui->listWidget_menu->clear();
     ui->listWidget_price->clear();
-    ui->name->clear();
     ui->pushButton_5->setDisabled(true);
+
+    ui->listWidget->setDisabled(false);
+    ui->pushButton_4->setDisabled(false);
 }
 
 QString ClosestTrip::AddApostropheToString(QString restaurantname)
