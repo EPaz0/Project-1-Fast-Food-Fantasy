@@ -350,6 +350,23 @@ void MainWindow::on_SubmitChange_clicked()
          int restaurantId = GetRestaurantIDUsingQSL(restName);
          double prices = GetRestaurantPriceUsingQSL(restName, MenuItem);
 
+         restaurant thisRestaurant;
+         QString resName = ui->listWidget->currentItem()->text();
+
+         for (int i = 0; i < restaurantList.size(); i++)
+         {
+             if (restaurantList[i].getRestaurantName() == resName)
+                 thisRestaurant = restaurantList[i];
+         }
+         QList<menuItem> resMenu = thisRestaurant.getMenu();
+         menuItem eachmenuItem;
+         eachmenuItem = resMenu.at(ui->listWidget_item->currentRow());
+         eachmenuItem.itemName = MenuName;
+             resMenu.replace(ui->listWidget_item->currentRow(), eachmenuItem);
+
+     thisRestaurant.setMenu(resMenu);
+     restaurantList[restaurantId-1] = thisRestaurant;
+
          //reopen database
         const QString DRIVER("QSQLITE");
         if (QSqlDatabase::isDriverAvailable(DRIVER))
@@ -384,6 +401,23 @@ void MainWindow::on_SubmitChange_clicked()
 
       QString restName = AddApostropheToString(restaurantname);
         int restaurantId = GetRestaurantIDUsingQSL(restName);
+
+        restaurant thisRestaurant;
+        QString resName = ui->listWidget->currentItem()->text();
+
+        for (int i = 0; i < restaurantList.size(); i++)
+        {
+            if (restaurantList[i].getRestaurantName() == resName)
+                thisRestaurant = restaurantList[i];
+        }
+        QList<menuItem> resMenu = thisRestaurant.getMenu();
+        menuItem eachmenuItem;
+        eachmenuItem = resMenu.at(ui->listWidget_item->currentRow());
+        eachmenuItem.itemPrice = MenuPrice.toFloat();
+            resMenu.replace(ui->listWidget_item->currentRow(), eachmenuItem);
+
+    thisRestaurant.setMenu(resMenu);
+    restaurantList[restaurantId-1] = thisRestaurant;
 
         const QString DRIVER("QSQLITE");
         if (QSqlDatabase::isDriverAvailable(DRIVER))
@@ -551,5 +585,12 @@ restaurantList[restaurantId-1] = thisRestaurant;
       QSqlDatabase::removeDatabase(connectionName);
 
            }
+}
+
+
+void MainWindow::on_listWidget_price_itemClicked(QListWidgetItem *item)
+{
+    int row = ui->listWidget_price->currentRow();
+    ui->listWidget_item->setCurrentRow(row);
 }
 
