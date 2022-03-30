@@ -815,7 +815,7 @@ void MainWindow::on_deleteRestaurant_clicked()
 
         QListWidgetItem *it = ui->listWidget->takeItem(restaurantSelected);
 
-        stringQry = "DELETE FROM restaurantList  WHERE row_number = " + QString::number(restaurantSelected);
+        stringQry = "DELETE FROM restaurantList  WHERE id = " + QString::number(restaurantSelected);
         qry.prepare(stringQry);
         qry.exec();
 
