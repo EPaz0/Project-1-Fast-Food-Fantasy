@@ -647,7 +647,8 @@ void MainWindow::on_actionUpdate_List_triggered()
                     distanceInfo info;
                     info.toWhich = temp.toInt();
                     info.distance = line.toFloat();
-                    aDistanceList.push_back(info);
+                    if (info.distance != 0)
+                        aDistanceList.push_back(info);
                 }
 
                 line = in.readLine();
@@ -693,6 +694,7 @@ void MainWindow::on_actionUpdate_List_triggered()
             int restaurantNumber;
             int distToSaddle;
             QVector<distanceInfo> resDistance;
+            distanceInfo newDistanceToUpdate;
             menuItem eachMenuItem;
             QList<menuItem> resMenu;
 
@@ -728,16 +730,40 @@ void MainWindow::on_actionUpdate_List_triggered()
                 qWarning() << "ERROR: Adding new menus" << qry.lastError().text();
             }
 
-            QSqlQuery subQuery(db);
             for(int j = 0; j < resDistance.size(); j++)
             {
+                QSqlQuery subQuery(db);
                 subQuery.prepare("INSERT INTO distances VALUES(:fromRestaurant, :toRestaurant, :distance)");
                 subQuery.bindValue(":fromRestaurant", restaurantNumber);
                 subQuery.bindValue(":toRestaurant", resDistance.at(j).toWhich);
                 subQuery.bindValue(":distance", QString::number(resDistance.at(j).distance));
-            if(!subQuery.exec())
-                qWarning() << "ERROR: Adding new distances" << qry.lastError().text();
+                newDistanceToUpdate.distance = resDistance.at(j).distance;
+                newDistanceToUpdate.toWhich = resDistance.at(j).toWhich;
+
+                for (int i = 0; i < 12; i++)
+                {
+                      if (restaurantList.at(i).getRestaurantNumber() == restaurantNumber)
+                      {
+                          restaurantList.at(i).getDistanceList().push_back(newDistanceToUpdate);
+                          break;
+                      }
+                }
+                if (!subQuery.exec())
+                    qWarning() << "ERROR: Adding new distances" << qry.lastError().text();
+
+
+                // update the distance list of each restaurant from 1-10 to new added restaurant
+                if (resDistance.at(j).toWhich <= 10)
+                {
+                    subQuery.prepare("INSERT INTO distances VALUES(:fromRestaurant, :toRestaurant, :distance)");
+                    subQuery.bindValue(":fromRestaurant", resDistance.at(j).toWhich);
+                    subQuery.bindValue(":toRestaurant", restaurantNumber);
+                    subQuery.bindValue(":distance", resDistance.at(j).distance);
+                    if (!subQuery.exec())
+                         qWarning() << "ERROR: updating distance" << qry.lastError().text();
+                }
             }
+
 
             db.close();
             QString connectionName = db.connectionName();
@@ -763,7 +789,8 @@ void MainWindow::on_actionVisit_All_12_triggered()
     analltwelvetrip->show();
     }
     else
-        qWarning() << "not updated yet";
+        //qWarning() << "not updated yet";
+        QMessageBox::critical(this, "Unavailable Option", "To plan this trip, you need 12 restaurants.");
 }
 
 
@@ -805,6 +832,10 @@ void MainWindow::on_deleteRestaurant_clicked()
         qry.prepare(DeleteDistance);
         qry.exec();
 
+        DeleteDistance = "DELETE FROM distances  WHERE toRestaurant = " + QString::number(restaurantSelected);
+        qry.prepare(DeleteDistance);
+        qry.exec();
+
 /*
         stringQry = "DELETE FROM restaurantList  WHERE id = '12'";
         qry.prepare(stringQry);
@@ -839,9 +870,10 @@ void MainWindow::on_deleteRestaurant_clicked()
             ui->listWidget->setCurrentRow(-1);
             QMessageBox::critical(this,tr("Delete"),tr("Deleted"));
             delete it;
-
-
         }
+
+
+        restaurantList.pop_back();
 
     }
     //restaurantSelected = 0;

@@ -1,3 +1,4 @@
+release/alltwelvetrip.o
 release/closesttrip.o
 release/customtrip.o
 release/endwindow.o
@@ -7,6 +8,7 @@ release/restaurant.o
 release/shorttesttripfromdomino.o
 release/signin.o
 release/qrc_resource.o
+release/moc_alltwelvetrip.o
 release/moc_closesttrip.o
 release/moc_customtrip.o
 release/moc_endwindow.o

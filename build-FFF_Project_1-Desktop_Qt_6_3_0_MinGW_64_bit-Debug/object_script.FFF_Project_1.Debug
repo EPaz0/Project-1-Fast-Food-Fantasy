@@ -1,3 +1,4 @@
+debug/alltwelvetrip.o
 debug/closesttrip.o
 debug/customtrip.o
 debug/endwindow.o
@@ -7,6 +8,7 @@ debug/restaurant.o
 debug/shorttesttripfromdomino.o
 debug/signin.o
 debug/qrc_resource.o
+debug/moc_alltwelvetrip.o
 debug/moc_closesttrip.o
 debug/moc_customtrip.o
 debug/moc_endwindow.o
