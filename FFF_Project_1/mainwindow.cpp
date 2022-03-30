@@ -475,6 +475,68 @@ void MainWindow::on_listWidget_price_itemDoubleClicked(QListWidgetItem *item)
 
 void MainWindow::on_deleteMenuItem_clicked()
 {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+        QSqlQuery qry;
+
+        db.setDatabaseName("restaurant.sqlite");
+        QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
+        db.setDatabaseName(dbPath);
+
+        if (!db.open())
+        {
+            qDebug() << "problem opening database";
+        }
+    int restaurantSelected = 11;
+        if(restaurantSelected != -1)
+        {
+            QString stringQry;
+            QString DeleteMenu;
+            QString DeleteDistance;
+
+
+            QListWidgetItem *it = ui->listWidget->takeItem(restaurantSelected);
+
+            stringQry = "DELETE FROM restaurantList  WHERE id = " + QString::number(restaurantSelected);
+            qry.prepare(stringQry);
+            qry.exec();
+
+            DeleteMenu = "DELETE FROM menu  WHERE restaurantID = " + QString::number(restaurantSelected);
+            qry.prepare(DeleteMenu);
+            qry.exec();
+
+            DeleteDistance = "DELETE FROM distances  WHERE fromRestaurant = " + QString::number(restaurantSelected);
+            qry.prepare(DeleteDistance);
+            qry.exec();
+
+           // qry.prepare("DELETE restaurantList. menu FROM menu INNER JOIN menu reststaurantList.id = menu.restaurantID");
+
+            /*stringQry =  "DELETE FROM menu WHERE restaurantID = " + QString::number(restaurantSelected);
+            qry.prepare(stringQry);
+            stringQry =  "DELETE FROM distances WHERE fromRestaurant = " + QString::number(restaurantSelected);
+            qry.prepare(stringQry);*/
+
+            if(qry.exec())
+            {
+                ui->listWidget_price->clear();
+                ui->listWidget_item->clear();
+                ui->listWidget_distance->clear();
+                ui->listWidget_name->clear();
+                ui->lineEdit->clear();
+                ui->lineEdit_2->clear();
+                ui->listWidget->setCurrentRow(-1);
+                QMessageBox::critical(this,tr("Delete"),tr("Deleted"));
+                delete it;
+
+
+            }
+
+        }
+        //restaurantSelected = 0;
+        db.close();
+        QString connectionName = db.connectionName();
+        db = QSqlDatabase();
+        QSqlDatabase::removeDatabase(connectionName);
+
     QString restaurantname = ui->listWidget->currentItem()->text();
     QString MenuItem = ui->listWidget_item->currentItem()->text();
     QString restName = AddApostropheToString(restaurantname);
@@ -598,9 +660,9 @@ void MainWindow::on_listWidget_price_itemClicked(QListWidgetItem *item)
 
 void MainWindow::on_actionUpdate_List_triggered()
 {
-QMessageBox Wait;
-Wait.setText("Please Wait");
-Wait.exec();
+//QMessageBox Wait;
+//Wait.setText("Please Wait");
+//Wait.exec();
     QFile file(":/txt/CS1D Spring 2022 New Fast Food Project.txt");
         if (file.open(QIODevice::ReadOnly | QIODevice::Text))
         {
@@ -697,14 +759,8 @@ Wait.exec();
                     qWarning() << aRestaurant->getMenu().at(i).itemName;
                 }
 
-
                 restaurantList.append(*aRestaurant);
                 delete aRestaurant;
-
-
-
-
-qWarning() << "Size: " << restaurantList.count();
 
             QString restaurantName;
             int restaurantNumber;
@@ -772,9 +828,6 @@ qWarning() << "Menu size:" << resMenu.size();
             qWarning() << "Adding " << restaurantName << "to name widget";
 
 ui->listWidget->addItem(restaurantName);
-
-
-
 
 }
 }
