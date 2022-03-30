@@ -1,0 +1,37 @@
+\hypertarget{endwindow_8h_source}{}\doxysection{endwindow.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef ENDWINDOW\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define ENDWINDOW\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QDialog>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{namespace }Ui \{}
+\DoxyCodeLine{7 \textcolor{keyword}{class }\mbox{\hyperlink{classendwindow}{endwindow}};}
+\DoxyCodeLine{8 \}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{class }\mbox{\hyperlink{classendwindow}{endwindow}} : \textcolor{keyword}{public} QDialog}
+\DoxyCodeLine{11 \{}
+\DoxyCodeLine{12     Q\_OBJECT}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{public}:}
+\DoxyCodeLine{15     \textcolor{keyword}{explicit} \mbox{\hyperlink{classendwindow}{endwindow}}(QWidget *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{16     \mbox{\hyperlink{classendwindow}{\string~endwindow}}();}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{19     \textcolor{keywordtype}{void} on\_pushButton\_clicked();}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{keywordtype}{void} AdminCheck();}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 signals:}
+\DoxyCodeLine{24     \textcolor{keywordtype}{void} backMain();}
+\DoxyCodeLine{25     \textcolor{keywordtype}{void} Admin();}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{private}:}
+\DoxyCodeLine{28     Ui::endwindow *ui;}
+\DoxyCodeLine{29     \textcolor{keywordtype}{bool} admin = \textcolor{keyword}{false};}
+\DoxyCodeLine{30 \};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ENDWINDOW\_H}}
+
+\end{DoxyCode}

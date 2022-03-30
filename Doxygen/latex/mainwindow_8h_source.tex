@@ -1,0 +1,99 @@
+\hypertarget{mainwindow_8h_source}{}\doxysection{mainwindow.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef MAINWINDOW\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define MAINWINDOW\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QMainWindow>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QSqlDatabase>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QSqlDriver>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <QSqlError>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <QSqlQuery>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <QStandardPaths>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <QDir>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <QList>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <QListWidgetItem>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <QtSql>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}signin.h"{}}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}closesttrip.h"{}}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include "{}endwindow.h"{}}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include "{}restaurant.h"{}}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include "{}shorttesttripfromdomino.h"{}}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include "{}customtrip.h"{}}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include "{}alltwelvetrip.h"{}}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 QT\_BEGIN\_NAMESPACE}
+\DoxyCodeLine{24 \textcolor{keyword}{namespace }Ui \{ \textcolor{keyword}{class }\mbox{\hyperlink{class_main_window}{MainWindow}}; \}}
+\DoxyCodeLine{25 QT\_END\_NAMESPACE}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{class }\mbox{\hyperlink{class_main_window}{MainWindow}} : \textcolor{keyword}{public} QMainWindow}
+\DoxyCodeLine{28 \{}
+\DoxyCodeLine{29     Q\_OBJECT}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{keyword}{public}:}
+\DoxyCodeLine{32     \mbox{\hyperlink{class_main_window}{MainWindow}}(QWidget *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{33     \mbox{\hyperlink{class_main_window}{\string~MainWindow}}();}
+\DoxyCodeLine{34     \textcolor{keywordtype}{int} GetRestaurantIDUsingQSL(QString name);}
+\DoxyCodeLine{35     \textcolor{keywordtype}{double} GetRestaurantPriceUsingQSL(QString name, QString \mbox{\hyperlink{structmenu_item}{menuItem}});}
+\DoxyCodeLine{36     QString AddApostropheToString(QString restaurantname);}
+\DoxyCodeLine{37     QString GetRestaurantNameUsingQSL(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id});}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{40     \textcolor{keywordtype}{void} on\_actionLog\_in\_triggered();}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \textcolor{keywordtype}{void} Admin();}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44     \textcolor{keywordtype}{void} on\_actionLog\_out\_triggered();}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{keywordtype}{void} on\_pushButton\_clicked();}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48     \textcolor{keywordtype}{void} on\_action10\_Closet\_triggered();}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \textcolor{keywordtype}{void} on\_listWidget\_item\_itemDoubleClicked(QListWidgetItem *item);}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52     \textcolor{keywordtype}{void} on\_SubmitChange\_clicked();}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \textcolor{keywordtype}{void} on\_actionShortest\_Trip\_triggered();}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56     \textcolor{keywordtype}{void} on\_actionCustom\_Trip\_triggered();}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \textcolor{keywordtype}{void} on\_listWidget\_price\_itemDoubleClicked(QListWidgetItem *item);}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     \textcolor{keywordtype}{void} on\_deleteMenuItem\_clicked();}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62     \textcolor{keywordtype}{void} on\_addMenu\_clicked();}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64     \textcolor{keywordtype}{void} on\_SubmitNew\_clicked();}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66     \textcolor{keywordtype}{void} on\_listWidget\_price\_itemClicked(QListWidgetItem *item);}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     \textcolor{keywordtype}{void} on\_actionUpdate\_List\_triggered();}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{keywordtype}{void} on\_actionVisit\_All\_12\_triggered();}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72     \textcolor{keywordtype}{void} on\_deleteRestaurant\_clicked();}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74     \textcolor{keywordtype}{void} on\_listWidget\_currentRowChanged(\textcolor{keywordtype}{int} currentRow);}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 signals:}
+\DoxyCodeLine{77     \textcolor{keywordtype}{void} isAdmin();}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{keyword}{private}:}
+\DoxyCodeLine{80     Ui::MainWindow *ui;}
+\DoxyCodeLine{81     \mbox{\hyperlink{class_signin}{Signin}} *signin;}
+\DoxyCodeLine{82     \mbox{\hyperlink{class_closest_trip}{ClosestTrip}} *tripFromSaddleback;}
+\DoxyCodeLine{83     \mbox{\hyperlink{class_shorttest_trip_from_domino}{ShorttestTripFromDomino}} *tripFromDomino;}
+\DoxyCodeLine{84     \mbox{\hyperlink{classcustomtrip}{customtrip}} *tripCustomized;}
+\DoxyCodeLine{85     \mbox{\hyperlink{classalltwelvetrip}{alltwelvetrip}} *analltwelvetrip;}
+\DoxyCodeLine{86     QList<restaurant> restaurantList;}
+\DoxyCodeLine{87     \textcolor{keywordtype}{bool} admin = \textcolor{keyword}{false};}
+\DoxyCodeLine{88     \textcolor{keywordtype}{int} restaurantSelected;}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     \textcolor{comment}{// import the table already created}}
+\DoxyCodeLine{91 \textcolor{comment}{//    QSqlDatabase db = QSqlDatabase::addDatabase("{}QSQLITE"{});}}
+\DoxyCodeLine{92 \textcolor{comment}{//    QSqlQuery qry;}}
+\DoxyCodeLine{93 \};}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// MAINWINDOW\_H}}
+
+\end{DoxyCode}

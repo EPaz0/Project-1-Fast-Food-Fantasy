@@ -1,0 +1,69 @@
+\hypertarget{shorttesttripfromdomino_8h_source}{}\doxysection{shorttesttripfromdomino.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef SHORTTESTTRIPFROMDOMINO\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define SHORTTESTTRIPFROMDOMINO\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QDialog>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QWidget>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QtSql>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <QToolTip>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}restaurant.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}endwindow.h"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{namespace }Ui \{}
+\DoxyCodeLine{12 \textcolor{keyword}{class }\mbox{\hyperlink{class_shorttest_trip_from_domino}{ShorttestTripFromDomino}};}
+\DoxyCodeLine{13 \}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{class }\mbox{\hyperlink{class_shorttest_trip_from_domino}{ShorttestTripFromDomino}} : \textcolor{keyword}{public} QDialog}
+\DoxyCodeLine{16 \{}
+\DoxyCodeLine{17     Q\_OBJECT}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{keyword}{public}:}
+\DoxyCodeLine{20     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_shorttest_trip_from_domino_1_1revenue_record}{revenueRecord}}}
+\DoxyCodeLine{21     \{}
+\DoxyCodeLine{22         QString restaurantName;}
+\DoxyCodeLine{23         \textcolor{keywordtype}{float} revenue;}
+\DoxyCodeLine{24     \};}
+\DoxyCodeLine{25     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_shorttest_trip_from_domino}{ShorttestTripFromDomino}}(QWidget *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{26     \mbox{\hyperlink{class_shorttest_trip_from_domino}{\string~ShorttestTripFromDomino}}();}
+\DoxyCodeLine{27     QString AddApostropheToString(QString name);}
+\DoxyCodeLine{28     \textcolor{keywordtype}{int} GetRestaurantIDUsingQSL(QString name);}
+\DoxyCodeLine{29     QString GetRestaurantNameUsingQSL(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id});}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 signals:}
+\DoxyCodeLine{32     \textcolor{keywordtype}{void} Admin();}
+\DoxyCodeLine{33     \textcolor{keywordtype}{void} backMain();}
+\DoxyCodeLine{34     \textcolor{keywordtype}{void} AdminCheck();}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{37     \textcolor{keywordtype}{void} on\_pushButton\_3\_clicked();}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \textcolor{keywordtype}{void} on\_pushButton\_start\_clicked();}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keywordtype}{void} on\_pushButton\_4\_clicked();}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \textcolor{keywordtype}{void} on\_pushButton\_clicked();}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{keywordtype}{void} on\_pushButton\_2\_clicked();}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     \textcolor{keywordtype}{void} on\_pushButton\_5\_clicked();}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{keywordtype}{void} on\_pushButton\_6\_clicked();}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     \textcolor{keywordtype}{void} isAdmin();}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{keyword}{private}:}
+\DoxyCodeLine{54     Ui::ShorttestTripFromDomino *ui;}
+\DoxyCodeLine{55     \mbox{\hyperlink{classendwindow}{endwindow}} *endWindow;}
+\DoxyCodeLine{56     \textcolor{comment}{// import the table already created}}
+\DoxyCodeLine{57     QSqlDatabase db = QSqlDatabase::addDatabase(\textcolor{stringliteral}{"{}QSQLITE"{}});}
+\DoxyCodeLine{58     QSqlQuery qry;}
+\DoxyCodeLine{59     \textcolor{keywordtype}{float} totalSpendingOnTrip = 0.0;}
+\DoxyCodeLine{60     \textcolor{keywordtype}{bool} admin = \textcolor{keyword}{false};}
+\DoxyCodeLine{61     QList<revenueRecord> revenueRecords;}
+\DoxyCodeLine{62 \};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// SHORTTESTTRIPFROMDOMINO\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,66 @@
+\hypertarget{alltwelvetrip_8h_source}{}\doxysection{alltwelvetrip.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef ALLTWELVETRIP\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define ALLTWELVETRIP\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QDialog>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QWidget>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QtSql>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}restaurant.h"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}endwindow.h"{}}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{namespace }Ui \{}
+\DoxyCodeLine{11 \textcolor{keyword}{class }\mbox{\hyperlink{classalltwelvetrip}{alltwelvetrip}};}
+\DoxyCodeLine{12 \}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{class }\mbox{\hyperlink{classalltwelvetrip}{alltwelvetrip}} : \textcolor{keyword}{public} QDialog}
+\DoxyCodeLine{15 \{}
+\DoxyCodeLine{16     Q\_OBJECT}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{keyword}{public}:}
+\DoxyCodeLine{19     \textcolor{keyword}{struct }\mbox{\hyperlink{structalltwelvetrip_1_1revenue_record}{revenueRecord}}}
+\DoxyCodeLine{20     \{}
+\DoxyCodeLine{21         QString restaurantName;}
+\DoxyCodeLine{22         \textcolor{keywordtype}{float} revenue;}
+\DoxyCodeLine{23     \};}
+\DoxyCodeLine{24     \textcolor{keyword}{explicit} \mbox{\hyperlink{classalltwelvetrip}{alltwelvetrip}}(QWidget *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{25     QString AddApostropheToString(QString name);}
+\DoxyCodeLine{26     \textcolor{keywordtype}{int} GetRestaurantIDUsingQSL(QString name);}
+\DoxyCodeLine{27     QString GetRestaurantNameUsingQSL(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id});}
+\DoxyCodeLine{28     \mbox{\hyperlink{classalltwelvetrip}{\string~alltwelvetrip}}();}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 signals:}
+\DoxyCodeLine{31     \textcolor{keywordtype}{void} Admin();}
+\DoxyCodeLine{32     \textcolor{keywordtype}{void} backMain();}
+\DoxyCodeLine{33     \textcolor{keywordtype}{void} AdminCheck();}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{36     \textcolor{keywordtype}{void} isAdmin();}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \textcolor{keywordtype}{void} on\_pushButton\_clicked();}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \textcolor{keywordtype}{void} on\_pushButton\_2\_clicked();}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \textcolor{keywordtype}{void} on\_pushButton\_3\_clicked();}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44     \textcolor{keywordtype}{void} on\_pushButton\_4\_clicked();}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{keywordtype}{void} on\_pushButton\_5\_clicked();}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48     \textcolor{keywordtype}{void} on\_pushButton\_6\_clicked();}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{keyword}{private}:}
+\DoxyCodeLine{51     Ui::alltwelvetrip *ui;}
+\DoxyCodeLine{52     \mbox{\hyperlink{classendwindow}{endwindow}} *endWindow;}
+\DoxyCodeLine{53     \textcolor{comment}{// import the table already created}}
+\DoxyCodeLine{54     QSqlDatabase db = QSqlDatabase::addDatabase(\textcolor{stringliteral}{"{}QSQLITE"{}});}
+\DoxyCodeLine{55     QSqlQuery qry;}
+\DoxyCodeLine{56     \textcolor{keywordtype}{float} totalSpendingOnTrip = 0.0;}
+\DoxyCodeLine{57     \textcolor{keywordtype}{bool} admin = \textcolor{keyword}{false};}
+\DoxyCodeLine{58     QList<revenueRecord> revenueRecords;}
+\DoxyCodeLine{59 \};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ALLTWELVETRIP\_H}}
+
+\end{DoxyCode}
