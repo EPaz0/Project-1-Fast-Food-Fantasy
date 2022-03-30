@@ -227,6 +227,7 @@ void customtrip::on_pushButton_10_clicked()
     QString firstRes = ui->listWidget->item(0)->text();
     firstRes = AddApostropheToString(firstRes);
     int firstResNum = GetRestaurantIDUsingQSL(firstRes);
+    /*
     qry.prepare("SELECT distancetoSaddleback FROM restaurantList WHERE id = "+QString::number(firstResNum));
     if (qry.exec())
     {
@@ -235,6 +236,7 @@ void customtrip::on_pushButton_10_clicked()
              totalDistance+=qry.value(0).toDouble();
         }
     }
+    */
 
     QString name;
     int restaurantID1;
