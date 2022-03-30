@@ -119,10 +119,6 @@ ClosestTrip::ClosestTrip(QWidget *parent) :
 
 ClosestTrip::~ClosestTrip()
 {
-//    db.close();
-//    const QString connectionName = db.connectionName();
-//    db = QSqlDatabase();
-//    QSqlDatabase::removeDatabase(connectionName);
     delete ui;
 }
 

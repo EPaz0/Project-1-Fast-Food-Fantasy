@@ -1,0 +1,7 @@
+Three Different Data Structures Used:
+
+QList - Linked List - used to hold menu items
+
+Class - restaurant - use to hold and modify restaurant data
+
+Struct - distanceInfo - used to hold/organize distance data
