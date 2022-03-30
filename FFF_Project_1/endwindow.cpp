@@ -16,8 +16,6 @@ endwindow::~endwindow()
     delete ui;
 }
 
-
-
 void endwindow::on_pushButton_clicked()
 {
     hide();
