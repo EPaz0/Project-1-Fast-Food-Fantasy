@@ -229,7 +229,6 @@ public:
         menubar->addAction(menuFile->menuAction());
         menubar->addAction(menuAdmin->menuAction());
         menubar->addAction(menuTrips->menuAction());
-        menuFile->addAction(actionOpen_File);
         menuFile->addAction(actionUpdate_List);
         menuAdmin->addAction(actionLog_in);
         menuAdmin->addAction(actionLog_out);

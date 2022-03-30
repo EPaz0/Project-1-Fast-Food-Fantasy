@@ -68,7 +68,7 @@ public:
         listWidget_3->setGeometry(QRect(30, 90, 191, 411));
         label_10 = new QLabel(customtrip);
         label_10->setObjectName(QString::fromUtf8("label_10"));
-        label_10->setGeometry(QRect(410, 30, 111, 41));
+        label_10->setGeometry(QRect(410, 30, 131, 41));
         QFont font;
         font.setFamilies({QString::fromUtf8("Perpetua")});
         font.setPointSize(12);

@@ -138,6 +138,7 @@ compiler_rcc_clean:
 	-$(DEL_FILE) debug/qrc_resource.cpp
 debug/qrc_resource.cpp: ../FFF_Project_1/resource.qrc \
 		C:/Qt/6.2.0/mingw81_64/bin/rcc.exe \
+		../FFF_Project_1/CS1D\ Spring\ 2022\ New\ Fast\ Food\ Project.txt \
 		../FFF_Project_1/CS1D_Spring_2022_Fast_Food_Project.txt
 	'C:\Qt\6.2.0\mingw81_64\bin\rcc.exe' -name resource ../FFF_Project_1/resource.qrc -o debug/qrc_resource.cpp
 
@@ -3153,7 +3154,9 @@ debug/mainwindow.o: ../FFF_Project_1/mainwindow.cpp ../FFF_Project_1/mainwindow.
 		C:/Qt/6.2.0/mingw81_64/include/QtWidgets/qstatusbar.h \
 		C:/Qt/6.2.0/mingw81_64/include/QtWidgets/QVBoxLayout \
 		C:/Qt/6.2.0/mingw81_64/include/QtCore/QFile \
-		C:/Qt/6.2.0/mingw81_64/include/QtCore/QTextStream
+		C:/Qt/6.2.0/mingw81_64/include/QtCore/QTextStream \
+		C:/Qt/6.2.0/mingw81_64/include/QtWidgets/QMessageBox \
+		C:/Qt/6.2.0/mingw81_64/include/QtWidgets/qmessagebox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/mainwindow.o ../FFF_Project_1/mainwindow.cpp
 
 debug/restaurant.o: ../FFF_Project_1/restaurant.cpp ../FFF_Project_1/restaurant.h \
