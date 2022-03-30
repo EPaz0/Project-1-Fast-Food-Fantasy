@@ -783,3 +783,14 @@ ui->listWidget->addItem(restaurantName);
         }
 
     }
+
+void MainWindow::on_actionVisit_All_12_triggered()
+{
+    hide();
+    analltwelvetrip = new alltwelvetrip(this);
+    connect(this,SIGNAL(isAdmin()), analltwelvetrip, SLOT(isAdmin()));
+    if(admin == true)
+        emit isAdmin();
+    analltwelvetrip->show();
+}
+
