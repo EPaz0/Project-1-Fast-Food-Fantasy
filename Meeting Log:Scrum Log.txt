@@ -1,0 +1,66 @@
+Scrum Log
+
+Meeting 1 1/21/2022
+
+Choose Scrum Leader and Product Owner
+Came up with team rules
+Choose team name
+Setup GitHub
+Start creating stories
+
+Meeting 2 2/2/2022
+
+Discussed sprint 1
+Added some new stories 
+Organized user stories cards
+
+Meeting 3 2/7/2022
+
+Need to come up with a baseline story
+Talked about going over all the stories 
+and making sure we have everything we need to do on them.
+
+Meeting 4 2/9/2022
+Played planning poker
+Dicussed Stories
+Monday come up with an idea of how want ui to look
+
+
+Meeting 6 2/23/2022
+Split UML Diagram
+Went over test plan
+
+Meeting 7 2/25/2022
+Shared progress with UML diagrams 
+
+Meeting 8 2/28/2022
+Sprint 1 finished
+Worked on class diagram together
+
+Meeting 9-10 3/7/22-3/9/22
+Dicussed SQL Database
+
+Meeting 11  3/14/22
+Sprint 2 finished
+Talked about: 
+Adding and removing restaurants/editing price
+Needing a limit so user cant buy 100 of the same item
+Removing restaurant so that after you've gone to it you can't go back
+
+Meeting 12  3/16/22
+Planned and Discussed work need to be done during spring break
+
+Meeting 13 3/28/22
+Discussed what was left to do 
+Finishing import and remove restaurants
+Finishing Big Oh
+Running Doxygen
+Writing down data structures used
+
+Meeting 14 3/29/22
+Wrapped up project
+Put everything in Github
+
+
+
+
