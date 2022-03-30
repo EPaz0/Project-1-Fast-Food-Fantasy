@@ -112,7 +112,8 @@ void ShorttestTripFromDomino::on_pushButton_start_clicked()
             int restaurantID2;
             float totalDistance = 0;
 
-            qry.prepare("SELECT distanceToSaddleback FROM restaurantList WHERE id = 3");
+           /* 
+           qry.prepare("SELECT distanceToSaddleback FROM restaurantList WHERE id = 3");
             if (qry.exec())
             {
                 while (qry.next())
@@ -120,6 +121,7 @@ void ShorttestTripFromDomino::on_pushButton_start_clicked()
                     totalDistance += qry.value(0).toFloat();
                 }
             }
+            */
 
 
            for (int i = 0; i < ui->listWidget->count() - 1; i++)
