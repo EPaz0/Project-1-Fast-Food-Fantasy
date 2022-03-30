@@ -80,6 +80,7 @@ void ShorttestTripFromDomino::on_pushButton_start_clicked()
            int res2ID = 0;
            QString res2NAME;
            QString extractedValues = "";  // restaurants already added
+           extractedValues = QString::number(11) + ", " + QString::number(12);
 
            for (int i = 0; i < numberOfRestaurant - 1; i++)
            {

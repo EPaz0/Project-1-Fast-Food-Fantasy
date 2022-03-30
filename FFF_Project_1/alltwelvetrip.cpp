@@ -21,6 +21,8 @@ alltwelvetrip::alltwelvetrip(QWidget *parent) :
     }
     ui->listWidget->clear();
 
+
+    /*
     QList<QString> restList;
     qry.prepare("SELECT restaurantName FROM restaurantList");
     if(qry.exec())
@@ -31,6 +33,7 @@ alltwelvetrip::alltwelvetrip(QWidget *parent) :
            restList.push_back(restName);
         }
     }
+
     if(restList.size() != 12)
     {
         db.close();
@@ -44,6 +47,8 @@ alltwelvetrip::alltwelvetrip(QWidget *parent) :
             emit backMain();
         QMessageBox::critical(this, "Unavailable Option", "To plan this trip, you need 12 restruants.");
     }
+    */
+
     QString stringQry;
    // QString restaurant;
     float totalDistance = 0;
@@ -53,23 +58,25 @@ alltwelvetrip::alltwelvetrip(QWidget *parent) :
        QString res2NAME;
        QString extractedValues = "";  // restaurants already added
 
+       /*
        totalDistance += 6.6;
        ui->listWidget->addItem(GetRestaurantNameUsingQSL(12));
        ui->listWidget->addItem(GetRestaurantNameUsingQSL(11));
        extractedValues = extractedValues + QString::number(12);
        extractedValues = extractedValues + "," + QString::number(11);
-
-       for (int i = 0; i < 10; i++)
+       */
+       for (int i = 0; i < 12; i++)
        {
            if (res1ID == 0)
            {
-               stringQry = "SELECT toRestaurant, MIN(distance) FROM distances WHERE fromRestaurant = " + QString::number(11) + " AND toRestaurant NOT IN (" + extractedValues + ")";
-               qry.prepare(stringQry);
+               qry.prepare("SELECT id, MIN(distancetoSaddleback) FROM restaurantList");
                if(qry.exec())
                {
                    while(qry.next())
                    {
                        res1ID = qry.value(0).toInt();
+                       totalDistance += qry.value(1).toFloat();   // add the distance from saddleback to the first restaurant to total distance
+                       qDebug() << totalDistance;
                    }
                }
                res1NAME =  GetRestaurantNameUsingQSL(res1ID);

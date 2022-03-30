@@ -68,6 +68,7 @@ public:
     QLineEdit *editNewItem;
     QLineEdit *editNewPrice;
     QPushButton *SubmitNew;
+    QPushButton *deleteRestaurant;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuAdmin;
@@ -78,7 +79,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(862, 548);
+        MainWindow->resize(862, 569);
         actionOpen_File = new QAction(MainWindow);
         actionOpen_File->setObjectName(QString::fromUtf8("actionOpen_File"));
         actionUpdate_List = new QAction(MainWindow);
@@ -211,6 +212,9 @@ public:
         SubmitNew = new QPushButton(centralwidget);
         SubmitNew->setObjectName(QString::fromUtf8("SubmitNew"));
         SubmitNew->setGeometry(QRect(470, 430, 51, 22));
+        deleteRestaurant = new QPushButton(centralwidget);
+        deleteRestaurant->setObjectName(QString::fromUtf8("deleteRestaurant"));
+        deleteRestaurant->setGeometry(QRect(40, 500, 111, 24));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -229,7 +233,6 @@ public:
         menubar->addAction(menuFile->menuAction());
         menubar->addAction(menuAdmin->menuAction());
         menubar->addAction(menuTrips->menuAction());
-        menuFile->addAction(actionOpen_File);
         menuFile->addAction(actionUpdate_List);
         menuAdmin->addAction(actionLog_in);
         menuAdmin->addAction(actionLog_out);
@@ -297,6 +300,7 @@ public:
         editNewItem->setPlaceholderText(QCoreApplication::translate("MainWindow", "New Item Name", nullptr));
         editNewPrice->setPlaceholderText(QCoreApplication::translate("MainWindow", "New Price", nullptr));
         SubmitNew->setText(QCoreApplication::translate("MainWindow", "Submit", nullptr));
+        deleteRestaurant->setText(QCoreApplication::translate("MainWindow", "Delete Restaurant", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuAdmin->setTitle(QCoreApplication::translate("MainWindow", "Admin", nullptr));
         menuTrips->setTitle(QCoreApplication::translate("MainWindow", "Trips", nullptr));

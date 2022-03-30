@@ -32,12 +32,13 @@ ClosestTrip::ClosestTrip(QWidget *parent) :
        int res2ID = 0;
        QString res2NAME;
        QString extractedValues = "";  // restaurants already added
+       extractedValues = QString::number(11) + ", " + QString::number(12);
        for (int i = 0; i < 10; i++)
        {
            // get the closest restaurant from Saddleback (first in list)
            if (res1ID == 0)
            {
-               qry.prepare("SELECT id, MIN(distancetoSaddleback) FROM restaurantList");
+               qry.prepare("SELECT id, MIN(distancetoSaddleback) FROM restaurantList WHERE id BETWEEN 0 AND 10");
                if (qry.exec())
                {
                    while (qry.next())
