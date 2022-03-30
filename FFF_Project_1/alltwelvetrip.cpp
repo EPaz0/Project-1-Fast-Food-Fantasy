@@ -76,7 +76,6 @@ alltwelvetrip::alltwelvetrip(QWidget *parent) :
                    {
                        res1ID = qry.value(0).toInt();
                        totalDistance += qry.value(1).toFloat();   // add the distance from saddleback to the first restaurant to total distance
-                       qDebug() << totalDistance;
                    }
                }
                res1NAME =  GetRestaurantNameUsingQSL(res1ID);

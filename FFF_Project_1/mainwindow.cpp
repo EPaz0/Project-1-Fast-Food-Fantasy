@@ -759,9 +759,13 @@ void MainWindow::on_actionUpdate_List_triggered()
                     subQuery.bindValue(":fromRestaurant", resDistance.at(j).toWhich);
                     subQuery.bindValue(":toRestaurant", restaurantNumber);
                     subQuery.bindValue(":distance", resDistance.at(j).distance);
+
+
                     if (!subQuery.exec())
-                         qWarning() << "ERROR: updating distance" << qry.lastError().text();
+                         qWarning() << "ERROR: updating distance" << qry.lastError().text();                                    
                 }
+
+
             }
 
 
