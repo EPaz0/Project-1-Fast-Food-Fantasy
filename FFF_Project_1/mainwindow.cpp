@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->editNewItem->setVisible(false);
     ui->editNewPrice->setVisible(false);
     ui->SubmitNew->setVisible(false);
+    ui->deleteRestaurant->setVisible(false);
 
     const QString DRIVER("QSQLITE");
 
@@ -137,6 +138,7 @@ void MainWindow::Admin()
     ui->SubmitChange->setVisible(true);
     ui->addMenu->setVisible(true);
     ui->deleteMenuItem->setVisible(true);
+    ui->deleteRestaurant->setVisible(true);
 }
 
 void MainWindow::on_actionLog_out_triggered()
@@ -148,6 +150,7 @@ void MainWindow::on_actionLog_out_triggered()
     ui->SubmitChange->setVisible(false);
     ui->addMenu->setVisible(false);
     ui->deleteMenuItem->setVisible(false);
+    ui->deleteRestaurant->setVisible(false);
 }
 
 void MainWindow::on_action10_Closet_triggered()
@@ -792,5 +795,96 @@ void MainWindow::on_actionVisit_All_12_triggered()
     if(admin == true)
         emit isAdmin();
     analltwelvetrip->show();
+}
+
+
+void MainWindow::on_deleteRestaurant_clicked()
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    QSqlQuery qry;
+
+    db.setDatabaseName("restaurant.sqlite");
+    QString dbPath = QCoreApplication::applicationDirPath() + "/restaurant.sqlite";
+    db.setDatabaseName(dbPath);
+
+    if (!db.open())
+    {
+        qDebug() << "problem opening database";
+    }
+
+
+    if(restaurantSelected != -1)
+    {
+        QString stringQry;
+        QString DeleteMenu;
+        QString DeleteDistance;
+        restaurantSelected = restaurantSelected + 1;
+        //qWarning() << restaurantSelected;
+
+
+        QListWidgetItem *it = ui->listWidget->takeItem(restaurantSelected);
+
+        stringQry = "DELETE FROM restaurantList  WHERE id = " + QString::number(restaurantSelected);
+        qry.prepare(stringQry);
+        qry.exec();
+
+        DeleteMenu = "DELETE FROM menu  WHERE restaurantID = " + QString::number(restaurantSelected);
+        qry.prepare(DeleteMenu);
+        qry.exec();
+
+        DeleteDistance = "DELETE FROM distances  WHERE fromRestaurant = " + QString::number(restaurantSelected);
+        qry.prepare(DeleteDistance);
+        qry.exec();
+
+/*
+        stringQry = "DELETE FROM restaurantList  WHERE id = '12'";
+        qry.prepare(stringQry);
+        qry.exec();
+
+        DeleteMenu = "DELETE FROM menu  WHERE restaurantID = '12'" ;
+        qry.prepare(DeleteMenu);
+        qry.exec();
+
+        DeleteDistance = "DELETE FROM distances  WHERE fromRestaurant = '12'";
+        qry.prepare(DeleteDistance);
+        qry.exec();
+*/
+       // qry.prepare("DELETE restaurantList. menu FROM menu INNER JOIN menu reststaurantList.id = menu.restaurantID");
+
+        /*stringQry =  "DELETE FROM menu WHERE restaurantID = " + QString::number(restaurantSelected);
+        qry.prepare(stringQry);
+
+        stringQry =  "DELETE FROM distances WHERE fromRestaurant = " + QString::number(restaurantSelected);
+        qry.prepare(stringQry);*/
+
+        if(qry.exec())
+        {
+            ui->listWidget->takeItem(ui->listWidget->currentRow());
+            //ui->listWidget->currentItem()->setText("");
+            ui->listWidget_price->clear();
+            ui->listWidget_item->clear();
+            ui->listWidget_distance->clear();
+            ui->listWidget_name->clear();
+            ui->lineEdit->clear();
+            ui->lineEdit_2->clear();
+            ui->listWidget->setCurrentRow(-1);
+            QMessageBox::critical(this,tr("Delete"),tr("Deleted"));
+            delete it;
+
+
+        }
+
+    }
+    //restaurantSelected = 0;
+    db.close();
+    QString connectionName = db.connectionName();
+    db = QSqlDatabase();
+    QSqlDatabase::removeDatabase(connectionName);
+}
+
+
+void MainWindow::on_listWidget_currentRowChanged(int currentRow)
+{
+    restaurantSelected = currentRow;
 }
 

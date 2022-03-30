@@ -69,6 +69,10 @@ private slots:
 
     void on_actionVisit_All_12_triggered();
 
+    void on_deleteRestaurant_clicked();
+
+    void on_listWidget_currentRowChanged(int currentRow);
+
 signals:
     void isAdmin();
 
@@ -81,6 +85,7 @@ private:
     alltwelvetrip *analltwelvetrip;
     QList<restaurant> restaurantList;
     bool admin = false;
+    int restaurantSelected;
 
     // import the table already created
 //    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
