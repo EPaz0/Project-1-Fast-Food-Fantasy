@@ -22,7 +22,7 @@ customtrip::customtrip(QWidget *parent) :
 
     ui->listWidget_3->clear();
 
-    qry.prepare("SELECT restaurantName FROM restaurantList");
+    qry.prepare("SELECT restaurantName FROM restaurantList WHERE id BETWEEN 1 AND 10");
     if(qry.exec())
     {
         while(qry.next())

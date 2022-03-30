@@ -17,6 +17,7 @@
 #include "restaurant.h"
 #include "shorttesttripfromdomino.h"
 #include "customtrip.h"
+#include "alltwelvetrip.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -66,6 +67,8 @@ private slots:
 
     void on_actionUpdate_List_triggered();
 
+    void on_actionVisit_All_12_triggered();
+
 signals:
     void isAdmin();
 
@@ -75,6 +78,7 @@ private:
     ClosestTrip *tripFromSaddleback;
     ShorttestTripFromDomino *tripFromDomino;
     customtrip *tripCustomized;
+    alltwelvetrip *analltwelvetrip;
     QList<restaurant> restaurantList;
     bool admin = false;
 
